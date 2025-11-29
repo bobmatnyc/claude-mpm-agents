@@ -1,612 +1,145 @@
-# Claude MPM - Multi-Agent Project Manager
+# Claude MPM Agent Templates
 
-A powerful orchestration framework for **Claude Code (CLI)** that enables multi-agent workflows, session management, and real-time monitoring through a streamlined Rich-based interface.
+A curated collection of specialized AI agent templates for [Claude MPM](https://github.com/bobmatnyc/claude-mpm) - the multi-agent orchestration framework for Claude Code.
 
-> **⚠️ Important**: Claude MPM **requires Claude Code CLI** (v1.0.92+), not Claude Desktop (app). All MCP integrations work with Claude Code's CLI interface only.
->
-> **Don't have Claude Code?** Install from: https://docs.anthropic.com/en/docs/claude-code
->
-> **Version Requirements:**
-> - Minimum: v1.0.92 (hooks support)
-> - Recommended: v2.0.30+ (latest features)
+## Overview
 
-> **Quick Start**: See [docs/user/getting-started.md](docs/user/getting-started.md) to get running in 5 minutes!
+This repository contains 48 production-ready agent templates in Markdown format with YAML frontmatter. Each agent is designed for specific engineering, operations, or quality assurance tasks within the Claude MPM framework.
 
-## Features
+## Agent Categories
 
-- 🤖 **Multi-Agent System**: 37 specialized agents for comprehensive project management
-- 🎯 **Skills System**: 21 bundled skills with auto-linking, three-tier organization (bundled/user/project), and interactive configuration
-- 🔄 **Session Management**: Resume previous sessions with `--resume`
-- 📋 **Resume Log System**: Proactive context management with automatic 10k-token session logs at 70%/85%/95% thresholds
-- 📊 **Real-Time Monitoring**: Live dashboard with `--monitor` flag
-- 🔌 **MCP Integration**: Full support for Model Context Protocol services
-- 📁 **Multi-Project Support**: Per-session working directories
-- 🔍 **Git Integration**: View diffs and track changes across projects
-- 🎯 **Smart Task Orchestration**: PM agent intelligently routes work to specialists
-- ⚡ **Simplified Architecture**: ~3,700 lines removed for better performance and maintainability
-- 🔒 **Enhanced Security**: Comprehensive input validation and sanitization framework
+### Engineering Agents
+- **engineer** - General-purpose software engineering
+- **python_engineer** - Python development with type safety and testing
+- **typescript_engineer** - TypeScript 5.6+ with branded types and strict mode
+- **react_engineer** - React development with hooks and modern patterns
+- **nextjs_engineer** - Next.js App Router and Server Components
+- **golang_engineer** - Go development with concurrency patterns
+- **rust_engineer** - Rust development with ownership and safety
+- **java_engineer** - Java/Spring Boot with hexagonal architecture
+- **ruby_engineer** - Ruby/Rails with service objects and RSpec
+- **php_engineer** - PHP/Laravel with strict types and testing
+- **dart_engineer** - Dart/Flutter with clean architecture
+- **svelte_engineer** - Svelte 5 with Runes and SvelteKit
+- **tauri_engineer** - Tauri desktop app development
+- **javascript_engineer_agent** - Vanilla JavaScript and Node.js backend
+- **data_engineer** - Data pipeline and ETL development
 
-## Quick Installation
+### Quality Assurance Agents
+- **qa** - General quality assurance and testing
+- **web_qa** - Web application testing with Playwright
+- **api_qa** - API testing and validation
 
-### Prerequisites
+### Operations Agents
+- **ops** - General DevOps and infrastructure
+- **local_ops_agent** - Local development with PM2 and Docker
+- **vercel_ops_agent** - Vercel deployment and operations
+- **gcp_ops_agent** - Google Cloud Platform operations
+- **clerk_ops** - Clerk authentication operations
 
-**Before installing Claude MPM**, ensure you have:
+### Research & Analysis Agents
+- **research** - Codebase investigation and analysis
+- **code_analyzer** - Code review and pattern identification
+- **security** - Security analysis and vulnerability assessment
 
-1. **Python 3.8+** (3.11+ recommended)
-2. **Claude Code CLI v1.0.92+** (required!)
+### Documentation & Support Agents
+- **documentation** - Technical documentation and API docs
+- **ticketing** - Ticket management and tracking
+- **product_owner** - Product strategy and prioritization
 
-```bash
-# Verify Claude Code is installed
-claude --version
+### Framework Management Agents
+- **agent-manager** - Agent lifecycle and deployment
+- **memory_manager** - Project-specific memory management
+- **version_control** - Git operations and release coordination
+- **project_organizer** - Project organization and workflow
 
-# If not installed, get it from:
-# https://docs.anthropic.com/en/docs/claude-code
+### Specialized Agents
+- **refactoring_engineer** - Safe code refactoring
+- **prompt_engineer** - Prompt optimization for Claude 4.5
+- **content_agent** - Content optimization and SEO
+- **imagemagick** - Image optimization specialist
+- **agentic_coder_optimizer** - Build system optimization
+
+### Template Documentation
+- **circuit_breakers** - PM violation detection rules
+- **git_file_tracking** - Git file tracking protocols
+- **pm_examples** - PM delegation examples
+- **pm_red_flags** - PM violation phrase indicators
+- **research_gate_examples** - Research gate protocol examples
+- **response_format** - PM response format templates
+- **ticket_completeness_examples** - Ticket completeness examples
+- **validation_templates** - Validation and verification templates
+
+## Template Format
+
+Each agent template uses Markdown with YAML frontmatter:
+
+```markdown
+---
+name: agent_name
+description: Agent purpose and capabilities
+agent_id: unique-identifier
+agent_type: engineer|qa|ops|research|documentation
+model: sonnet|opus|haiku
+version: 2.0.0
+tags:
+  - technology
+  - domain
+category: engineering|qa|ops|research
+---
+
+# Agent Name
+
+Agent instructions and guidelines...
 ```
 
-### Install Claude MPM
+## Usage
 
-```bash
-# Basic installation
-pip install claude-mpm
+These templates are designed to be used with Claude MPM:
 
-# Install with monitoring dashboard (recommended)
-pip install "claude-mpm[monitor]"
-```
+1. **Deploy agents** via Claude MPM CLI:
+   ```bash
+   claude-mpm agents deploy <agent-name>
+   ```
 
-Or with pipx (recommended for isolated installation):
-```bash
-# Basic installation
-pipx install claude-mpm
+2. **Use in Claude Code** via delegation:
+   ```
+   PM delegates to engineer agent for implementation tasks
+   ```
 
-# Install with monitoring dashboard (recommended)
-pipx install "claude-mpm[monitor]"
-```
+3. **Customize templates** for your specific needs
 
-### Verify Installation
+## Template Schema
 
-```bash
-# Check versions
-claude-mpm --version
-claude --version
+All templates follow the Claude MPM Agent Template Schema v1.3.0:
 
-# Run diagnostics (checks Claude Code compatibility)
-claude-mpm doctor
-```
+- **Metadata**: Name, version, description, tags, category
+- **Configuration**: Model selection, resource limits, timeouts
+- **Capabilities**: Memory limits, CPU allocation, network access
+- **Dependencies**: Python packages, system requirements
+- **Skills**: Reusable skill references
+- **Knowledge**: Domain expertise, best practices, constraints
+- **Interactions**: Input/output formats, handoff patterns
+- **Memory Routing**: Memory categorization and keywords
 
-**💡 Optional Dependencies**:
-- `[monitor]` - Full monitoring dashboard with Socket.IO and async web server components
-- `[mcp]` - Additional MCP services (mcp-browser, mcp-ticketer) - most users won't need this
+## Version History
 
-**🎉 Pipx Support Now Fully Functional!** Recent improvements ensure complete compatibility:
-- ✅ Socket.IO daemon script path resolution (fixed)
-- ✅ Commands directory access (fixed)
-- ✅ Resource files properly packaged for pipx environments
-- ✅ Python 3.13+ fully supported
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-## 🤝 Recommended Partner Products
+## Contributing
 
-Claude MPM works excellently with these complementary MCP tools. While optional, we **strongly recommend** installing them for enhanced capabilities:
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
 
-### kuzu-memory - Advanced Memory Management
+## License
 
-**What it does**: Provides persistent, project-specific knowledge graphs that enable agents to learn and retain context across sessions. Your agents will remember project patterns, architectural decisions, and important context automatically.
+Part of the Claude MPM project. See main repository for license details.
 
-**Installation:**
-```bash
-pipx install kuzu-memory
-```
+## Related
 
-**Benefits with Claude MPM:**
-- 🧠 **Persistent Context**: Agents remember project-specific patterns and decisions across sessions
-- 🎯 **Intelligent Prompts**: Automatically enriches agent prompts with relevant historical context
-- 📊 **Knowledge Graphs**: Structured storage of project knowledge, not just flat memory
-- 🔄 **Seamless Integration**: Works transparently in the background with zero configuration
-- 💡 **Smart Learning**: Agents improve over time as they learn your project's patterns
-
-**Perfect for**: Long-running projects, teams needing consistent context, complex codebases with deep architectural patterns.
-
-**Learn more**: [kuzu-memory on PyPI](https://pypi.org/project/kuzu-memory/) | [GitHub Repository](https://github.com/bobmatnyc/kuzu-memory)
+- **Claude MPM**: https://github.com/bobmatnyc/claude-mpm
+- **Documentation**: https://docs.claude.com/en/docs/claude-code
+- **Community**: Claude MPM GitHub Discussions
 
 ---
 
-### mcp-vector-search - Semantic Code Search
-
-**What it does**: Enables semantic code search across your entire codebase using AI embeddings. Find code by what it *does*, not just what it's *named*. Search for "authentication logic" and find relevant functions even if they're named differently.
-
-**Installation:**
-```bash
-pipx install mcp-vector-search
-```
-
-**Benefits with Claude MPM:**
-- 🔍 **Semantic Discovery**: Find code by intent and functionality, not just keywords
-- 🎯 **Context-Aware**: Understand code relationships and similarities automatically
-- ⚡ **Fast Indexing**: Efficient vector embeddings for large codebases
-- 🔄 **Live Updates**: Automatically tracks code changes and updates index
-- 📊 **Pattern Recognition**: Discover similar code patterns and potential refactoring opportunities
-
-**Use with**: `/mpm-search "authentication logic"` command in Claude Code sessions or `claude-mpm search` CLI command.
-
-**Perfect for**: Large codebases, discovering existing functionality, finding similar implementations, architectural exploration.
-
-**Learn more**: [mcp-vector-search on PyPI](https://pypi.org/project/mcp-vector-search/) | [GitHub Repository](https://github.com/bobmatnyc/mcp-vector-search)
-
----
-
-### Quick Setup - Both Tools
-
-Install both recommended tools in one go:
-
-```bash
-pipx install kuzu-memory
-pipx install mcp-vector-search
-```
-
-Then verify they're working:
-
-```bash
-claude-mpm verify
-```
-
-**That's it!** These tools integrate automatically with Claude MPM once installed. No additional configuration needed.
-
-**That's it!** See [docs/user/getting-started.md](docs/user/getting-started.md) for immediate usage.
-
-## Quick Usage
-
-```bash
-# Start interactive mode (recommended)
-claude-mpm
-
-# Start with monitoring dashboard
-claude-mpm run --monitor
-
-# Use semantic code search (auto-installs mcp-vector-search on first use)
-claude-mpm search "authentication logic"
-# or inside Claude Code session:
-/mpm-search "authentication logic"
-
-# Use MCP Gateway for external tool integration
-claude-mpm mcp
-
-# Run comprehensive health diagnostics
-claude-mpm doctor
-
-# Generate detailed diagnostic report with MCP service analysis
-claude-mpm doctor --verbose --output-file doctor-report.md
-
-# Run specific diagnostic checks including MCP services
-claude-mpm doctor --checks installation configuration agents mcp
-
-# Check MCP service status specifically
-claude-mpm doctor --checks mcp --verbose
-
-# Verify MCP services installation and configuration
-claude-mpm verify
-
-# Auto-fix MCP service issues
-claude-mpm verify --fix
-
-# Verify specific service
-claude-mpm verify --service kuzu-memory
-
-# Get JSON output for automation
-claude-mpm verify --json
-
-# Manage memory for large conversation histories
-claude-mpm cleanup-memory
-
-# Check for updates (including Claude Code compatibility)
-claude-mpm doctor --checks updates
-```
-
-**💡 Update Checking**: Claude MPM automatically checks for updates and verifies Claude Code compatibility on startup. Configure in `~/.claude-mpm/configuration.yaml` or see [docs/update-checking.md](docs/update-checking.md).
-
-See [docs/user/getting-started.md](docs/user/getting-started.md) for complete usage examples.
-
-## Skills Deployment
-
-Claude MPM includes intelligent skills deployment with **multi-collection support**:
-
-- **Multiple Sources**: Add skills from different GitHub repositories
-- **Automatic Detection**: Analyzes your project's technology stack
-- **Smart Recommendations**: Research agent suggests relevant skills
-- **Git-Based Updates**: Clone on first install, pull on updates
-- **Easy Management**: Simple CLI commands for all operations
-
-### Quick Start
-
-```bash
-# Deploy from default collection
-claude-mpm skills deploy-github --toolchain python
-
-# Add new collection
-claude-mpm skills collection-add obra-superpowers https://github.com/obra/superpowers
-
-# Deploy from specific collection
-claude-mpm skills deploy-github --collection obra-superpowers
-
-# List all collections
-claude-mpm skills collection-list
-```
-
-### Multi-Collection Management
-
-**Add Collections**:
-```bash
-# Add obra's superpowers collection
-claude-mpm skills collection-add obra-superpowers https://github.com/obra/superpowers --priority 2
-
-# Add company internal skills
-claude-mpm skills collection-add internal https://github.com/yourcompany/internal-skills
-```
-
-**Deploy from Collections**:
-```bash
-# Deploy from specific collection
-claude-mpm skills deploy-github --collection obra-superpowers --toolchain python
-
-# Deploy from default collection
-claude-mpm skills deploy-github --categories testing
-```
-
-**Manage Collections**:
-```bash
-# List all collections (shows priority, status, last update)
-claude-mpm skills collection-list
-
-# Enable/disable collections
-claude-mpm skills collection-disable claude-mpm
-claude-mpm skills collection-enable claude-mpm
-
-# Set default collection
-claude-mpm skills collection-set-default obra-superpowers
-```
-
-### Git-Based Deployment
-
-Collections are managed as git repositories:
-- **First install**: Runs `git clone` to `~/.claude/skills/<collection-name>/`
-- **Updates**: Runs `git pull` in existing repository
-- **Benefits**: Version history, rollback capability, always latest skills
-
-### How It Works
-
-1. **Research Agent Analyzes Project**
-   - Scans configuration files (package.json, pyproject.toml, etc.)
-   - Detects frameworks (FastAPI, React, Next.js, etc.)
-   - Identifies testing tools (pytest, Playwright, Jest, etc.)
-   - Discovers infrastructure patterns (Docker, GitHub Actions, etc.)
-
-2. **Skill Gap Detection**
-   - Compares detected technologies to deployed skills
-   - Identifies missing skills that would improve workflow
-   - Prioritizes recommendations (high/medium/low)
-
-3. **Proactive Recommendations**
-   - During project initialization
-   - When new technologies are added
-   - When specific work types begin (testing, debugging, deployment)
-   - When quality issues are detected
-
-### Example: Python FastAPI Project
-
-```markdown
-Research Agent Analysis:
-Technology Stack Detected: Python 3.11, FastAPI, pytest, Docker, GitHub Actions
-
-Recommended Skills:
-- test-driven-development (high priority) - TDD workflow enforcement
-- backend-engineer (high priority) - API design patterns
-- docker-workflow (medium priority) - Container best practices
-- ci-cd-pipeline-builder (medium priority) - GitHub Actions optimization
-
-Deploy with:
-claude-mpm skills deploy-github --toolchain python
-```
-
-### Technology → Skills Mapping
-
-| Your Technology | Recommended Skills |
-|-----------------|-------------------|
-| Python + pytest | test-driven-development, python-style |
-| FastAPI/Flask | backend-engineer |
-| React/Next.js | frontend-development, web-frameworks |
-| Docker | docker-workflow |
-| GitHub Actions | ci-cd-pipeline-builder |
-| Playwright | webapp-testing |
-
-### Important Notes
-
-- Skills load at Claude Code STARTUP ONLY - restart required after deployment
-- Batch deploy related skills to minimize restarts
-- Research agent automatically recommends skills during analysis
-- See [Skills Deployment Guide](docs/guides/skills-deployment-guide.md) for comprehensive details
-- See [Skills Quick Reference](docs/reference/skills-quick-reference.md) for command reference
-
-## Architecture (v4.4.1)
-
-Following Phase 3 architectural simplification in v4.4.1, Claude MPM features:
-
-- **Streamlined Rich Interface**: Removed complex TUI system (~2,500 lines) for cleaner user experience
-- **MCP Integration**: Full support for Model Context Protocol services with automatic detection
-- **Service-Oriented Architecture**: Simplified five specialized service domains
-- **Interface-Based Contracts**: All services implement explicit interfaces
-- **Enhanced Performance**: ~3,700 lines removed for better startup time and maintainability
-- **Enhanced Security**: Comprehensive input validation and sanitization framework
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture information.
-
-## Key Capabilities
-
-### Multi-Agent Orchestration
-
-Claude MPM includes 15 specialized agents:
-
-#### Core Development
-- **Engineer** - Software development and implementation
-- **Research** - Code analysis and research
-- **Documentation** - Documentation creation and maintenance
-- **QA** - Testing and quality assurance
-- **Security** - Security analysis and implementation
-
-#### Language-Specific Engineers
-- **Python Engineer (v2.3.0)** - Type-safe, async-first Python with SOA patterns for non-trivial applications
-  - Service-oriented architecture with ABC interfaces for applications
-  - Lightweight script patterns for automation and one-off tasks
-  - Clear decision criteria for when to use DI/SOA vs simple functions
-  - Dependency injection containers with auto-resolution
-  - Use for: Web applications, microservices, data pipelines (DI/SOA) or scripts, CLI tools, notebooks (simple functions)
-
-- **Rust Engineer (v1.1.0)** - Memory-safe, high-performance systems with trait-based service architecture
-  - Dependency injection with traits (constructor injection, trait objects)
-  - Service-oriented architecture patterns (repository, builder)
-  - Decision criteria for when to use DI/SOA vs simple code
-  - Async programming with tokio and zero-cost abstractions
-  - Use for: Web services, microservices (DI/SOA) or CLI tools, scripts (simple code)
-
-#### Operations & Infrastructure
-- **Ops** - Operations and deployment with advanced git commit authority and security verification (v2.2.2+)
-- **Version Control** - Git and version management
-- **Data Engineer** - Data pipeline and ETL development
-
-#### Web Development
-- **Web UI** - Frontend and UI development
-- **Web QA** - Web testing and E2E validation
-
-#### Project Management
-- **Ticketing** - Issue tracking and management
-- **Project Organizer** - File organization and structure
-- **Memory Manager** - Project memory and context management
-
-#### Code Quality
-- **Refactoring Engineer** - Code refactoring and optimization
-- **Code Analyzer** - Static code analysis with AST and tree-sitter
-
-### Agent Memory System
-Agents learn project-specific patterns using a simple list format and can update memories via JSON response fields (`remember` for incremental updates, `MEMORIES` for complete replacement). Initialize with `claude-mpm memory init`.
-
-### Skills System
-
-Claude MPM includes a powerful skills system that eliminates redundant agent guidance through reusable skill modules:
-
-**20 Bundled Skills** covering essential development workflows (all versioned starting at 0.1.0):
-- Git workflow, TDD, code review, systematic debugging
-- API documentation, refactoring patterns, performance profiling
-- Docker containerization, database migrations, security scanning
-- JSON/PDF/XLSX handling, async testing, ImageMagick operations
-- Local development servers: Next.js, FastAPI, Vite, Express
-- Web performance: Lighthouse metrics, Core Web Vitals optimization
-
-**Three-Tier Organization:**
-- **Bundled**: Core skills included with Claude MPM (~15,000 lines of reusable guidance)
-- **User**: Custom skills in `~/.config/claude-mpm/skills/`
-- **Project**: Project-specific skills in `.claude-mpm/skills/`
-
-**Version Tracking:**
-- All skills support semantic versioning (MAJOR.MINOR.PATCH)
-- Check versions with `/mpm-version` command in Claude Code
-- See [Skills Versioning Guide](docs/user/skills-versioning.md) for details
-
-**Quick Access:**
-```bash
-# Interactive skills management
-claude-mpm configure
-# Choose option 2: Skills Management
-
-# Auto-link skills to agents based on their roles
-# Configure custom skill assignments
-# View current skill mappings
-```
-
-Skills are automatically injected into agent prompts, reducing template size by 85% while maintaining full capability coverage.
-
-### MCP Gateway (Model Context Protocol)
-
-Claude MPM includes a powerful MCP Gateway that enables:
-- Integration with external tools and services
-- Custom tool development
-- Protocol-based communication
-- Extensible architecture
-
-See [MCP Gateway Documentation](docs/developer/13-mcp-gateway/README.md) for details.
-
-### Memory Management
-
-Large conversation histories can consume 2GB+ of memory. Use the `cleanup-memory` command to manage Claude conversation history:
-
-```bash
-# Clean up old conversation history
-claude-mpm cleanup-memory
-
-# Keep only recent conversations
-claude-mpm cleanup-memory --days 7
-```
-
-### Resume Log System
-
-**NEW in v4.17.2** - Proactive context management for seamless session continuity.
-
-The Resume Log System automatically generates structured 10k-token logs when approaching Claude's context window limits, enabling you to resume work without losing important context.
-
-**Key Features**:
-- 🎯 **Graduated Thresholds**: Warnings at 70% (60k buffer), 85% (30k buffer), and 95% (10k buffer)
-- 📋 **Structured Logs**: 10k-token budget intelligently distributed across 7 key sections
-- 🔄 **Seamless Resumption**: Automatically loads previous session context on startup
-- 📁 **Human-Readable**: Markdown format for both Claude and human review
-- ⚙️ **Zero-Configuration**: Works automatically with sensible defaults
-
-**How It Works**:
-1. Monitor token usage continuously throughout session
-2. Display proactive warnings at 70%, 85%, and 95% thresholds
-3. Automatically generate resume log when approaching limits
-4. Load previous resume log when starting new session
-5. Continue work seamlessly with full context preservation
-
-**Example Resume Log Structure**:
-```markdown
-# Session Resume Log: 20251101_115000
-
-## Context Metrics (500 tokens)
-- Token usage and percentage
-
-## Mission Summary (1,000 tokens)
-- Overall goal and purpose
-
-## Accomplishments (2,000 tokens)
-- What was completed
-
-## Key Findings (2,500 tokens)
-- Important discoveries
-
-## Decisions & Rationale (1,500 tokens)
-- Why choices were made
-
-## Next Steps (1,500 tokens)
-- What to do next
-
-## Critical Context (1,000 tokens)
-- Essential state, IDs, paths
-```
-
-**Configuration** (`.claude-mpm/configuration.yaml`):
-```yaml
-context_management:
-  enabled: true
-  budget_total: 200000
-  thresholds:
-    caution: 0.70   # First warning - plan transition
-    warning: 0.85   # Strong warning - wrap up
-    critical: 0.95  # Urgent - stop new work
-  resume_logs:
-    enabled: true
-    auto_generate: true
-    max_tokens: 10000
-    storage_dir: ".claude-mpm/resume-logs"
-```
-
-**QA Status**: 40/41 tests passing (97.6% coverage), APPROVED FOR PRODUCTION ✅
-
-See [docs/user/resume-logs.md](docs/user/resume-logs.md) for complete documentation.
-
-### Real-Time Monitoring
-The `--monitor` flag opens a web dashboard showing live agent activity, file operations, and session management.
-
-See [docs/reference/MEMORY.md](docs/reference/MEMORY.md) and [docs/developer/11-dashboard/README.md](docs/developer/11-dashboard/README.md) for details.
-
-
-## 📚 Documentation
-
-**👉 [Complete Documentation Hub](docs/README.md)** - Start here for all documentation!
-
-### Quick Links by User Type
-
-#### 👥 For Users
-- **[🚀 5-Minute Quick Start](docs/user/quickstart.md)** - Get running immediately
-- **[📦 Installation Guide](docs/user/installation.md)** - All installation methods
-- **[📖 User Guide](docs/user/README.md)** - Complete user documentation
-- **[❓ FAQ](docs/guides/FAQ.md)** - Common questions answered
-
-#### 💻 For Developers
-- **[🏗️ Architecture Overview](docs/developer/ARCHITECTURE.md)** - Service-oriented system design
-- **[💻 Developer Guide](docs/developer/README.md)** - Complete development documentation
-- **[🧪 Contributing](docs/developer/03-development/README.md)** - How to contribute
-- **[📊 API Reference](docs/API.md)** - Complete API documentation
-
-#### 🤖 For Agent Creators
-- **[🤖 Agent System](docs/AGENTS.md)** - Complete agent development guide
-- **[📝 Creation Guide](docs/developer/07-agent-system/creation-guide.md)** - Step-by-step tutorials
-- **[📋 Schema Reference](docs/developer/10-schemas/agent_schema_documentation.md)** - Agent format specifications
-
-#### 🚀 For Operations
-- **[🚀 Deployment](docs/DEPLOYMENT.md)** - Release management & versioning
-- **[📊 Monitoring](docs/MONITOR.md)** - Real-time dashboard & metrics
-- **[🐛 Troubleshooting](docs/TROUBLESHOOTING.md)** - Enhanced `doctor` command with detailed reports and auto-fix capabilities
-
-### 🎯 Documentation Features
-- **Single Entry Point**: [docs/README.md](docs/README.md) is your navigation hub
-- **Clear User Paths**: Organized by user type and experience level
-- **Cross-Referenced**: Links between related topics and sections
-- **Up-to-Date**: Version 4.16.3 with web performance optimization skill
-
-## Recent Updates (v4.16.3)
-
-**Web Performance Optimization**: New `web-performance-optimization` skill for Lighthouse metrics, Core Web Vitals (LCP, INP, CLS), and framework-specific optimization patterns.
-
-## Previous Updates (v4.16.1)
-
-**Local Development Skills**: Added 4 new toolchain-specific skills: `nextjs-local-dev`, `fastapi-local-dev`, `vite-local-dev`, and `express-local-dev` for professional local server management with PM2, HMR, and production-grade patterns.
-
-**Skills System Integration**: 20 bundled skills with auto-linking, three-tier organization, and interactive configuration. Eliminates 85% of redundant guidance across agent templates (~15,000 lines of reusable content).
-
-**Enhanced Documentation**: Complete documentation suite with PDF guides, reorganized structure, and comprehensive design documents for skills integration.
-
-**Agent Template Improvements**: Cleaned agent templates with skills integration, removing redundant guidance while maintaining full capability coverage.
-
-**Interactive Skills Management**: New skills wizard accessible via `claude-mpm configure` for viewing, configuring, and auto-linking skills to agents.
-
-**Bug Fixes**: Resolved agent template inconsistencies and improved configuration management.
-
-See [CHANGELOG.md](CHANGELOG.md) for full history and [docs/user/MIGRATION.md](docs/user/MIGRATION.md) for upgrade instructions.
-
-## Development
-
-### Quick Development Setup
-```bash
-# Complete development setup with code formatting and quality tools
-make dev-complete
-
-# Or step by step:
-make setup-dev          # Install in development mode
-make setup-pre-commit    # Set up automated code formatting
-```
-
-### Code Quality & Formatting
-The project uses automated code formatting and quality checks:
-- **Black** for code formatting
-- **isort** for import sorting
-- **flake8** for linting
-- **mypy** for type checking
-- **Pre-commit hooks** for automatic enforcement
-
-See [docs/developer/CODE_FORMATTING.md](docs/developer/CODE_FORMATTING.md) for details.
-
-### Contributing
-Contributions are welcome! Please see our [project structure guide](docs/reference/STRUCTURE.md) and follow the established patterns.
-
-**Development Workflow**:
-1. Run `make dev-complete` to set up your environment
-2. Code formatting happens automatically on commit
-3. All code must pass quality checks before merging
-
-### Project Structure
-See [docs/reference/STRUCTURE.md](docs/reference/STRUCTURE.md) for codebase organization.
-
-### License
-MIT License - see [LICENSE](LICENSE) file.
-
-## Credits
-
-- Based on [claude-multiagent-pm](https://github.com/kfsone/claude-multiagent-pm)
-- Enhanced for [Claude Code (CLI)](https://docs.anthropic.com/en/docs/claude-code) integration
-- Built with ❤️ by the Claude MPM community
+**Generated from Claude MPM v2.8.0** - Agent templates converted from JSON to Markdown format.
