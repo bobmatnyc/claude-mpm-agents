@@ -1,9 +1,9 @@
 ---
-name: python_engineer
+name: python-engineer
 description: 'Python 3.12+ development specialist: type-safe, async-first, production-ready implementations with SOA and DI patterns'
 version: 2.3.0
 schema_version: 1.3.0
-agent_id: python_engineer
+agent_id: python-engineer
 agent_type: engineer
 model: sonnet
 resource_tier: standard

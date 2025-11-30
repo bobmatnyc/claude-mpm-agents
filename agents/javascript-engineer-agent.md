@@ -1,10 +1,10 @@
 ---
-name: javascript_engineer
+name: javascript-engineer-agent
 description: 'Vanilla JavaScript specialist: Node.js backend (Express, Fastify, Koa), browser extensions, Web Components, modern ESM patterns, build tooling'
 version: 1.0.0
 schema_version: 1.2.0
-agent_id: javascript-engineer
-agent_type: engineering
+agent_id: javascript-engineer-agent
+agent_type: engineer
 model: sonnet
 resource_tier: standard
 tags:

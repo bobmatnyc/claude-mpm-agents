@@ -1,9 +1,9 @@
 ---
-name: agent_unknown
-description: Agent description not provided
+name: local-ops-agent
+description: Local operations specialist for deployment, DevOps, and process management
 version: 2.0.1
 schema_version: 1.3.0
-agent_id: unknown-agent
+agent_id: local-ops-agent
 agent_type: specialized
 model: sonnet
 resource_tier: standard
