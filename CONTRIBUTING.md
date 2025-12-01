@@ -1,274 +1,513 @@
-# Contributing to Claude MPM
+# Contributing to Claude MPM Agent Templates
 
-Welcome to the Claude MPM project! This guide will help you get started with contributing to our multi-agent project management framework.
+Thank you for your interest in contributing to the Claude MPM Agent Templates repository! This document provides guidelines for contributing agent templates, enhancements, and improvements.
 
-## Quick Start Development Workflow
+## Overview
 
-Claude MPM uses a **quality-first development approach** with three essential commands that should be part of your daily workflow:
+This repository contains **agent templates** for Claude MPM, not the main framework. Agent templates are markdown files with YAML frontmatter that define specialized AI agents for different tasks (engineering, QA, operations, etc.).
 
-### 🚀 Essential Commands
+**Key Concepts:**
+- **BASE-AGENT.md Inheritance**: Shared instructions that eliminate duplication across agents
+- **Hierarchical Organization**: Agents organized by functional category (engineer, qa, ops, etc.)
+- **Build Process**: Templates are compiled into deployable agent definitions
+- **Auto-Deployment**: Agents can be automatically deployed based on project detection
 
-```bash
-# 1. Auto-fix code issues during development
-make lint-fix
+## Quick Start for Contributors
 
-# 2. Run all quality checks before commits
-make quality
-
-# 3. Build with complete quality validation for releases
-make safe-release-build
-```
-
-### Daily Development Flow
-
-1. **During Development**: Use `make lint-fix` frequently to maintain code quality
-   - Uses **Ruff** (10-200x faster than traditional tools)
-   - Auto-fixes formatting, import sorting, and simple linting issues
-   - Safe to run anytime - only fixes issues, never breaks code
-   - Keeps your code clean as you work
-
-2. **Before Commits**: Always run `make quality` before committing
-   - Runs comprehensive quality checks (ruff linting + formatting, mypy type checking, structure validation)
-   - Catches issues early in the development cycle
-   - **Required step** - don't skip this!
-
-3. **For Releases**: Use `make safe-release-build` for any release builds
-   - Complete pre-publish quality gate plus build process
-   - Ensures all releases meet our quality standards
-   - Mandatory for all production releases
-
-### Modern Tooling (10-200x faster)
-
-We use **Ruff** for unified linting and formatting, replacing multiple legacy tools:
-
-- **What Ruff replaces**: black (formatting), isort (import sorting), flake8 (linting), pyupgrade (syntax modernization)
-- **Performance**: 10-200x faster than traditional Python linting tools
-- **Still use mypy**: Type checking remains with mypy (Ruff doesn't replace type checkers)
-- **Configuration**: All settings in `pyproject.toml` under `[tool.ruff]`
-
-## Quick Reference
-
-| Command | When to Use | What It Does | Time |
-|---------|-------------|--------------|------|
-| `make lint-fix` | During development | Auto-fixes formatting, imports, simple issues | ~30s |
-| `make quality` | Before every commit | Comprehensive quality checks and validation | ~2-3min |
-| `make safe-release-build` | For releases | Complete quality gate + safe build | ~5-10min |
-
-## Commit Guidelines
-
-### Before Every Commit
-
-**Always run the quality check:**
-```bash
-# This should pass before you commit
-make quality
-```
-
-If `make quality` fails:
-1. First try `make lint-fix` to auto-fix common issues
-2. Address any remaining issues manually
-3. Run `make quality` again to verify fixes
-
-### Commit Message Format
-
-We use [Conventional Commits](https://www.conventionalcommits.org/) for automatic versioning:
-
-- `feat:` - New features (minor version bump)
-- `fix:` - Bug fixes (patch version bump) 
-- `feat!:` or `BREAKING CHANGE:` - Breaking changes (major version bump)
-- `perf:` - Performance improvements
-- `refactor:` - Code refactoring
-- `docs:` - Documentation updates
-- `test:` - Test additions/updates
-
-Example:
-```bash
-git commit -m "feat: add new quality validation commands to development workflow"
-```
-
-## Development Environment
-
-### Setup
-
-Claude MPM supports both Mamba (recommended) and traditional Python environments:
+### 1. Fork and Clone
 
 ```bash
-# Clone and setup
-git clone https://github.com/your-repo/claude-mpm.git
-cd claude-mpm
-
-# Setup with automatic environment detection
-make setup
-
-# Or use specific environment
-make setup --use-venv  # Force traditional venv
+git clone https://github.com/YOUR-USERNAME/claude-mpm-agents.git
+cd claude-mpm-agents
 ```
 
-### Environment Benefits
+### 2. Understand the Structure
 
-- **Mamba (Recommended)**: 50-80% faster dependency resolution, optimized binaries
-- **Auto-detection**: `./scripts/claude-mpm` automatically uses the best available environment
-- **Project-specific**: Environments are isolated per project
+```
+agents/
+├── BASE-AGENT.md                    # Root-level shared instructions
+├── engineer/
+│   ├── BASE-AGENT.md               # Engineer-specific shared instructions
+│   ├── backend/
+│   │   ├── python-engineer.md      # Agent-specific content only
+│   │   ├── golang-engineer.md
+│   │   └── ...
+│   └── frontend/
+│       ├── react-engineer.md
+│       └── ...
+├── qa/
+│   ├── BASE-AGENT.md
+│   ├── qa.md
+│   └── api-qa.md
+└── ...
 
-## Code Quality Standards
+templates/                           # Reference materials (not deployed)
+├── circuit-breakers.md
+├── pm-examples.md
+└── ...
+```
 
-### Architecture Principles
+### 3. Create a New Agent
 
-1. **Service-Oriented Architecture**: Use our five specialized service domains
-2. **Interface-Based Contracts**: All services implement explicit interfaces
-3. **Dependency Injection**: Use service container for loose coupling
-4. **Performance**: Implement caching and lazy loading appropriately
-5. **Security**: Follow security guidelines in [docs/reference/SECURITY.md](docs/reference/SECURITY.md)
+**Option A: Using the build tool (recommended)**
+```bash
+./build-agent.py --create engineer/backend/kotlin-engineer
+```
 
-### Code Structure
+**Option B: Manual creation**
+1. Create file in appropriate category: `agents/engineer/backend/kotlin-engineer.md`
+2. Add YAML frontmatter
+3. Write agent-specific instructions
+4. Build and validate
 
-- **Scripts**: ALL scripts go in `/scripts/`, NEVER in project root
-- **Tests**: ALL tests go in `/tests/`, NEVER in project root  
-- **Python modules**: Always under `/src/claude_mpm/`
-- **Import conventions**: Use full package names: `from claude_mpm.module import ...`
-
-### Testing Requirements
-
-We maintain 85%+ test coverage across:
-
-1. **Unit Tests**: Individual services and components
-2. **Integration Tests**: Service interactions and interfaces
-3. **Performance Tests**: Caching and optimization verification
-4. **Security Tests**: Input validation and security measures
-5. **E2E Tests**: Complete user workflows
-
-#### Running Tests
-
-Tests are configured to run in parallel by default using pytest-xdist, providing 3-4x speedup:
+### 4. Build and Test
 
 ```bash
-# Run all tests in parallel (default, fastest)
-make test
+# Build all agents (creates build/ directory)
+./build-agent.py
 
-# Run tests serially for debugging
-make test-serial
+# Validate structure and frontmatter
+./build-agent.py --validate
 
-# Run only unit tests (fast)
-make test-fast
+# Build specific agent
+./build-agent.py engineer/backend/kotlin-engineer
 
-# Run with coverage report
-make test-coverage
-
-# Run specific test types
-make test-unit          # Unit tests only
-make test-integration   # Integration tests only
-make test-e2e          # End-to-end tests only
+# Test in Claude MPM
+claude-mpm agents deploy --file build/engineer/backend/kotlin-engineer.md
 ```
 
-**Parallelization Details:**
-- Tests use all available CPU cores by default (`-n auto`)
-- Expected speedup: 3-4x faster than serial execution
-- Typical execution time: ~30-45 seconds (down from 2-3 minutes)
-- Use `make test-serial` for debugging race conditions or fixture issues
+### 5. Submit Pull Request
 
-**Writing Thread-Safe Tests:**
-- Ensure test fixtures are isolated (use `tmp_path` for file operations)
-- Avoid shared state between tests
-- Use `@pytest.mark.serial` for tests that must run sequentially
-- Mock external services to prevent port conflicts
+```bash
+git checkout -b feat/add-kotlin-engineer
+git add agents/engineer/backend/kotlin-engineer.md
+git commit -m "feat: add Kotlin engineer agent for JVM backend development"
+git push origin feat/add-kotlin-engineer
+```
 
-## Documentation
+Then create a PR on GitHub using the pull request template.
 
-### Key Documentation Locations
+## BASE-AGENT.md Inheritance System
 
-- **Start Here**: [docs/README.md](docs/README.md) - Complete navigation guide
-- **Architecture**: [docs/developer/ARCHITECTURE.md](docs/developer/ARCHITECTURE.md) - Service architecture
-- **Structure**: [docs/developer/STRUCTURE.md](docs/developer/STRUCTURE.md) - File organization
-- **Services**: [docs/developer/SERVICES.md](docs/developer/SERVICES.md) - Service development
-- **Quality**: [docs/developer/QA.md](docs/developer/QA.md) - Testing procedures
-- **Deployment**: [docs/reference/DEPLOY.md](docs/reference/DEPLOY.md) - Release process
+### How Inheritance Works
 
-### Documentation Standards
+When you build an agent, the build process automatically **appends** BASE-AGENT.md content from the inheritance chain:
 
-1. **Service Documentation**: Document all interfaces and implementations
-2. **Architecture Updates**: Keep architecture docs current with changes
-3. **Migration Guides**: Document breaking changes and upgrade paths
-4. **Performance Metrics**: Document performance expectations and benchmarks
+```
+agents/engineer/backend/python-engineer.md
+    ↓ (inherits from)
+agents/engineer/backend/BASE-AGENT.md
+    ↓ (inherits from)
+agents/engineer/BASE-AGENT.md
+    ↓ (inherits from)
+agents/BASE-AGENT.md
+```
+
+**Final compiled agent** = python-engineer.md content + all BASE-AGENT.md files in chain
+
+### What to Put Where
+
+**❌ DON'T duplicate in agent-specific files:**
+- General PM delegation rules
+- Common quality standards
+- Standard error handling patterns
+- Universal testing requirements
+
+**✅ DO include in agent-specific files:**
+- Language/framework-specific patterns
+- Technology stack capabilities
+- Unique tool configurations
+- Specialized workflows
+
+**Example: python-engineer.md should contain:**
+```markdown
+---
+agent_id: python-engineer
+category: engineer/backend
+model: sonnet
+version: 1.0.0
+---
+
+# Python Engineer Agent
+
+## Technology Stack
+- Python 3.11+
+- FastAPI, Django, Flask
+- SQLAlchemy, Alembic
+- pytest, mypy, ruff
+
+## Capabilities
+- Type-safe API development with FastAPI
+- Database migrations with Alembic
+- Async programming with asyncio
+- Testing with pytest and fixtures
+
+## Implementation Patterns
+
+### FastAPI Service Pattern
+[Agent-specific pattern details...]
+
+### Database Session Management
+[Agent-specific pattern details...]
+```
+
+**BASE-AGENT.md should contain:**
+```markdown
+# Common Engineering Standards
+
+## Code Quality Requirements
+- All code must pass linting
+- Type hints required
+- Comprehensive error handling
+- Performance considerations
+
+## Testing Requirements
+- Unit tests for all functions
+- Integration tests for APIs
+- 80%+ code coverage
+
+[... shared content for all engineers ...]
+```
+
+### Benefits of Inheritance
+
+- **57% less duplication**: Shared instructions in one place
+- **Consistency**: All agents follow same base standards
+- **Maintainability**: Update once, applies to all agents
+- **Focus**: Agent files only contain unique content
+
+## Agent File Guidelines
+
+### File Naming Convention
+
+**✅ Correct:**
+- `python-engineer.md`
+- `api-qa.md`
+- `vercel-ops.md`
+- `mpm-agent-manager.md`
+
+**❌ Incorrect:**
+- `python_engineer.md` (underscores)
+- `PythonEngineer.md` (PascalCase)
+- `pythonEngineer.md` (camelCase)
+
+**Rule**: Use lowercase with dashes (kebab-case)
+
+### File Location
+
+Place agents in the category that matches their primary function:
+
+- **engineer/backend**: Backend language engineers (Python, Go, Java, etc.)
+- **engineer/frontend**: Frontend framework engineers (React, Vue, Svelte, etc.)
+- **engineer/mobile**: Mobile platform engineers (Flutter, React Native, etc.)
+- **engineer/fullstack**: Full-stack framework engineers (Next.js, SvelteKit, etc.)
+- **qa**: Quality assurance and testing agents
+- **ops/platform**: Platform-specific operations (Vercel, GCP, Railway, etc.)
+- **ops/infra**: Infrastructure and deployment agents
+- **universal**: Cross-cutting agents (research, documentation, etc.)
+- **claude-mpm**: MPM-specific agents (agent-manager, ticketing, etc.)
+
+### YAML Frontmatter
+
+**Required fields:**
+```yaml
+---
+agent_id: kotlin-engineer        # Must match filename (without .md)
+category: engineer/backend       # Must match directory path
+model: sonnet                    # sonnet, opus, or haiku
+version: 1.0.0                   # Semantic versioning
+---
+```
+
+**Optional fields:**
+```yaml
+tags:                            # Technology and domain tags
+  - kotlin
+  - jvm
+  - spring-boot
+  - coroutines
+
+routing:                         # Auto-deployment rules
+  keywords:
+    - kotlin
+    - spring
+  paths:
+    - "*.kt"
+    - "build.gradle.kts"
+  priority: 100
+```
+
+### Agent Content Structure
+
+**Recommended sections:**
+
+```markdown
+---
+[frontmatter]
+---
+
+# [Agent Name] Agent
+
+## Technology Stack
+List primary languages, frameworks, and tools
+
+## Capabilities
+What can this agent do?
+
+## When to Use This Agent
+Specific use cases and scenarios
+
+## Implementation Patterns
+Agent-specific patterns and best practices
+
+## Common Workflows
+Step-by-step workflows for typical tasks
+
+## Examples
+Code examples and usage demonstrations
+```
+
+## Avoiding Duplication with BASE-AGENT.md
+
+### Before Creating a New Agent
+
+**Ask yourself:**
+1. Does this content apply to ALL agents? → Put in `agents/BASE-AGENT.md`
+2. Does this apply to all engineers? → Put in `agents/engineer/BASE-AGENT.md`
+3. Does this apply to all backend engineers? → Put in `agents/engineer/backend/BASE-AGENT.md`
+4. Is this Python-specific? → Put in `agents/engineer/backend/python-engineer.md`
+
+### Common Duplication Mistakes
+
+**❌ Mistake 1: Duplicating quality standards**
+```markdown
+# In python-engineer.md (WRONG)
+All code must pass linting and have type hints.
+Tests are required with 80%+ coverage.
+
+# Should be in agents/engineer/BASE-AGENT.md or agents/BASE-AGENT.md
+```
+
+**❌ Mistake 2: Duplicating PM delegation rules**
+```markdown
+# In react-engineer.md (WRONG)
+Never implement directly. Always delegate to appropriate agent.
+
+# Should be in agents/BASE-AGENT.md
+```
+
+**✅ Correct: Agent-specific content only**
+```markdown
+# In python-engineer.md (CORRECT)
+## FastAPI-Specific Patterns
+
+Use dependency injection for database sessions:
+
+```python
+from fastapi import Depends
+from sqlalchemy.orm import Session
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+```
+```
+
+## Auto-Deployment Configuration
+
+Agents can be automatically deployed when Claude MPM detects certain project types.
+
+### Adding Auto-Deploy Rules
+
+1. **Add routing to agent frontmatter:**
+```yaml
+routing:
+  keywords:                    # Keywords in dependencies or code
+    - fastapi
+    - uvicorn
+  paths:                       # File patterns to detect
+    - "requirements.txt"
+    - "pyproject.toml"
+  priority: 100                # Higher = preferred when multiple match
+```
+
+2. **Update AUTO-DEPLOY-INDEX.md** (if creating new patterns):
+   - Document the detection logic
+   - Explain why this agent is chosen
+   - Note any conflicts with other agents
+
+### Testing Auto-Deployment
+
+```bash
+# In a FastAPI project
+claude-mpm agents auto-configure --preview
+
+# Should show python-engineer in recommendations
+```
+
+## Commit and PR Guidelines
+
+### Conventional Commits
+
+We use [Conventional Commits](https://www.conventionalcommits.org/) for versioning:
+
+- `feat: add Kotlin engineer agent` → Minor version bump
+- `fix: correct Python engineer FastAPI pattern` → Patch version bump
+- `feat!: restructure agent categories` → Major version bump (breaking)
+- `docs: update BASE-AGENT.md inheritance guide` → No version bump
+- `refactor: rename python_engineer to python-engineer` → No version bump
+
+### PR Process
+
+1. **Create issue first** (for new agents or major changes)
+2. **Fork and create branch**: `feat/add-kotlin-engineer`
+3. **Make changes** following guidelines above
+4. **Build and validate**: `./build-agent.py --validate`
+5. **Test locally**: Deploy and test in Claude MPM
+6. **Commit with conventional format**
+7. **Push and create PR** using the PR template
+8. **Address review feedback**
+
+### PR Checklist
+
+Before submitting:
+- [ ] Agent uses dash-based naming (`kotlin-engineer.md`, not `kotlin_engineer.md`)
+- [ ] Agent is in correct category directory
+- [ ] YAML frontmatter is complete and valid
+- [ ] Agent-specific content only (no duplication of BASE-AGENT.md)
+- [ ] Built successfully with `./build-agent.py`
+- [ ] Validated with `./build-agent.py --validate`
+- [ ] Tested deployment in Claude MPM
+- [ ] AUTO-DEPLOY-INDEX.md updated (if adding auto-deploy rules)
+- [ ] README.md updated (if adding new category)
+
+## Building Agents
+
+### Build Process
+
+The build process:
+1. Reads agent-specific content from `agents/[category]/[agent].md`
+2. Walks up directory tree collecting all `BASE-AGENT.md` files
+3. Appends BASE-AGENT.md content in order (root → category → subcategory)
+4. Writes compiled agent to `build/[category]/[agent].md`
+
+### Build Commands
+
+```bash
+# Build all agents
+./build-agent.py
+
+# Build specific category
+./build-agent.py engineer/backend
+
+# Build specific agent
+./build-agent.py engineer/backend/python-engineer
+
+# Validate all agents
+./build-agent.py --validate
+
+# Show inheritance chain
+./build-agent.py --show-inheritance engineer/backend/python-engineer
+
+# Preview final output
+./build-agent.py --preview engineer/backend/python-engineer
+```
+
+### Validation Rules
+
+The validator checks:
+- ✅ Valid YAML frontmatter
+- ✅ Required fields present (`agent_id`, `category`, `model`, `version`)
+- ✅ File location matches category
+- ✅ Filename matches agent_id
+- ✅ Dash-based naming convention
+- ✅ Model is valid (sonnet, opus, haiku)
+- ✅ Version follows semantic versioning
 
 ## Common Development Tasks
 
-### Adding a New Service
+### Adding a New Language Engineer
 
-1. **Create Interface**: Define service contract in `src/claude_mpm/services/core/interfaces.py`
-2. **Implement Service**: Create implementation in appropriate service domain
-3. **Register Service**: Add to service container for dependency injection
-4. **Add Tests**: Unit, integration, and interface compliance tests
-5. **Update Documentation**: Document in [docs/developer/SERVICES.md](docs/developer/SERVICES.md)
+1. **Choose category**: `agents/engineer/backend/` or `agents/engineer/frontend/`
+2. **Create file**: `agents/engineer/backend/kotlin-engineer.md`
+3. **Add frontmatter**:
+```yaml
+---
+agent_id: kotlin-engineer
+category: engineer/backend
+model: sonnet
+version: 1.0.0
+tags:
+  - kotlin
+  - jvm
+  - spring-boot
+routing:
+  keywords:
+    - kotlin
+    - spring
+  paths:
+    - "*.kt"
+    - "build.gradle.kts"
+  priority: 100
+---
+```
+4. **Write content**: Focus on Kotlin-specific patterns only
+5. **Build and test**: `./build-agent.py engineer/backend/kotlin-engineer`
+6. **Submit PR**
 
-### Adding CLI Commands
+### Enhancing an Existing Agent
 
-1. Create command module in `src/claude_mpm/cli/commands/`
-2. Register in `src/claude_mpm/cli/parser.py`
-3. Follow existing command patterns
-4. Use dependency injection for service access
-5. Add comprehensive tests and documentation
+1. **Identify what to change**: Agent-specific or shared content?
+2. **If shared**: Edit appropriate BASE-AGENT.md file
+3. **If agent-specific**: Edit the agent file directly
+4. **Rebuild**: `./build-agent.py [agent-path]`
+5. **Test**: Deploy updated agent and verify changes
+6. **Submit PR** with clear description of enhancement
 
-### Modifying PM Instructions
+### Creating a New Category
 
-1. Edit `src/claude_mpm/agents/INSTRUCTIONS.md` for PM behavior
-2. Edit `src/claude_mpm/agents/BASE_PM.md` for framework requirements  
-3. Test with `./claude-mpm run` in interactive mode
-4. Update tests for PM behavior changes
+1. **Create directory**: `agents/new-category/`
+2. **Create BASE-AGENT.md**: `agents/new-category/BASE-AGENT.md`
+3. **Add shared content** for all agents in this category
+4. **Create first agent**: `agents/new-category/first-agent.md`
+5. **Update README.md**: Document new category
+6. **Submit PR** explaining rationale for new category
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Quality Check Failures**: Run `make lint-fix` first, then address remaining issues
-2. **Import Errors**: Ensure virtual environment is activated and PYTHONPATH includes `src/`
-3. **Service Resolution Errors**: Check service container registration
-4. **Version Errors**: Run `pip install -e .` for proper installation
+**Issue 1: Build fails with "File not found"**
+- **Cause**: Incorrect file path or category mismatch
+- **Fix**: Ensure file location matches `category` in frontmatter
+
+**Issue 2: Validation fails with "Invalid frontmatter"**
+- **Cause**: YAML syntax error or missing required field
+- **Fix**: Check YAML syntax, ensure all required fields present
+
+**Issue 3: Agent content is duplicated**
+- **Cause**: Content in agent file that should be in BASE-AGENT.md
+- **Fix**: Move shared content to appropriate BASE-AGENT.md file
+
+**Issue 4: Auto-deployment not working**
+- **Cause**: Missing or incorrect routing rules
+- **Fix**: Add `routing` section to frontmatter with correct patterns
 
 ### Getting Help
 
-- **Development Guidelines**: **Read [CLAUDE.md](CLAUDE.md) first** - Critical guide to the three environments and deployment architecture
-- **Documentation**: Comprehensive guides in [docs/](docs/)
-- **Architecture**: [docs/developer/ARCHITECTURE.md](docs/developer/ARCHITECTURE.md) for service architecture
-- **Quality Issues**: See [docs/reference/DEPLOY.md#quality-gates](docs/reference/DEPLOY.md#quality-gates)
-
-## Project Overview
-
-Claude MPM is a framework that extends Claude Code with multi-agent orchestration capabilities, featuring:
-
-- **Service-Oriented Architecture**: Five specialized service domains
-- **Interface-Based Contracts**: All services implement explicit interfaces
-- **Dependency Injection**: Service container with automatic resolution
-- **Performance Optimizations**: Lazy loading, multi-level caching, connection pooling
-- **Security Framework**: Input validation, path traversal prevention
-- **Backward Compatibility**: Lazy imports maintain existing import paths
-
-## Release Process
-
-For maintainers handling releases:
-
-```bash
-# Patch release (bug fixes)
-make release-patch
-
-# Minor release (new features) 
-make release-minor
-
-# Major release (breaking changes)
-make release-major
-
-# Publish to all channels
-make release-publish
-```
-
-All releases require passing the complete quality gate (`make pre-publish`).
-
----
+- **Issue Templates**: Use GitHub issue templates for bug reports or feature requests
+- **Discussions**: GitHub Discussions for questions and community support
+- **Documentation**: README.md for repository overview and structure
+- **Examples**: Study existing agents for patterns and structure
 
 ## Questions?
 
-- 📚 **Start with**: [docs/README.md](docs/README.md) for complete documentation navigation
-- 🏗️ **Architecture**: [docs/developer/ARCHITECTURE.md](docs/developer/ARCHITECTURE.md) for system design
-- 🔧 **Development**: [CLAUDE.md](CLAUDE.md) for detailed development guidelines
-- 🚀 **Deployment**: [docs/reference/DEPLOY.md](docs/reference/DEPLOY.md) for release process
+- 📚 **Repository Overview**: [README.md](README.md)
+- 🏗️ **Agent Structure**: See "Repository Structure" in README
+- 🔧 **Build System**: `./build-agent.py --help`
+- 🤖 **Example Agents**: Browse `agents/` directory for reference
 
-Thank you for contributing to Claude MPM! 🚀
+Thank you for contributing to Claude MPM Agent Templates! 🚀
