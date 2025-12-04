@@ -1,227 +1,227 @@
 {
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/BASE-AGENT.md": {
-    "etag": "W/\"04460e029d84ecec2d2fcc46c16ef291a7439fe1fb7de62f0b9fa4c250f8a3a7\"",
-    "last_modified": "2025-12-03T20:31:38.701780+00:00",
-    "file_size": 3988
+    "etag": "W/\"949e36549acae11445b49dbc3e69703c709f66bf38304553cca9e98a80cd12f7\"",
+    "last_modified": "2025-12-04T06:54:56.166264+00:00",
+    "file_size": 3926
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/BASE-AGENT.md": {
-    "etag": "W/\"ac2a3613b255e52729a4c9f53e27ce06e5a67c74e1c50b6ac54530183831f723\"",
-    "last_modified": "2025-12-03T20:31:38.719870+00:00",
-    "file_size": 11189
+    "etag": "W/\"fcb3ff7f1453e96e8576a715bd02b55bdb818443802336d089df15e18b83d22c\"",
+    "last_modified": "2025-12-04T06:54:56.182507+00:00",
+    "file_size": 11163
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-agent-manager.md": {
-    "etag": "W/\"73f53ded735ece65da8aa7d37a791340ae34cbd4c5486c726505e13385ab85d2\"",
-    "last_modified": "2025-12-03T20:31:38.735996+00:00",
-    "file_size": 15105
+    "etag": "W/\"07ac03103fe5ee2cc37fc69b644c8adfdab8419b5ba90b7e0dd9bd81971e2222\"",
+    "last_modified": "2025-12-04T06:54:56.202919+00:00",
+    "file_size": 46909
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-skills-manager.md": {
-    "etag": "W/\"33da7e4e94c03e4f895ccf43afb1f2216872b629131fd71aedc2453f127a64fe\"",
-    "last_modified": "2025-12-03T20:31:38.754676+00:00",
-    "file_size": 38438
+    "etag": "W/\"d8d09f15df5755343fe983c04844456ee89bafdc068c28f808a7ec306e58f71a\"",
+    "last_modified": "2025-12-04T06:54:56.221734+00:00",
+    "file_size": 38310
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/documentation/documentation.md": {
-    "etag": "W/\"54d142e53702c8d3655340ca5d1c6993370111eeb57f2c8dbae9da70ad39ad82\"",
-    "last_modified": "2025-12-03T20:31:38.771566+00:00",
-    "file_size": 13691
+    "etag": "W/\"0bf85e38b4fd118cf33d5efff339bfef6dce176a9135e1534b0c88738c02c59f\"",
+    "last_modified": "2025-12-04T06:54:56.235560+00:00",
+    "file_size": 13459
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/documentation/ticketing.md": {
-    "etag": "W/\"66936b027a801220772dbf922dd972d3bf6b5a0239184b853044f3f29c77b14a\"",
-    "last_modified": "2025-12-03T20:31:38.787621+00:00",
-    "file_size": 50531
+    "etag": "W/\"9164f27ca62772b80f138656f8c2ec07584d1ecab8ea03cca2854b414f127f57\"",
+    "last_modified": "2025-12-04T06:54:56.253359+00:00",
+    "file_size": 49035
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/BASE-AGENT.md": {
-    "etag": "W/\"068034f7c65caf6a362d2a62dc49006cb83aa2fe59e04db63297a2bc8bd5e215\"",
-    "last_modified": "2025-12-03T20:31:38.804297+00:00",
-    "file_size": 5069
+    "etag": "W/\"4b27eac8a2bb0aaf548e092ed40134293964bbfb0fce68943510149dac00e6f9\"",
+    "last_modified": "2025-12-04T06:54:56.350579+00:00",
+    "file_size": 5071
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/golang-engineer.md": {
-    "etag": "W/\"4926dc14d948614efcb43150b41088736a67a54dd7d31692ee0963dacff0dd2b\"",
-    "last_modified": "2025-12-03T20:31:38.821019+00:00",
-    "file_size": 9444
+    "etag": "W/\"70989d122c4d2a36058de09b3d6952a0d89ee691c3362e42a945a434ec414062\"",
+    "last_modified": "2025-12-04T06:54:56.369553+00:00",
+    "file_size": 9454
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/java-engineer.md": {
-    "etag": "W/\"fc94d3090457fa061af311c831edd49cf697f92effe150f7f1d575f283e177ae\"",
-    "last_modified": "2025-12-03T20:31:38.841925+00:00",
-    "file_size": 43836
+    "etag": "W/\"137ea650c20ed862f191f7f36fbe897aff55f1e14aafd7ee90e821a957f17503\"",
+    "last_modified": "2025-12-04T06:54:56.389256+00:00",
+    "file_size": 44262
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/javascript-engineer.md": {
-    "etag": "W/\"0bad81ef729eccc92baf43565a2714c7249c3a49ada4b3f8ca6b1b30d057fa03\"",
-    "last_modified": "2025-12-03T20:31:38.857401+00:00",
-    "file_size": 19652
+    "etag": "W/\"61c60fa58c514ec72691ecf5af4d68d2f52b43a0b385762571f0a7178734dc06\"",
+    "last_modified": "2025-12-04T06:54:56.413093+00:00",
+    "file_size": 19640
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/php-engineer.md": {
-    "etag": "W/\"8e8a4004b532c9c6336353d4db23d8e9652d70cc64b2b8fdbdf5d3eb93c4fd22\"",
-    "last_modified": "2025-12-03T20:31:38.873310+00:00",
-    "file_size": 9559
+    "etag": "W/\"e502018f58ba9298176700fc18c1db5ea5b210f9ef7d807dbbfffe792c205e63\"",
+    "last_modified": "2025-12-04T06:54:56.434052+00:00",
+    "file_size": 9539
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/python-engineer.md": {
-    "etag": "W/\"8ae7ae2770884dc117abeae737418e70597905171571e1ad5d2bfd310598ef7d\"",
-    "last_modified": "2025-12-03T20:31:38.892212+00:00",
-    "file_size": 43339
+    "etag": "W/\"274c08f6d34c5e796de372c65d1395b88040ba801a025c882fc7be2f2d6b3592\"",
+    "last_modified": "2025-12-04T06:54:56.450536+00:00",
+    "file_size": 44228
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/ruby-engineer.md": {
-    "etag": "W/\"3d3b9cf2cc45bfab8631ac3137cc0c40e12b70f50de5ba5583f2ddc090d1e7fe\"",
-    "last_modified": "2025-12-03T20:31:38.909295+00:00",
-    "file_size": 9094
+    "etag": "W/\"279acf8deade2c1bff0c8abfc56115a492e7736bfc855f997e50fedd3e5e2c7b\"",
+    "last_modified": "2025-12-04T06:54:56.467415+00:00",
+    "file_size": 9074
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/rust-engineer.md": {
-    "etag": "W/\"4387655ab292764eb01787e3bddcae7d18f051d21b5b46d496f5f1aa8a9fbc28\"",
-    "last_modified": "2025-12-03T20:31:38.947779+00:00",
-    "file_size": 16469
+    "etag": "W/\"5e5ad9ea41fd347d9b8a7b32a1ddbd48b9d8b9a7cd10382c1387625d2acd7eb6\"",
+    "last_modified": "2025-12-04T06:54:56.484003+00:00",
+    "file_size": 16479
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/core/engineer.md": {
     "etag": "W/\"099414b526224a253051521916d34e17492593f94d93152104cd3fed3f2e3ef6\"",
-    "last_modified": "2025-12-03T20:31:38.968798+00:00",
+    "last_modified": "2025-12-04T06:54:56.501994+00:00",
     "file_size": 4096
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/data/data-engineer.md": {
-    "etag": "W/\"0ba6f2353a166bee80335a2f8a99654959cb319c5553c1c5967ac75f8c3292b8\"",
-    "last_modified": "2025-12-03T20:31:38.985738+00:00",
-    "file_size": 17627
+    "etag": "W/\"f9e5db266fc666cfa09dd6890b249fc76e1f82a35a9f5b96ef8a3cf1dd28749e\"",
+    "last_modified": "2025-12-04T06:54:56.521160+00:00",
+    "file_size": 17603
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/data/typescript-engineer.md": {
-    "etag": "W/\"65caad8d11b7821b5c0dd02f1782808f51a05ee79d84b94f3a56436e9317c6d3\"",
-    "last_modified": "2025-12-03T20:31:39.002943+00:00",
-    "file_size": 14946
+    "etag": "W/\"a5cd518a19606e92b391d09274e0a585fd7a6821b88e233df76661456e3600bd\"",
+    "last_modified": "2025-12-04T06:54:56.537336+00:00",
+    "file_size": 14900
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/nextjs-engineer.md": {
-    "etag": "W/\"2e9cceb4b86920b832e56f2e071afa880b668fb333122f6d650e30737a71b603\"",
-    "last_modified": "2025-12-03T20:31:39.112832+00:00",
-    "file_size": 14846
+    "etag": "W/\"18239c203bbabd22cfb6c9332da6084220d64f18d45ff39f5f70742a4371ee3c\"",
+    "last_modified": "2025-12-04T06:54:56.553492+00:00",
+    "file_size": 15512
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/react-engineer.md": {
-    "etag": "W/\"f77f5ac5d45869e2fef94d20cc13f6794bfc7483f2e1fdea91351f39fbedc80c\"",
-    "last_modified": "2025-12-03T20:31:39.128728+00:00",
-    "file_size": 10553
+    "etag": "W/\"94f9f4d8a2323a59933ae889ff86063677869a9c8280f46c54f3b96bead02ff1\"",
+    "last_modified": "2025-12-04T06:54:56.570604+00:00",
+    "file_size": 7164
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/svelte-engineer.md": {
-    "etag": "W/\"ddc6dd9821296930c4c0e750bc213e2dd573c0d6289c7596a4000006d46a9432\"",
-    "last_modified": "2025-12-03T20:31:39.147008+00:00",
-    "file_size": 15150
+    "etag": "W/\"21e52ddab1b0fd2558def58afd02990048d30028d3e0e14db25ef90466e2108c\"",
+    "last_modified": "2025-12-04T06:54:56.588762+00:00",
+    "file_size": 15721
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/web-ui.md": {
-    "etag": "W/\"769c97ec8bbb6746153396f417c0fb3fcba5b824906cfd7b4682ba8247cfc0f6\"",
-    "last_modified": "2025-12-03T20:31:39.167294+00:00",
-    "file_size": 32111
+    "etag": "W/\"c485266024c0a7e0e1a2b2fce9e3a8dfd9df25f3eaad3c29f5e82f2d3cda1ba6\"",
+    "last_modified": "2025-12-04T06:54:56.608264+00:00",
+    "file_size": 33802
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/mobile/dart-engineer.md": {
-    "etag": "W/\"3798398d4aa2b5671c52fb3cee48b0990d7ec4f7937c76d43ef9f750d316cfb3\"",
-    "last_modified": "2025-12-03T20:31:39.190458+00:00",
-    "file_size": 18599
+    "etag": "W/\"e8e41856c791c225651c5c0e227065c72a3581ee8ddd042e695b863bdb0d2c4c\"",
+    "last_modified": "2025-12-04T06:54:56.627087+00:00",
+    "file_size": 18604
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/mobile/tauri-engineer.md": {
-    "etag": "W/\"b0653b6cc7d3e59cea20e58bdf983c72c2c16d46a1190c369c52ec6a634dd7e9\"",
-    "last_modified": "2025-12-03T20:31:39.207021+00:00",
-    "file_size": 21647
+    "etag": "W/\"768d2d705713e27b46a30d6a24fb4f72450dbcecfa11dace4808b889c5259b69\"",
+    "last_modified": "2025-12-04T06:54:56.642597+00:00",
+    "file_size": 21614
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/agentic-coder-optimizer.md": {
-    "etag": "W/\"94c2c367f04d1e4896d54bad0aa4802430a673d4cc9d1fa9c196ba6702bd5e26\"",
-    "last_modified": "2025-12-03T20:31:39.224099+00:00",
-    "file_size": 13335
+    "etag": "W/\"04ebb92040739ff458f130c60386d76758bd1b6898b0c65b1c7c13a3eef07592\"",
+    "last_modified": "2025-12-04T06:54:56.659038+00:00",
+    "file_size": 13325
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/imagemagick.md": {
-    "etag": "W/\"f59d25bd16223befe697f170333a156784d16f1547661ad61a06628bd029e849\"",
-    "last_modified": "2025-12-03T20:31:39.238396+00:00",
+    "etag": "W/\"0ef0c393df97ff2b7cbaa8362a85a91bf9d26030a9e606a0578358bebacbf3db\"",
+    "last_modified": "2025-12-04T06:54:56.676144+00:00",
     "file_size": 13151
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/prompt-engineer.md": {
     "etag": "W/\"8f4061cca2de39c335b729e20f78eb308ed9a4ca6d926584b086c38b216e32c8\"",
-    "last_modified": "2025-12-03T20:31:39.255895+00:00",
+    "last_modified": "2025-12-04T06:54:56.691534+00:00",
     "file_size": 2877
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/refactoring-engineer.md": {
     "etag": "W/\"fa5ebc07f5f538d2ae05facd8ac729bcae2b7217e0ef41e6751a794f034bb634\"",
-    "last_modified": "2025-12-03T20:31:39.274502+00:00",
+    "last_modified": "2025-12-04T06:54:56.702753+00:00",
     "file_size": 8900
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/BASE-AGENT.md": {
-    "etag": "W/\"9062764213d949ef2d0ef5952c9cb6e5bf0a97a1fcf295ef306244874c65d241\"",
-    "last_modified": "2025-12-03T20:31:39.310714+00:00",
-    "file_size": 8245
+    "etag": "W/\"8f9dff15df27671aa64dfb43c8adfa2c86fa9ecb38d958c654516efbca5bc016\"",
+    "last_modified": "2025-12-04T06:54:56.718529+00:00",
+    "file_size": 8252
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/core/ops.md": {
-    "etag": "W/\"20645c88cf82fb61ea9ba6360078bb385c792a182dda5fc4bdcabb82f21ef9c3\"",
-    "last_modified": "2025-12-03T20:31:39.326592+00:00",
-    "file_size": 9357
+    "etag": "W/\"3ca74fcc086bc5a1046a428b2acbce93df4024a2a7f6e22493288045ba5ceb4c\"",
+    "last_modified": "2025-12-04T06:54:56.735940+00:00",
+    "file_size": 9355
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/clerk-ops.md": {
-    "etag": "W/\"1b6abd911ff9342304db3be995e72ed4d7242aa027444314c169df17545ea5fc\"",
-    "last_modified": "2025-12-03T20:31:39.343303+00:00",
-    "file_size": 14397
+    "etag": "W/\"1923ce94d834561a20b01a8b5fd743c0dc1c5afee646ca10e6f1fe30a3981d41\"",
+    "last_modified": "2025-12-04T06:54:56.757023+00:00",
+    "file_size": 14353
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/gcp-ops.md": {
     "etag": "W/\"d1e04ed70d0f21620dcfd5712c6179e61fbc7d8b327042edeaddff8e24686e04\"",
-    "last_modified": "2025-12-03T20:31:39.358163+00:00",
+    "last_modified": "2025-12-04T06:54:56.769363+00:00",
     "file_size": 8247
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/local-ops.md": {
     "etag": "W/\"e138c78ebeec7fe60887c5aa2a3eb6e9747cdb7cd70aeb69e39a3825ef6678a7\"",
-    "last_modified": "2025-12-03T20:31:39.372472+00:00",
+    "last_modified": "2025-12-04T06:54:56.784641+00:00",
     "file_size": 713
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/vercel-ops.md": {
-    "etag": "W/\"a3b75a0aa34dac8e929e9fab9eb70f936666281dba3c9f34d5d2de022d213503\"",
-    "last_modified": "2025-12-03T20:31:39.399609+00:00",
-    "file_size": 20267
+    "etag": "W/\"a9eef3a09c811a75880616e55c157c41b012b5da261987e1dcec092393432c5b\"",
+    "last_modified": "2025-12-04T06:54:56.883694+00:00",
+    "file_size": 20273
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/tooling/version-control.md": {
-    "etag": "W/\"34818b552d4a9b9f970651f00444be0ec6a84b98a15244e9e6115e4b5824b83c\"",
-    "last_modified": "2025-12-03T20:31:39.410458+00:00",
-    "file_size": 19013
+    "etag": "W/\"5bceb48ed7ef844504b2f832887a9fda02e937f202e3c17d756987c7f4bcb7a3\"",
+    "last_modified": "2025-12-04T06:54:56.900840+00:00",
+    "file_size": 18972
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/BASE-AGENT.md": {
-    "etag": "W/\"0f004ca3674b5a0245c8d16f70855c3983bf220cf2a7ca89f3898f8605f8ff37\"",
-    "last_modified": "2025-12-03T20:31:39.428235+00:00",
-    "file_size": 6800
+    "etag": "W/\"5723f63dc4db71637dfe13789806415d8f65238fee57abbc9d1a88e8e4a30f74\"",
+    "last_modified": "2025-12-04T06:54:56.920185+00:00",
+    "file_size": 6775
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/api-qa.md": {
     "etag": "W/\"bd52369f31f428489877585363519557b0525f1d9ec7c467cad8d220830ba45e\"",
-    "last_modified": "2025-12-03T20:31:39.443224+00:00",
+    "last_modified": "2025-12-04T06:54:56.936428+00:00",
     "file_size": 4095
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/qa.md": {
     "etag": "W/\"499346cde15df9cb30c298dfd8bfd21c0713167ab0eee86fd621d7aa5ed89c48\"",
-    "last_modified": "2025-12-03T20:31:39.459151+00:00",
+    "last_modified": "2025-12-04T06:54:56.957488+00:00",
     "file_size": 8235
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/web-qa.md": {
-    "etag": "W/\"d966f44df76b25c9917ed07ff39162de872230b74f6c8304603e0702d08a085f\"",
-    "last_modified": "2025-12-03T20:31:39.476848+00:00",
-    "file_size": 21514
+    "etag": "W/\"bdd73e9647b217dff21541d3846f4c7825fb5e3542f98654d92e1f5b44f7c6cd\"",
+    "last_modified": "2025-12-04T06:54:56.971979+00:00",
+    "file_size": 21482
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/security/security.md": {
-    "etag": "W/\"5a2a0b7d63a69b181351e369b7a16f769907d7aa39fac23c4f4b6289163a45a5\"",
-    "last_modified": "2025-12-03T20:31:39.493795+00:00",
-    "file_size": 25570
+    "etag": "W/\"8d9f16d86ce03387b7dd6fddd388ba96ec26ff923b3af43f6bea4c0946f0f382\"",
+    "last_modified": "2025-12-04T06:54:56.994000+00:00",
+    "file_size": 25095
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/code-analyzer.md": {
     "etag": "W/\"3b9481b683777da45b97802a9400047fa2d8a8537a55922f4eeb31dbfbdf6a98\"",
-    "last_modified": "2025-12-03T20:31:39.509190+00:00",
+    "last_modified": "2025-12-04T06:54:57.009586+00:00",
     "file_size": 6748
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/content-agent.md": {
-    "etag": "W/\"1b6adbdfd69ba07328bfd0ab71e5292bc364910906c7fd393f6d89feb34c1eec\"",
-    "last_modified": "2025-12-03T20:31:39.530143+00:00",
+    "etag": "W/\"ee63ba993e6e12b2aa35b76e0f8c02fdf6b2f06de55a582fc0d2c9a1bc4c2ce3\"",
+    "last_modified": "2025-12-04T06:54:57.037373+00:00",
     "file_size": 23666
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/memory-manager.md": {
-    "etag": "W/\"f19baa4f5ae39d7e633f1d7dbff10c75ce48338fc4b8b6474b234fa1f0d1e9fc\"",
-    "last_modified": "2025-12-03T20:31:39.638834+00:00",
-    "file_size": 10388
+    "etag": "W/\"f5f844440f4ff697bdd7364d7431eedc7fc50574fafa9f77535b7b51fe9e8bbd\"",
+    "last_modified": "2025-12-04T06:54:57.058708+00:00",
+    "file_size": 10372
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/product-owner.md": {
-    "etag": "W/\"e6236b1781b3401a0ec74ef58cb7b13bb9559eecd5cdd91cc1e3febffeacf6c8\"",
-    "last_modified": "2025-12-03T20:31:39.657313+00:00",
-    "file_size": 33444
+    "etag": "W/\"8c7a0c84a5d8dd38102b5924e133104bd375c8d37a4ea6145fcff653382b8da2\"",
+    "last_modified": "2025-12-04T06:54:57.090940+00:00",
+    "file_size": 33154
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/project-organizer.md": {
-    "etag": "W/\"af470ef878972e261a3e29a221193eb1949feb56a7ebbb2017ff2a64b82ee527\"",
-    "last_modified": "2025-12-03T20:31:39.674119+00:00",
-    "file_size": 9302
+    "etag": "W/\"e38678e59e1b070146b7a145999c71b29b9ed8b53a5b57926ffd14bbc41d79c7\"",
+    "last_modified": "2025-12-04T06:54:57.104812+00:00",
+    "file_size": 9304
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/research.md": {
-    "etag": "W/\"f5e328394dbe54c14c367976ada3cc91bbb6d3bea83ff994bf15d019c37198c0\"",
-    "last_modified": "2025-12-03T20:31:39.694908+00:00",
-    "file_size": 47628
+    "etag": "W/\"ff93aa385466c6ece5e8ae3ad46ca622ca9bb61454fc0e4c7294f9b38474521d\"",
+    "last_modified": "2025-12-04T06:54:57.118909+00:00",
+    "file_size": 47679
   }
 }
