@@ -507,38 +507,19 @@ auto_detect_labels=False if pm_tags else True
 
 ## TICKETING INTEGRATION PRIORITY
 
-### PRIMARY: mcp-ticketer MCP Server (ALWAYS PREFER)
+### PRIMARY: mcp-ticketer MCP Server (Preferred)
 
-**CRITICAL**: When mcp-ticketer MCP tools are available, ALWAYS use them instead of native platform APIs (GitHub, Linear, JIRA).
+When available, generally prefer mcp-ticketer MCP tools:
+- `mcp__mcp-ticketer__create_ticket`
+- `mcp__mcp-ticketer__list_tickets`
+- `mcp__mcp-ticketer__get_ticket`
+- `mcp__mcp-ticketer__update_ticket`
+- `mcp__mcp-ticketer__search_tickets`
+- `mcp__mcp-ticketer__add_comment`
 
-**mcp-ticketer provides**:
-- Unified interface across ALL platforms (GitHub, Linear, JIRA, Asana)
-- Enhanced features (project management, bulk operations, hierarchy support)
-- Better error handling and validation
-- Consistent API regardless of backend system
-- Additional capabilities not available in native APIs
+### SECONDARY: aitrackdown CLI (Fallback)
 
-**Use these mcp-ticketer tools**:
-- `mcp__mcp-ticketer__ticket` - All CRUD operations (create, read, update, delete, list)
-- `mcp__mcp-ticketer__hierarchy` - Epics, issues, tasks management
-- `mcp__mcp-ticketer__ticket_search` - Search tickets
-- `mcp__mcp-ticketer__ticket_comment` - Add/list comments
-- `mcp__mcp-ticketer__project_status` - Project analytics
-- `mcp__mcp-ticketer__milestone` - Milestone management
-- `mcp__mcp-ticketer__label` - Label operations
-- `mcp__mcp-ticketer__ticket_analyze` - Pattern detection
-- `mcp__mcp-ticketer__ticket_bulk` - Bulk operations
-
-### SECONDARY: Native Platform APIs (Use ONLY when mcp-ticketer unavailable)
-
-**When mcp-ticketer is NOT available**, fall back to native platform APIs:
-- `mcp__github__*` - GitHub-specific operations
-- `mcp__linear__*` - Linear-specific operations (if available)
-- `mcp__jira__*` - JIRA-specific operations (if available)
-
-### TERTIARY: aitrackdown CLI (Legacy Fallback)
-
-**When NO MCP tools available**, use aitrackdown CLI:
+When mcp-ticketer is NOT available, use aitrackdown CLI:
 - `aitrackdown create issue "Title" --description "Details"`
 - `aitrackdown create task "Title" --description "Details"`
 - `aitrackdown create epic "Title" --description "Details"`
@@ -546,28 +527,10 @@ auto_detect_labels=False if pm_tags else True
 - `aitrackdown transition ISS-0001 in-progress`
 - `aitrackdown status tasks`
 
-### NEVER Use:
+### avoid Use:
 - `claude-mpm tickets create` (does not exist)
 - Manual file manipulation
 - Direct ticket file editing
-
-### Integration Priority Decision Flow
-
-```
-1. Check: Are mcp__mcp-ticketer__* tools available?
-   ├─ YES → Use mcp-ticketer (PRIMARY)
-   └─ NO → Continue to step 2
-
-2. Check: Are native platform MCP tools available? (mcp__github__*, mcp__linear__*, etc.)
-   ├─ YES → Use native platform API (SECONDARY)
-   └─ NO → Continue to step 3
-
-3. Check: Is aitrackdown CLI available?
-   ├─ YES → Use aitrackdown CLI (TERTIARY)
-   └─ NO → Report: No ticket integration available
-
-4. User override: If user explicitly requests specific integration, honor preference
-```
 
 ## MCP DETECTION WORKFLOW
 
