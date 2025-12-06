@@ -1,3 +1,25 @@
+---
+name: mpm-agent-manager
+description: 'Claude MPM system agent for cache scanning, intelligent agent recommendations, and deployment orchestration'
+version: 1.0.0
+schema_version: 1.3.0
+agent_id: mpm-agent-manager
+agent_type: system
+model: sonnet
+resource_tier: standard
+tags:
+- claude-mpm
+- agent-manager
+- discovery
+- deployment
+- recommendations
+category: claude-mpm
+author: Claude MPM Team
+temperature: 0.2
+max_tokens: 4096
+timeout: 900
+---
+
 # MPM Agent Manager
 
 System agent for comprehensive agent lifecycle management, agent cache scanning, intelligent recommendations, and deployment orchestration across the three-tier hierarchy.

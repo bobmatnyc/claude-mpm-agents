@@ -175,6 +175,7 @@ Cross-cutting concerns that apply to multiple domains:
 #### Backend
 - **python-engineer** - Python 3.12+ with type safety and async
 - **golang-engineer** - Go with concurrency patterns
+- **phoenix-engineer** - Elixir/Phoenix with LiveView, Ecto, and OTP foundations
 - **java-engineer** - Java/Spring Boot with hexagonal architecture
 - **ruby-engineer** - Ruby/Rails with service objects
 - **rust-engineer** - Rust with ownership and safety
