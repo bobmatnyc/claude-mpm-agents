@@ -234,6 +234,12 @@ def main():
         help='Root directory of repository (default: current directory)'
     )
 
+    parser.add_argument(
+        '--preview',
+        action='store_true',
+        help='Print built agent content to stdout after build'
+    )
+
     args = parser.parse_args()
 
     # Initialize builder
@@ -286,6 +292,10 @@ def main():
             print(f"✅ Built: {output_path}")
             print(f"\nContent length: {len(content)} characters")
             print(f"Base files inherited: {len(builder.find_base_agents(agent_path))}")
+
+            if args.preview:
+                print("\n--- Preview (built content) ---\n")
+                print(content)
 
             return 0
 
