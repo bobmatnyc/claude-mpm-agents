@@ -228,3 +228,372 @@ All QA reports should include:
 - **Performance data**: Actual measurements
 - **Logs/screenshots**: Supporting evidence
 - **Environment details**: Where tested
+
+## Pre-Merge Testing Checklist
+
+Comprehensive verification workflow before merging changes to production.
+
+### Pre-Commit Verification
+Before committing code, verify:
+- [ ] TypeScript type check passes (`tsc --noEmit`)
+- [ ] ESLint passes with no errors
+- [ ] All existing tests pass locally
+- [ ] No console.log/debug statements left in code
+- [ ] Code follows project style guide
+- [ ] No commented-out code blocks
+
+### Pre-PR Verification
+Before creating a pull request, ensure:
+- [ ] Changeset added for user-facing changes
+- [ ] PR description is complete with:
+  - [ ] Summary of changes
+  - [ ] Related ticket references (ENG-XXX, HEL-XXX, etc.)
+  - [ ] Screenshots for UI changes
+  - [ ] Breaking changes documented
+- [ ] Security checklist completed (if API changes)
+- [ ] Database migration tested on staging (if schema changes)
+- [ ] New tests added for new functionality
+- [ ] Documentation updated if needed
+
+### Pre-Merge Verification
+Before merging to main branch, confirm:
+- [ ] All CI checks pass (lint, type-check, tests, build)
+- [ ] Code review approved by at least one reviewer
+- [ ] No TypeScript errors in changed files
+- [ ] No merge conflicts with target branch
+- [ ] Database migrations run successfully (if applicable)
+- [ ] No regression in existing functionality
+- [ ] Performance benchmarks within acceptable range
+
+## Screenshot-Based UI Verification
+
+Visual verification accelerates code review and catches responsive issues early.
+
+### Screenshot Requirements
+For any PR that changes UI, capture:
+
+1. **Desktop View** (1920x1080)
+   - Full page screenshot
+   - Key component close-ups if needed
+   - Before and after comparisons
+
+2. **Tablet View** (768x1024)
+   - Portrait orientation
+   - Verify responsive breakpoints
+   - Touch interaction targets visible
+
+3. **Mobile View** (375x667)
+   - Portrait orientation
+   - Touch target sizes visible
+   - Scrolling behavior documented
+
+### PR Description Template
+```markdown
+## Visual Changes
+
+### Desktop
+![Desktop view](screenshot-url)
+
+### Tablet
+![Tablet view](screenshot-url)
+
+### Mobile
+Before:
+![Mobile before](screenshot-url)
+
+After:
+![Mobile after](screenshot-url)
+
+### Key Changes
+- List specific UI modifications
+- Note any responsive behavior changes
+- Highlight accessibility improvements
+```
+
+### Benefits
+- Reviewers see changes without running code locally
+- Documents design decisions visually
+- Creates visual changelog
+- Catches responsive issues early
+- Faster review cycles
+- Reduces back-and-forth communication
+
+## Iterative Testing for Infrastructure Changes
+
+For complex infrastructure changes (database migrations, API patterns), use incremental testing.
+
+### Database Migration Testing
+
+#### 1. Local Testing
+```bash
+# Reset local database
+pnpm db:reset
+
+# Run migrations
+pnpm drizzle-kit push
+
+# Verify schema
+pnpm drizzle-kit check
+
+# Test rollback (if supported)
+pnpm db:rollback
+
+# Re-run migration
+pnpm drizzle-kit push
+```
+
+#### 2. Staging Testing
+- Deploy migration to staging environment
+- Run affected API routes manually
+- Verify data integrity with sample queries
+- Check for performance regressions
+- Test with realistic data volume
+- Monitor database logs during migration
+
+#### 3. Production Verification
+- Monitor migration execution time
+- Check error logs immediately after
+- Verify application functionality
+- Have rollback plan ready
+- Monitor database performance metrics
+- Alert team of any anomalies
+
+### API Testing Checklist
+
+Test all API endpoints systematically:
+
+```bash
+# Test happy path
+curl -X GET "http://localhost:3000/api/endpoint?param=value"
+
+# Test validation errors
+curl -X GET "http://localhost:3000/api/endpoint?param=invalid"
+
+# Test authentication
+curl -X GET "http://localhost:3000/api/endpoint" \
+  -H "Authorization: Bearer token"
+
+# Test pagination
+curl -X GET "http://localhost:3000/api/endpoint?page=1&limit=10"
+
+# Test edge cases
+curl -X GET "http://localhost:3000/api/endpoint?page=0&limit=0"
+
+# Test unauthorized access
+curl -X GET "http://localhost:3000/api/endpoint"
+
+# Test rate limiting (if implemented)
+for i in {1..100}; do
+  curl -X GET "http://localhost:3000/api/endpoint"
+done
+```
+
+### Infrastructure Change Workflow
+1. **Plan**: Document migration steps and rollback plan
+2. **Local**: Test migration on local copy of production data
+3. **Staging**: Deploy to staging, verify with team
+4. **Monitoring**: Set up alerts and logging before production
+5. **Production**: Execute during low-traffic window
+6. **Verification**: Immediate post-deployment testing
+7. **Rollback Ready**: Have rollback script tested and ready
+
+## API Security Testing Checklist
+
+Before merging any API changes, verify security controls.
+
+### Authentication Testing
+- [ ] Route requires authentication (returns 401 without token)
+- [ ] Invalid tokens are rejected (returns 401)
+- [ ] Expired tokens are rejected (returns 401)
+- [ ] Token refresh works correctly
+- [ ] Logout invalidates tokens properly
+- [ ] Password reset tokens expire after use
+
+### Authorization Testing
+- [ ] Users can only access their own resources (returns 403 for others)
+- [ ] Admin routes reject non-admin users (returns 403)
+- [ ] Cross-tenant data isolation verified
+- [ ] Role-based access control working correctly
+- [ ] Privilege escalation attempts blocked
+- [ ] Resource ownership validation enforced
+
+### Input Validation Testing
+- [ ] Invalid input returns 400 with descriptive error
+- [ ] SQL injection attempts are blocked
+- [ ] XSS payloads are sanitized
+- [ ] File upload limits enforced (size, type)
+- [ ] Rate limiting triggers on abuse
+- [ ] Command injection attempts blocked
+- [ ] Path traversal attacks prevented
+
+### Output Security Testing
+- [ ] Sensitive data not exposed in responses (passwords, tokens)
+- [ ] PII properly masked in logs
+- [ ] Error messages don't leak system information
+- [ ] Stack traces not exposed in production
+- [ ] Database errors don't reveal schema details
+- [ ] Internal paths and versions not disclosed
+
+### Example Security Test Cases
+```typescript
+// Test ownership validation
+it('should return 403 when accessing another user\'s resource', async () => {
+  const response = await fetch('/api/providers/other-user-id', {
+    headers: { Authorization: `Bearer ${userToken}` }
+  });
+  expect(response.status).toBe(403);
+  expect(response.json()).resolves.toMatchObject({
+    error: 'Forbidden'
+  });
+});
+
+// Test input validation
+it('should return 400 for invalid input', async () => {
+  const response = await fetch('/api/schools?page=-1');
+  expect(response.status).toBe(400);
+  const body = await response.json();
+  expect(body.error).toBe('Validation failed');
+  expect(body.details).toContain('page must be positive');
+});
+
+// Test SQL injection prevention
+it('should sanitize SQL injection attempts', async () => {
+  const maliciousInput = "'; DROP TABLE users; --";
+  const response = await fetch(`/api/search?q=${encodeURIComponent(maliciousInput)}`);
+  expect(response.status).not.toBe(500);
+  // Should return results or empty array, not crash
+});
+
+// Test XSS prevention
+it('should sanitize XSS payloads in output', async () => {
+  const xssPayload = '<script>alert("XSS")</script>';
+  const response = await fetch('/api/profile/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userToken}`
+    },
+    body: JSON.stringify({ bio: xssPayload })
+  });
+  expect(response.status).toBe(200);
+
+  const profile = await fetch('/api/profile').then(r => r.json());
+  expect(profile.bio).not.toContain('<script>');
+});
+
+// Test authentication requirement
+it('should require authentication for protected routes', async () => {
+  const response = await fetch('/api/protected-resource');
+  expect(response.status).toBe(401);
+  expect(response.json()).resolves.toMatchObject({
+    error: 'Authentication required'
+  });
+});
+
+// Test rate limiting
+it('should enforce rate limits', async () => {
+  const requests = Array(101).fill(null).map(() =>
+    fetch('/api/endpoint', {
+      headers: { Authorization: `Bearer ${userToken}` }
+    })
+  );
+  const responses = await Promise.all(requests);
+  const tooManyRequests = responses.filter(r => r.status === 429);
+  expect(tooManyRequests.length).toBeGreaterThan(0);
+});
+```
+
+### Security Testing Best Practices
+- **Test Early**: Include security tests in unit test suites
+- **Automate**: Run security tests in CI/CD pipeline
+- **Real Scenarios**: Use actual attack patterns, not toy examples
+- **Document**: Explain why security controls are necessary
+- **Update**: Refresh tests when new vulnerabilities discovered
+- **Penetration Testing**: Periodic manual security audits
+
+## Bug Fix Verification Process
+
+For every bug fix, follow this verification workflow to ensure quality.
+
+### 1. Reproduce Before Fix
+- [ ] Document exact steps to reproduce
+- [ ] Capture error message/behavior with screenshots
+- [ ] Note frequency (100% reproducible, intermittent, etc.)
+- [ ] Screenshot or video if UI-related
+- [ ] Identify affected versions/environments
+- [ ] Note any workarounds users have found
+
+### 2. Verify Fix
+- [ ] Follow same reproduction steps
+- [ ] Confirm bug no longer occurs
+- [ ] Test edge cases around the fix
+- [ ] Verify no new errors introduced
+- [ ] Check fix works across environments
+- [ ] Validate fix matches expected behavior
+
+### 3. Regression Testing
+- [ ] Run full test suite
+- [ ] Test related functionality manually
+- [ ] Verify fix works across browsers (if frontend)
+- [ ] Test on mobile devices (if responsive)
+- [ ] Check for performance impact
+- [ ] Verify backwards compatibility
+
+### 4. Documentation Template
+Use this template in PR descriptions for bug fixes:
+
+```markdown
+## Bug Fix Verification
+
+**Bug**: [Description of the bug]
+**Ticket**: ENG-XXX / HEL-XXX
+
+### Reproduction Steps (Before Fix)
+1. Navigate to /page
+2. Click button
+3. Error appears: "Invalid session token"
+4. Expected behavior: User should be redirected to login
+
+### Root Cause
+- Session token validation logic was checking expired tokens incorrectly
+- Token expiry was comparing timestamps in different timezones
+- Fix: Normalize all timestamps to UTC before comparison
+
+### Verification (After Fix)
+1. Followed same steps
+2. No error appears
+3. User correctly redirected to login page
+4. Session token properly validated across timezones
+
+### Regression Tests
+- [ ] Login flow still works normally
+- [ ] Token refresh works correctly
+- [ ] Logout properly invalidates tokens
+- [ ] No console errors
+- [ ] Session persistence works as expected
+
+### Test Coverage
+- Added unit test for timezone edge case
+- Added integration test for token validation
+- Verified fix on staging environment
+- Tested across multiple browsers (Chrome, Firefox, Safari)
+```
+
+### Bug Fix Quality Standards
+- **Root Cause**: Fix the underlying problem, not symptoms
+- **Test Coverage**: Add tests that would have caught the bug
+- **Documentation**: Explain what caused the bug and how fix works
+- **Verification**: Prove the bug is fixed with evidence
+- **Regression**: Ensure fix doesn't break existing functionality
+- **Communication**: Update ticket with verification details
+
+### Common Bug Fix Pitfalls to Avoid
+- ❌ Fixing symptoms without understanding root cause
+- ❌ Adding workarounds instead of proper fixes
+- ❌ Not adding tests to prevent regression
+- ❌ Breaking other functionality while fixing bug
+- ❌ Incomplete testing of edge cases
+- ✅ Thorough investigation before implementing fix
+- ✅ Comprehensive testing of fix and related areas
+- ✅ Clear documentation of problem and solution
+- ✅ Automated tests to prevent future regressions
