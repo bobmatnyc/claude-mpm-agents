@@ -288,6 +288,475 @@ Before declaring deployment complete:
 - [ ] Team notified
 - [ ] Post-deployment verification completed
 
+## Database Migration Workflow
+
+Follow migration-first development - schema changes always start with migrations.
+
+### Migration-First Development Process
+
+1. **Design Schema in SQL Migration**
+   ```sql
+   -- drizzle/XXXX_descriptive_name.sql
+   CREATE TABLE school_calendars (
+     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+     school_id UUID NOT NULL REFERENCES schools(id),
+     start_date DATE NOT NULL,
+     end_date DATE NOT NULL,
+     created_at TIMESTAMP DEFAULT NOW()
+   );
+   ```
+
+2. **Generate TypeScript Definitions**
+   ```bash
+   pnpm drizzle-kit generate
+   # Or: npm run db:generate
+   ```
+
+3. **Create Schema Snapshot**
+   - Automatically created in `drizzle/meta/XXXX_snapshot.json`
+   - Snapshots enable schema drift detection
+   - Committed to version control
+
+4. **Implement TypeScript Schema**
+   ```typescript
+   // src/lib/db/schema/school/calendar.ts
+   export const schoolCalendars = pgTable('school_calendars', {
+     id: uuid('id').primaryKey().defaultRandom(),
+     schoolId: uuid('school_id').notNull().references(() => schools.id),
+     startDate: date('start_date').notNull(),
+     endDate: date('end_date').notNull(),
+     createdAt: timestamp('created_at').defaultNow(),
+   });
+   ```
+
+5. **Add Quality Check to CI**
+   ```yaml
+   # .github/workflows/quality.yml or .gitlab-ci.yml
+   - name: Check database schema
+     run: pnpm drizzle-kit check
+
+   - name: Verify migrations (dry-run)
+     run: pnpm drizzle-kit push --dry-run
+   ```
+
+6. **Test on Staging**
+   - Run migration against staging database
+   - Verify no errors or conflicts
+   - Test affected API routes and queries
+   - Check for data integrity issues
+
+### Schema Organization Best Practices
+
+Organize schemas by domain for maintainability:
+
+```
+src/lib/db/schema/
+├── index.ts              # Export all schemas
+├── school/
+│   ├── index.ts
+│   ├── district.ts
+│   ├── holiday.ts
+│   └── school.ts
+├── providers.ts
+├── cart.ts
+└── users.ts
+```
+
+### Migration Workflow Principles
+
+- **Schema First**: Never write TypeScript schema before SQL migration
+- **Single Source of Truth**: SQL migration is the canonical definition
+- **Version Control**: All migrations and snapshots in git
+- **CI Validation**: Automated schema drift detection
+- **Staging First**: Test migrations before production
+- **Rollback Plan**: Maintain down migrations for critical changes
+
+## Type-Safe API Route Creation
+
+Use the validatedHandler pattern for consistent, type-safe API routes with automatic validation.
+
+### The validatedHandler Pattern
+
+Create a reusable handler that combines Zod validation with Next.js API routes:
+
+```typescript
+// src/lib/api/handler.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+
+type ValidationSource = 'query' | 'body';
+
+export function validatedHandler<T extends z.ZodType>(
+  config: {
+    input: { schema: T; source: ValidationSource };
+  },
+  handler: (ctx: { input: z.infer<T>; request: NextRequest }) => Promise<Response>,
+) {
+  return async (request: NextRequest): Promise<Response> => {
+    try {
+      // 1. Parse input based on source
+      const rawInput = config.input.source === 'query'
+        ? Object.fromEntries(new URL(request.url).searchParams)
+        : await request.json();
+
+      // 2. Validate with Zod schema
+      const result = config.input.schema.safeParse(rawInput);
+
+      if (!result.success) {
+        return NextResponse.json({
+          error: "Validation failed",
+          details: result.error.issues.map(err => ({
+            path: err.path.join("."),
+            message: err.message,
+          })),
+        }, { status: 400 });
+      }
+
+      // 3. Call handler with typed data
+      return await handler({ input: result.data, request });
+
+    } catch (error) {
+      console.error('API Error:', error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 }
+      );
+    }
+  };
+}
+```
+
+### Usage Example
+
+```typescript
+// src/app/api/schools/route.ts
+import { validatedHandler } from '@/lib/api/handler';
+import { paginationInputSchema } from '@/lib/api/pagination';
+import { z } from 'zod';
+
+const getSchoolsSchema = paginationInputSchema.extend({
+  keyword: z.string().optional(),
+  districtId: z.string().uuid().optional(),
+});
+
+export const GET = validatedHandler({
+  input: { source: 'query', schema: getSchoolsSchema }
+}, async ({ input }) => {
+  const schools = await db.query.schools.findMany({
+    where: input.keyword
+      ? ilike(schools.name, `%${input.keyword}%`)
+      : undefined,
+    limit: input.limit,
+    offset: (input.page - 1) * input.limit,
+  });
+
+  return NextResponse.json(schools);
+});
+```
+
+### Benefits of validatedHandler
+
+- **Eliminates Boilerplate**: Removes repetitive validation code from 100+ API routes
+- **Type Safety**: Input types automatically inferred from Zod schema
+- **Consistent Error Handling**: Standardized error response format
+- **Clear Separation**: Validation logic separated from business logic
+- **Framework Agnostic**: Pattern works with Express, Fastify, Hono, etc.
+- **Developer Experience**: Single place to maintain validation logic
+
+### Pattern Variations
+
+**For Express/Fastify**:
+```typescript
+export function validatedHandler<T extends z.ZodType>(
+  schema: T,
+  handler: (input: z.infer<T>, req: Request, res: Response) => Promise<void>
+) {
+  return async (req: Request, res: Response) => {
+    const result = schema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: result.error });
+    }
+    await handler(result.data, req, res);
+  };
+}
+```
+
+## Pagination Standardization
+
+Use consistent pagination across all list endpoints for predictable API behavior.
+
+### Pagination Schema Definition
+
+```typescript
+// src/lib/api/pagination.ts
+import { z } from 'zod';
+
+export const paginationInputSchema = z.object({
+  page: z.coerce.number().min(1).default(1),
+  limit: z.coerce.number().min(1).max(100).default(10),
+});
+
+export type PaginatedResponse<T> = {
+  data: T[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  nextPage: number | null;
+  previousPage: number | null;
+};
+
+export function createPaginatedResponse<T>(
+  data: T[],
+  total: number,
+  page: number,
+  limit: number
+): PaginatedResponse<T> {
+  const totalPages = Math.ceil(total / limit);
+  return {
+    data,
+    page,
+    limit,
+    total,
+    totalPages,
+    nextPage: page < totalPages ? page + 1 : null,
+    previousPage: page > 1 ? page - 1 : null,
+  };
+}
+```
+
+### Using Pagination in API Routes
+
+```typescript
+// Extend pagination schema with endpoint-specific filters
+const listProvidersSchema = paginationInputSchema.extend({
+  status: z.enum(['active', 'inactive']).optional(),
+  specialty: z.string().optional(),
+});
+
+export const GET = validatedHandler({
+  input: { source: 'query', schema: listProvidersSchema }
+}, async ({ input }) => {
+  // Calculate offset
+  const offset = (input.page - 1) * input.limit;
+
+  // Fetch data with pagination
+  const providers = await db.query.providers.findMany({
+    where: buildWhereClause(input),
+    limit: input.limit,
+    offset: offset,
+  });
+
+  // Get total count
+  const total = await db.select({ count: count() })
+    .from(providers)
+    .where(buildWhereClause(input));
+
+  // Return paginated response
+  return NextResponse.json(
+    createPaginatedResponse(providers, total[0].count, input.page, input.limit)
+  );
+});
+```
+
+### Pagination Best Practices
+
+- **Consistent Limits**: Max 100 items per page, default 10
+- **URL Parameters**: Use query params for GET requests
+- **Total Count**: Always include total count for UI pagination
+- **Next/Previous**: Provide explicit next/previous page numbers
+- **Offset vs Cursor**: Use offset for simple pagination, cursor for large datasets
+- **Performance**: Index columns used in WHERE and ORDER BY clauses
+
+## CI/CD Quality Integration
+
+Proactively add validation to CI pipeline to catch issues before production.
+
+### Database Schema Quality Checks
+
+Add automated schema validation to prevent drift and broken migrations:
+
+```yaml
+# .github/workflows/quality.yml
+name: Quality Checks
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check database schema drift
+        run: pnpm drizzle-kit check
+
+      - name: Verify migrations (dry-run)
+        run: pnpm drizzle-kit push --dry-run
+        env:
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+
+      - name: Run type checking
+        run: pnpm tsc --noEmit
+
+      - name: Lint code
+        run: pnpm lint
+```
+
+### GitLab CI Equivalent
+
+```yaml
+# .gitlab-ci.yml
+quality:
+  stage: test
+  image: node:20
+  script:
+    - npm install -g pnpm
+    - pnpm install --frozen-lockfile
+    - pnpm drizzle-kit check
+    - pnpm drizzle-kit push --dry-run
+    - pnpm tsc --noEmit
+    - pnpm lint
+  only:
+    - merge_requests
+    - main
+```
+
+### Quality Check Philosophy
+
+- **Fail Fast**: Catch errors in CI, not production
+- **Automated Standards**: Team standards enforced via automation
+- **Schema Validation**: Prevent schema drift and bad migrations
+- **Type Safety**: Verify TypeScript compilation before merge
+- **Consistent Linting**: Enforce code style automatically
+- **Documentation via CI**: CI configuration documents quality requirements
+
+### Additional Quality Checks
+
+```yaml
+# Security scanning
+- name: Run security audit
+  run: pnpm audit --audit-level=moderate
+
+# Test coverage
+- name: Run tests with coverage
+  run: pnpm test --coverage
+
+- name: Check coverage threshold
+  run: |
+    COVERAGE=$(jq .total.lines.pct coverage/coverage-summary.json)
+    if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+      echo "Coverage $COVERAGE% is below 80% threshold"
+      exit 1
+    fi
+
+# Bundle size analysis
+- name: Check bundle size
+  run: pnpm build
+
+- name: Analyze bundle
+  run: pnpm analyze
+```
+
+### Progressive Quality Gates
+
+Start with basic checks and progressively increase rigor:
+
+**Phase 1 - Foundation** (Week 1):
+- Database schema validation
+- TypeScript compilation
+- Basic linting
+
+**Phase 2 - Enhancement** (Week 2-3):
+- Security audits
+- Test coverage thresholds
+- Performance benchmarks
+
+**Phase 3 - Excellence** (Month 2+):
+- Bundle size limits
+- Lighthouse scores
+- Accessibility audits
+- E2E test suites
+
+## API Development Standards
+
+### Request/Response Patterns
+
+**Consistent Error Responses**:
+```typescript
+type ErrorResponse = {
+  error: string;
+  details?: Array<{ path: string; message: string }>;
+  code?: string;
+};
+
+// Example usage in validatedHandler
+if (!result.success) {
+  return NextResponse.json({
+    error: "Validation failed",
+    code: "VALIDATION_ERROR",
+    details: result.error.issues.map(err => ({
+      path: err.path.join("."),
+      message: err.message,
+    })),
+  }, { status: 400 });
+}
+```
+
+**Success Response Envelope**:
+```typescript
+type SuccessResponse<T> = {
+  data: T;
+  meta?: Record<string, unknown>;
+};
+
+// For single items
+return NextResponse.json({ data: school });
+
+// For lists with pagination
+return NextResponse.json({
+  data: schools,
+  meta: {
+    pagination: {
+      page: 1,
+      limit: 10,
+      total: 100,
+      totalPages: 10,
+    }
+  }
+});
+```
+
+### Environment-Specific Configuration
+
+```typescript
+// src/lib/config/environment.ts
+import { z } from 'zod';
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url(),
+  API_KEY: z.string().min(1),
+  NODE_ENV: z.enum(['development', 'staging', 'production']),
+  PORT: z.coerce.number().default(3000),
+});
+
+export const env = envSchema.parse(process.env);
+```
+
 ## Emergency Response
 
 ### Incident Response Steps
