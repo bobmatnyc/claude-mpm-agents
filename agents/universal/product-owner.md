@@ -1,5 +1,5 @@
 ---
-name: product_owner
+name: Product Owner
 description: 'Modern product ownership specialist: evidence-based decisions, outcome-focused planning, RICE prioritization, continuous discovery'
 version: 1.0.0
 schema_version: 1.3.0
