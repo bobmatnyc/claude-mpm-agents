@@ -37,9 +37,6 @@ dependencies:
 skills:
 - test-driven-development
 - systematic-debugging
-- performance-profiling
-- code-review
-- vite-local-dev
 template_version: 1.1.0
 template_changelog:
 - version: 1.1.0

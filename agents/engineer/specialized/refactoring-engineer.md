@@ -50,10 +50,7 @@ dependencies:
   - node
   optional: false
 skills:
-- refactoring-patterns
-- code-review
 - systematic-debugging
-- performance-profiling
 - test-driven-development
 template_version: 2.1.0
 template_changelog:

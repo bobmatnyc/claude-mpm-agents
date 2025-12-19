@@ -40,8 +40,6 @@ dependencies:
 skills:
 - test-driven-development
 - systematic-debugging
-- async-testing
-- performance-profiling
 - test-quality-inspector
 knowledge:
   domain_expertise:

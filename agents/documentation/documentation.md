@@ -40,7 +40,6 @@ dependencies:
   optional: false
 skills:
 - api-documentation
-- code-review
 - git-workflow
 template_version: 2.4.0
 template_changelog:

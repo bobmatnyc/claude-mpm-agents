@@ -47,7 +47,6 @@ dependencies:
   - ngrok
   - docker
 skills:
-- docker-containerization
 - database-migration
 - security-scanning
 - git-workflow

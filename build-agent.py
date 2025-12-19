@@ -23,8 +23,9 @@ Examples:
 import argparse
 import sys
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Set
 import re
+import json
 
 
 class AgentBuilder:
@@ -33,6 +34,7 @@ class AgentBuilder:
     def __init__(self, root_dir: Path, output_dir: Optional[Path] = None):
         self.root_dir = root_dir
         self.output_dir = output_dir or root_dir / "dist" / "agents"
+        self._valid_skills: Optional[Set[str]] = None
         self.agents_dir = root_dir / "agents"
 
     def find_base_agents(self, agent_path: Path) -> List[Path]:
@@ -146,6 +148,56 @@ class AgentBuilder:
 
         return output_path
 
+    def load_valid_skills(self) -> Set[str]:
+        """
+        Load valid skill names from claude-mpm-skills manifest.
+
+        Returns: Set of valid skill names, or empty set if manifest not found
+        """
+        if self._valid_skills is not None:
+            return self._valid_skills
+
+        manifest_path = self.root_dir.parent / "claude-mpm-skills" / "manifest.json"
+
+        if not manifest_path.exists():
+            # Manifest not found - return empty set (validation will be skipped)
+            self._valid_skills = set()
+            return self._valid_skills
+
+        try:
+            with open(manifest_path) as f:
+                manifest = json.load(f)
+
+            skills = set()
+
+            # Handle universal skills (list of dicts)
+            if 'universal' in manifest.get('skills', {}):
+                for skill in manifest['skills']['universal']:
+                    if isinstance(skill, dict) and 'name' in skill:
+                        skills.add(skill['name'])
+
+            # Handle toolchains (nested dict of lists of dicts)
+            if 'toolchains' in manifest.get('skills', {}):
+                for toolchain, toolchain_skills in manifest['skills']['toolchains'].items():
+                    if isinstance(toolchain_skills, list):
+                        for skill in toolchain_skills:
+                            if isinstance(skill, dict) and 'name' in skill:
+                                skills.add(skill['name'])
+
+            # Handle examples (if present)
+            if 'examples' in manifest.get('skills', {}):
+                for skill in manifest['skills']['examples']:
+                    if isinstance(skill, dict) and 'name' in skill:
+                        skills.add(skill['name'])
+
+            self._valid_skills = skills
+            return skills
+
+        except Exception:
+            # Error loading manifest - return empty set
+            self._valid_skills = set()
+            return self._valid_skills
+
     def validate_agent(self, agent_path: Path) -> List[str]:
         """
         Validate agent definition.
@@ -166,6 +218,25 @@ class AgentBuilder:
                 for field in required_fields:
                     if f"{field}:" not in frontmatter:
                         errors.append(f"Missing required field: {field}")
+
+                # Validate skill references
+                valid_skills = self.load_valid_skills()
+                if valid_skills:  # Only validate if manifest was loaded
+                    # Extract skills from frontmatter
+                    skills_match = re.search(r'skills:\s*\n((?:- .+\n)+)', content)
+                    if skills_match:
+                        skills_text = skills_match.group(1)
+                        agent_skills = []
+                        for line in skills_text.split('\n'):
+                            line = line.strip()
+                            if line.startswith('- '):
+                                skill = line[2:].strip()
+                                agent_skills.append(skill)
+
+                        # Check for invalid skills
+                        invalid_skills = [s for s in agent_skills if s not in valid_skills]
+                        if invalid_skills:
+                            errors.append(f"Invalid skill references (not in claude-mpm-skills): {', '.join(invalid_skills)}")
 
             # Check for content
             if not body.strip():

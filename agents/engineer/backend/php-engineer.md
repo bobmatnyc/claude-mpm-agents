@@ -37,13 +37,8 @@ dependencies:
 skills:
 - test-driven-development
 - systematic-debugging
-- async-testing
-- performance-profiling
 - security-scanning
-- code-review
-- refactoring-patterns
 - git-workflow
-- espocrm-development
 template_version: 2.1.0
 template_changelog:
 - version: 2.1.0

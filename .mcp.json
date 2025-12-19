@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "mcp-vector-search": {
+      "type": "stdio",
       "command": "uv",
       "args": [
         "run",
@@ -9,8 +10,14 @@
       ],
       "env": {
         "MCP_ENABLE_FILE_WATCHING": "true"
-      },
-      "type": "stdio"
+      }
+    },
+    "kuzu-memory": {
+      "type": "stdio",
+      "command": "kuzu-memory",
+      "args": [
+        "mcp"
+      ]
     }
   }
 }

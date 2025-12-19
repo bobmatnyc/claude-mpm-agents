@@ -34,14 +34,9 @@ dependencies:
   - npm
   optional: false
 skills:
-- flexlayout-react
 - test-driven-development
 - systematic-debugging
-- async-testing
-- performance-profiling
 - security-scanning
-- code-review
-- refactoring-patterns
 - git-workflow
 template_version: 1.2.0
 template_changelog:

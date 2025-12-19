@@ -39,15 +39,10 @@ dependencies:
 skills:
 - test-driven-development
 - systematic-debugging
-- async-testing
-- performance-profiling
 - security-scanning
 - api-documentation
 - git-workflow
-- code-review
-- refactoring-patterns
 - database-migration
-- docker-containerization
 template_version: 2.3.0
 template_changelog:
 - version: 2.3.0

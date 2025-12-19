@@ -38,7 +38,6 @@ dependencies:
  optional: false
 skills:
 - security-scanning
-- code-review
 - systematic-debugging
 knowledge:
  domain_expertise:

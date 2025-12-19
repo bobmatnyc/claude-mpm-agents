@@ -19,6 +19,16 @@
 - Content rules: Put shared instructions in the nearest `BASE-AGENT.md`; keep agent files focused on technology- or workflow-specific guidance. Avoid duplicating universal standards.
 - Formatting: Markdown with concise headings; prefer bullet lists and short, actionable sentences.
 
+## Skill References
+- **IMPORTANT**: Only reference skills from the `claude-mpm-skills` repository (110 production-ready skills).
+- Skills are Claude Code skills loaded at startup that provide specialized knowledge and patterns.
+- Available skills are organized into `universal/` (32 skills) and `toolchains/` (76 skills).
+- See `../claude-mpm-skills/manifest.json` for the complete list of valid skill names.
+- See `../claude-mpm-skills/README.md` for skill descriptions and categories.
+- Common universal skills: `test-driven-development`, `systematic-debugging`, `security-scanning`, `git-workflow`, `git-worktrees`, `stacked-prs`, `database-migration`, `api-documentation`, `test-quality-inspector`.
+- **Validation**: Run `python3 scripts/audit_skills.py` to verify all skill references are valid.
+- **Never** reference skills from external repositories (e.g., obra/superpowers, alirezarezvani/claude-skills).
+
 ## Testing Guidelines
 - Primary check is validation: run `./build-agent.py --validate` and fix any frontmatter or path mismatches.
 - For inheritance sanity, run `--preview` and skim for duplicated or missing sections before publishing.

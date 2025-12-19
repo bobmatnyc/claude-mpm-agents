@@ -42,13 +42,6 @@ dependencies:
   - git
   optional: false
 skills:
-- modern-javascript
-- backend-development
-- browser-apis
-- web-components
-- build-tooling
-- testing
-- performance-optimization
 - git-workflow
 template_version: 1.0.0
 template_changelog:

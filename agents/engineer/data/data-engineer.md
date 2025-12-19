@@ -65,11 +65,7 @@ dependencies:
 skills:
 - test-driven-development
 - systematic-debugging
-- async-testing
-- performance-profiling
 - security-scanning
-- code-review
-- refactoring-patterns
 - git-workflow
 knowledge:
   domain_expertise:

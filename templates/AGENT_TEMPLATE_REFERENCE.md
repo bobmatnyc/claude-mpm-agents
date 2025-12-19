@@ -96,11 +96,40 @@ dependencies:
 # ============================================================================
 # SKILLS (Claude Code Skills)
 # ============================================================================
+#
+# IMPORTANT: Only reference skills from the claude-mpm-skills repository!
+#
+# Skills are Claude Code skills that provide specialized knowledge and patterns.
+# They are loaded at Claude Code STARTUP only (not dynamically).
+#
+# Available Skills:
+#   - 110 production-ready skills in claude-mpm-skills
+#   - Organized into universal/ (32 skills) and toolchains/ (76 skills)
+#   - See: ../claude-mpm-skills/manifest.json for complete list
+#   - See: ../claude-mpm-skills/README.md for descriptions
+#
+# Common Universal Skills:
+#   - test-driven-development: TDD patterns and practices
+#   - systematic-debugging: Structured debugging approach
+#   - security-scanning: Security analysis and threat detection
+#   - git-workflow: Git best practices and workflows
+#   - git-worktrees: Advanced git worktree management
+#   - stacked-prs: Stacked PR workflow patterns
+#   - database-migration: Database schema migration strategies
+#   - api-documentation: API documentation standards
+#   - test-quality-inspector: Test quality analysis
+#
+# Validation:
+#   - Run: python3 scripts/audit_skills.py to verify all skill references
+#   - Build validation will check skills against manifest
+#
+# ============================================================================
 
 skills:                                   # OPTIONAL: Claude Code skills this agent uses
-  - test-driven-development               # Examples from obra/superpowers, alirezarezvani/claude-skills
-  - systematic-debugging                  # Skills are loaded at Claude Code STARTUP only
-  - async-testing
+  - test-driven-development               # Example: TDD patterns
+  - systematic-debugging                  # Example: Debugging workflows
+  - security-scanning                     # Example: Security analysis
+  - git-workflow                          # Example: Git best practices
 
 # ============================================================================
 # CHANGELOG (Version History)

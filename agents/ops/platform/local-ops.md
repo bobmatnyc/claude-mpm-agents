@@ -15,7 +15,6 @@ tags:
 - monitoring
 category: operations
 skills:
-- docker-containerization
 - database-migration
 - security-scanning
 - git-workflow

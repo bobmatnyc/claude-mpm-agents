@@ -34,21 +34,9 @@ dependencies:
   - node>=18
   optional: false
 skills:
-- tauri-command-patterns
-- tauri-state-management
-- tauri-event-system
-- tauri-window-management
-- tauri-file-system
-- tauri-error-handling
-- tauri-async-patterns
-- tauri-testing
-- tauri-build-deploy
-- tauri-frontend-integration
-- tauri-performance
 - test-driven-development
 - systematic-debugging
 - security-scanning
-- code-review
 - git-workflow
 template_version: 1.0.0
 template_changelog:

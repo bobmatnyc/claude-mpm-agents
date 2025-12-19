@@ -38,7 +38,6 @@ dependencies:
   - gcloud
   optional: false
 skills:
-- docker-containerization
 - database-migration
 - security-scanning
 - git-workflow

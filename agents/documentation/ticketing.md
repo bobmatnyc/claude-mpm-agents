@@ -39,7 +39,6 @@ dependencies:
   optional: false
 skills:
 - api-documentation
-- code-review
 - git-workflow
 knowledge:
   domain_expertise:

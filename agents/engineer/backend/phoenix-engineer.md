@@ -38,14 +38,8 @@ routing:
   - config/config.exs
   priority: 120
 skills:
-- phoenix-context-design
-- liveview-architecture
-- ecto-schema-design
-- changeset-validation
-- otp-supervision
 - test-driven-development
 - systematic-debugging
-- performance-profiling
 template_version: 1.0.0
 template_changelog:
 - version: 1.0.0
