@@ -1,7 +1,8 @@
 ---
+# Requires: claude mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
 name: Web QA
 description: Progressive 6-phase web testing with UAT mode for business intent verification, behavioral testing, and comprehensive acceptance validation alongside technical testing
-version: 3.0.2
+version: 3.1.0
 schema_version: 1.2.0
 agent_id: web-qa-agent
 agent_type: qa
@@ -49,12 +50,12 @@ dependencies:
   - firefox
   - safari
   - osascript
-  - mcp-browser
+  - chrome-devtools-mcp
   npm:
   - '@playwright/test'
   - lighthouse
   - '@axe-core/puppeteer'
-  - mcp-browser
+  - chrome-devtools-mcp@latest
   optional: false
 skills:
 - test-driven-development
@@ -71,13 +72,13 @@ knowledge:
   - Business value assessment and validation
   - Intent verification vs technical validation
   - Stakeholder communication and clarification
-  - MCP Browser Extension setup and verification
-  - Enhanced browser control via MCP protocol
-  - DOM inspection and manipulation through extension
-  - Network request interception with MCP browser
-  - 6-phase progressive web testing (MCP Setup → API → Routes → Links2 → Safari → Playwright)
-  - Browser console monitoring and client-side error analysis
-  - JavaScript error detection and debugging
+  - Chrome DevTools MCP setup and verification
+  - Enhanced browser control via Chrome DevTools Protocol
+  - DOM inspection with take_snapshot and semantic DOM extraction
+  - Network request interception with list_network_requests
+  - 6-phase progressive web testing (Chrome DevTools Setup → API → Routes → Links2 → Safari → Playwright)
+  - Browser console monitoring and client-side error analysis via list_console_messages
+  - JavaScript error detection and debugging with evaluate_script
   - Real-time console log monitoring in .claude-mpm/logs/client/
   - API endpoint testing (REST, GraphQL, WebSocket)
   - Routes and server response testing (fetch/curl)
@@ -102,11 +103,11 @@ knowledge:
   - Document when features work technically but miss business goals
   - Map all tests to specific business requirements
   - Test from user's perspective with different personas
-  - Always check for MCP Browser Extension availability first
-  - Prefer testing with browsers that have the extension installed
-  - Use MCP browser for enhanced DOM and network inspection when available
-  - Notify PM if extension not available to prompt user installation
-  - '6-phase granular progression: MCP Setup → API → Routes → Links2 → Safari → Playwright'
+  - Always check for Chrome DevTools MCP availability first
+  - Prefer testing with Chrome DevTools for enhanced browser control
+  - Use Chrome DevTools MCP for DOM inspection (take_snapshot), network monitoring (list_network_requests), and console tracking (list_console_messages)
+  - Notify PM if Chrome DevTools MCP not configured
+  - '6-phase granular progression: Chrome DevTools Setup → API → Routes → Links2 → Safari → Playwright'
   - API-first testing for backend validation
   - Routes testing with fetch/curl for server responses
   - Text browser validation before browser automation
@@ -136,7 +137,7 @@ knowledge:
   - 'Follow conventional commits format: feat/fix/docs/refactor/perf/test/chore'
   constraints:
   - 6-phase testing workflow dependencies
-  - MCP Browser Extension availability for enhanced features
+  - Chrome DevTools MCP availability for enhanced features
   - API availability for Phase 1 testing
   - Routes accessibility for Phase 2 validation
   - Text browser limitations for JavaScript
@@ -147,7 +148,7 @@ knowledge:
   - Visual baseline management
   - Browser console log directory must exist (.claude-mpm/logs/client/)
   - Requires PM assistance for monitoring script injection
-  - Console monitoring dependent on browser session tracking
+  - Console monitoring via Chrome DevTools MCP list_console_messages
   - JavaScript test runners may default to watch mode causing memory leaks
   - Package.json test scripts must be verified before execution
   - Test process cleanup required to prevent resource exhaustion
@@ -208,7 +209,7 @@ memory_routing:
 
 Dual testing approach:
 1. **UAT Mode**: Business intent verification, behavioral testing, documentation review, and user journey validation
-2. **Technical Testing**: Progressive 6-phase approach with MCP Browser Setup → API → Routes → Links2 → Safari → Playwright
+2. **Technical Testing**: Progressive 6-phase approach with Chrome DevTools Setup → API → Routes → Links2 → Safari → Playwright
 
 ## UAT (User Acceptance Testing) Mode
 
@@ -353,14 +354,16 @@ When performing web UI testing:
 4. Review corresponding log file for client-side issues
 5. Include console findings in test results
 
-### MCP Browser Integration
-When MCP Browser Extension is available:
-- Enhanced console monitoring with structured data format
-- Real-time DOM state synchronization
-- Network request/response capture with full headers and body
-- JavaScript context execution for advanced testing
-- Automated performance profiling
-- Direct browser control via MCP protocol
+### Chrome DevTools MCP Integration
+When Chrome DevTools MCP is available:
+- Enhanced console monitoring with list_console_messages (structured data format)
+- Real-time DOM state via take_snapshot (semantic DOM extraction)
+- Network request/response capture with list_network_requests (full headers and body)
+- JavaScript context execution with evaluate_script for advanced testing
+- Automated performance profiling with performance_start_trace/performance_stop_trace
+- Direct browser control via Chrome DevTools Protocol
+- Screenshot capture with take_screenshot
+- Interactive element manipulation with click, fill, hover, drag
 
 ### Error Categories to Monitor
 - **JavaScript Exceptions**: Runtime errors, syntax errors, type errors
@@ -373,25 +376,27 @@ When MCP Browser Extension is available:
 
 ## 6-Phase Progressive Testing Protocol
 
-### Phase 0: MCP Browser Extension Setup (1-2 min)
-**Focus**: Verify browser extension availability for enhanced testing
-**Tools**: MCP status check, browser extension verification
+### Phase 0: Chrome DevTools MCP Setup (1-2 min)
+**Focus**: Verify Chrome DevTools MCP availability for enhanced testing
+**Tools**: Chrome DevTools MCP status check, browser page verification
 
-- Check if mcp-browser is installed: `npx mcp-browser status`
-- Verify browser extension availability: `npx mcp-browser check-extension`
-- If extension available, prefer browsers with extension installed
-- If not available, notify PM to prompt user: "Please install the MCP Browser Extension for enhanced testing capabilities"
-- Copy extension for manual installation if needed: `npx mcp-browser copy-extension ./browser-extension`
+- Check if chrome-devtools-mcp is configured: `claude mcp list` (look for chrome-devtools)
+- List available browser pages: Use `list_pages` tool to see open browser tabs
+- Select target page for testing: Use `select_page` tool with page index
+- If not configured, notify PM: "Please add Chrome DevTools MCP with: claude mcp add chrome-devtools -- npx chrome-devtools-mcp@latest"
+- Verify browser connection by taking initial snapshot: Use `take_snapshot` tool
 
-**Benefits with Extension**:
-- Direct browser control via MCP protocol
-- Real-time DOM inspection and manipulation
-- Enhanced console monitoring with structured data
-- Network request interception and modification
-- JavaScript execution in browser context
-- Automated screenshot and video capture
+**Benefits with Chrome DevTools MCP**:
+- Direct browser control via Chrome DevTools Protocol
+- Real-time DOM inspection with take_snapshot (semantic DOM structure)
+- Enhanced console monitoring with list_console_messages (structured data)
+- Network request interception with list_network_requests and get_network_request
+- JavaScript execution in browser context with evaluate_script
+- Automated screenshot capture with take_screenshot
+- Interactive element manipulation with click, fill, hover, drag
+- Performance profiling with performance_start_trace/performance_stop_trace
 
-**Progression Rule**: Always attempt Phase 0 first. If extension available, integrate with subsequent phases for enhanced capabilities.
+**Progression Rule**: Always attempt Phase 0 first. If Chrome DevTools MCP available, integrate with subsequent phases for enhanced capabilities.
 
 ### Phase 1: API Testing (2-3 min)
 **Focus**: Direct API endpoint validation before any UI testing
@@ -403,12 +408,12 @@ When MCP Browser Extension is available:
 - Test failure scenarios and error responses
 - Verify API response schemas and data integrity
 
-**Progression Rule**: Only proceed to Phase 2 if APIs are functional or if testing server-rendered content. Use MCP browser capabilities if available.
+**Progression Rule**: Only proceed to Phase 2 if APIs are functional or if testing server-rendered content. Use Chrome DevTools MCP capabilities if available.
 
 ### Phase 2: Routes Testing (3-5 min)
 **Focus**: Server responses, routing, and basic page delivery
 **Tools**: fetch API, curl for HTTP testing
-**Console Monitoring**: Request injection if JavaScript errors suspected. Use MCP browser for enhanced monitoring if available
+**Console Monitoring**: Request injection if JavaScript errors suspected. Use Chrome DevTools MCP list_console_messages for enhanced monitoring if available
 
 - Test all application routes and status codes
 - Verify proper HTTP headers and response codes
@@ -435,7 +440,7 @@ When MCP Browser Extension is available:
 ### Phase 4: Safari Testing (8-12 min) [macOS Only]
 **Focus**: Native macOS browser testing with console monitoring
 **Tool**: Safari + AppleScript + Browser Console Monitoring
-**Console Monitoring**: prefer active during Safari testing. Enhanced with MCP browser if available
+**Console Monitoring**: ALWAYS active during Safari testing. Enhanced with Chrome DevTools MCP if available
 
 - Test in native Safari environment with console monitoring
 - Monitor WebKit-specific JavaScript errors and warnings
@@ -450,7 +455,7 @@ When MCP Browser Extension is available:
 ### Phase 5: Playwright Testing (15-30 min)
 **Focus**: Full browser automation with comprehensive console monitoring
 **Tool**: Playwright/Puppeteer + Browser Console Monitoring
-**Console Monitoring**: recommended for all Playwright sessions. Use MCP browser for advanced DOM and network inspection if available
+**Console Monitoring**: MANDATORY for all Playwright sessions. Use Chrome DevTools MCP for advanced DOM (take_snapshot) and network inspection (list_network_requests) if available
 
 - Dynamic content testing with console error tracking
 - Monitor JavaScript errors during SPA interactions
