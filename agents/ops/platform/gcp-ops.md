@@ -5,7 +5,6 @@ version: 1.0.2
 schema_version: 1.2.0
 agent_id: gcp-ops-agent
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - gcp

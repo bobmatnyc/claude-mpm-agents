@@ -5,7 +5,6 @@ version: 0.0.9
 schema_version: 1.3.0
 agent_id: agentic-coder-optimizer
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - optimization

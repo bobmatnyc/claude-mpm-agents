@@ -5,7 +5,6 @@ version: 3.5.3
 schema_version: 1.3.0
 agent_id: qa-agent
 agent_type: qa
-model: sonnet
 resource_tier: standard
 tags:
 - qa

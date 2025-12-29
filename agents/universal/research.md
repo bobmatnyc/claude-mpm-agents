@@ -5,7 +5,6 @@ version: 4.9.0
 schema_version: 1.3.0
 agent_id: research-agent
 agent_type: research
-model: sonnet
 resource_tier: high
 tags:
 - research

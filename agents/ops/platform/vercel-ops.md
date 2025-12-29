@@ -5,7 +5,6 @@ version: 2.0.1
 schema_version: 1.2.0
 agent_id: vercel-ops-agent
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - vercel

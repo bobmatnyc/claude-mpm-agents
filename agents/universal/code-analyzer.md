@@ -5,7 +5,6 @@ version: 2.6.2
 schema_version: 1.2.0
 agent_id: code-analyzer
 agent_type: research
-model: sonnet
 resource_tier: standard
 tags:
 - code-analysis

@@ -5,7 +5,6 @@ version: 1.1.2
 schema_version: 1.2.0
 agent_id: memory-manager-agent
 agent_type: memory_manager
-model: sonnet
 resource_tier: lightweight
 tags:
 - memory

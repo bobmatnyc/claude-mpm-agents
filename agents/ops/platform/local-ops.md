@@ -5,7 +5,6 @@ version: 2.0.1
 schema_version: 1.3.0
 agent_id: local-ops-agent
 agent_type: specialized
-model: sonnet
 resource_tier: standard
 tags:
 - deployment

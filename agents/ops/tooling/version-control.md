@@ -5,7 +5,6 @@ version: 2.3.2
 schema_version: 1.2.0
 agent_id: version-control
 agent_type: ops
-model: sonnet
 resource_tier: lightweight
 tags:
 - git

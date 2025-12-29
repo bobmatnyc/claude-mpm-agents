@@ -157,7 +157,6 @@ name: Agent Name
 description: Brief description of agent capabilities
 agent_id: unique-identifier
 agent_type: engineer|qa|ops|universal|documentation
-model: sonnet|opus|haiku
 tags:
   - technology
   - domain

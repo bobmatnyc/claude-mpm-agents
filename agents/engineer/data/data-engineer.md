@@ -5,7 +5,6 @@ version: 2.5.1
 schema_version: 1.2.0
 agent_id: data-engineer
 agent_type: engineer
-model: sonnet
 resource_tier: intensive
 tags:
 - data

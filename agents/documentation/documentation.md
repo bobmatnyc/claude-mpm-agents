@@ -5,7 +5,6 @@ version: 3.4.2
 schema_version: 1.2.0
 agent_id: documentation-agent
 agent_type: documentation
-model: sonnet
 resource_tier: lightweight
 tags:
 - documentation

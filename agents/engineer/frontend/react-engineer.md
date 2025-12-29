@@ -5,7 +5,6 @@ version: 1.2.0
 schema_version: 1.3.0
 agent_id: react_engineer
 agent_type: engineer
-model: sonnet
 resource_tier: standard
 tags:
 - react

@@ -5,7 +5,6 @@ version: 3.0.0
 schema_version: 1.3.0
 agent_id: prompt-engineer
 agent_type: analysis
-model: sonnet
 resource_tier: standard
 tags:
 - prompt-engineering

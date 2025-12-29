@@ -5,7 +5,6 @@ version: 1.0.0
 schema_version: 1.3.0
 agent_id: product_owner
 agent_type: product
-model: sonnet
 resource_tier: standard
 tags:
 - product-management

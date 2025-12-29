@@ -5,7 +5,6 @@ version: 1.4.2
 schema_version: 1.2.0
 agent_id: web-ui-engineer
 agent_type: engineer
-model: sonnet
 resource_tier: standard
 tags:
 - web-ui

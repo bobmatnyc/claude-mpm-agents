@@ -5,7 +5,6 @@ version: 2.2.4
 schema_version: 1.2.0
 agent_id: ops-agent
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - ops

@@ -5,7 +5,6 @@ version: 1.2.0
 schema_version: 1.2.0
 agent_id: project-organizer
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - organization

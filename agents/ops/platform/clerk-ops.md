@@ -5,7 +5,6 @@ version: 1.1.1
 schema_version: 1.3.1
 agent_id: clerk-ops
 agent_type: ops
-model: sonnet
 resource_tier: standard
 tags:
 - clerk

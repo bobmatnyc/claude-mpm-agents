@@ -5,7 +5,6 @@ version: 1.0.2
 schema_version: 1.1.0
 agent_id: imagemagick
 agent_type: imagemagick
-model: sonnet
 resource_tier: standard
 tags:
 - imagemagick

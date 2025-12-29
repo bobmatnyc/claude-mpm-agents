@@ -5,7 +5,6 @@ version: 1.1.3
 schema_version: 1.2.0
 agent_id: refactoring-engineer
 agent_type: refactoring
-model: sonnet
 resource_tier: intensive
 tags:
 - refactoring

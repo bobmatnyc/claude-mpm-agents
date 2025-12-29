@@ -5,7 +5,6 @@ version: 2.5.0
 schema_version: 1.2.0
 agent_id: security-agent
 agent_type: security
-model: sonnet
 resource_tier: standard
 tags:
 - security
