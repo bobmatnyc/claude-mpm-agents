@@ -63,7 +63,7 @@ templates/                           # Reference materials (not deployed)
 ### 4. Build and Test
 
 ```bash
-# Build all agents (creates build/ directory)
+# Build all agents (creates dist/agents/ directory)
 ./build-agent.py
 
 # Validate structure and frontmatter
@@ -73,7 +73,7 @@ templates/                           # Reference materials (not deployed)
 ./build-agent.py engineer/backend/kotlin-engineer
 
 # Test in Claude MPM
-claude-mpm agents deploy --file build/engineer/backend/kotlin-engineer.md
+claude-mpm agents deploy --file dist/agents/engineer/backend/kotlin-engineer.md
 ```
 
 ### 5. Submit Pull Request
@@ -392,7 +392,7 @@ The build process:
 1. Reads agent-specific content from `agents/[category]/[agent].md`
 2. Walks up directory tree collecting all `BASE-AGENT.md` files
 3. Appends BASE-AGENT.md content in order (root → category → subcategory)
-4. Writes compiled agent to `build/[category]/[agent].md`
+4. Writes compiled agent to `dist/agents/[category]/[agent].md`
 
 ### Build Commands
 

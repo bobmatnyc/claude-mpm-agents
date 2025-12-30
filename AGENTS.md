@@ -4,10 +4,10 @@
 - `agents/`: Source agent templates with YAML frontmatter. Each category (engineer, qa, ops, universal, claude-mpm, documentation, security) may include a `BASE-AGENT.md` for inherited standards plus agent-specific files such as `agents/engineer/backend/python-engineer.md`.
 - `templates/`: Reference material and examples (`AGENT_TEMPLATE_REFERENCE.md`, `circuit-breakers.md`, validation patterns); not deployed.
 - `docs/`: Research notes and analyses that inform template authoring.
-- `build-agent.py`: Python 3.9+ build tool that flattens inheritance and validates agents. Default output is `build/` (use `--output-dir` to change).
+- `build-agent.py`: Python 3.9+ build tool that flattens inheritance and validates agents. Default output is `dist/agents/` (use `--output-dir` to change).
 
 ## Build, Test, and Development Commands
-- `./build-agent.py --all`: Build every agent into `build/` using the inheritance chain.
+- `./build-agent.py --all`: Build every agent into `dist/agents/` using the inheritance chain.
 - `./build-agent.py --validate`: Run structure/frontmatter checks (required before PRs).
 - `./build-agent.py --preview agents/engineer/backend/python-engineer.md`: Show the compiled output for one agent.
 - `./build-agent.py --show-inheritance agents/engineer/backend/python-engineer.md`: Inspect which `BASE-AGENT.md` files are applied.
@@ -37,7 +37,7 @@
 ## Commit & Pull Request Guidelines
 - Use Conventional Commits (`feat: add kotlin engineer agent`, `docs: update base agent inheritance guide`). Include `!` for breaking reorganizations.
 - PRs should state the agent(s) touched, why changes live in agent vs. `BASE-AGENT.md`, and note `./build-agent.py --validate` output. Link related issues and update `README.md` or `AUTO-DEPLOY-INDEX.md` when categories or routing change.
-- Avoid committing generated artifacts; keep `build/` out of PRs unless explicitly requested.
+- Avoid committing generated artifacts; keep `dist/agents/` out of PRs unless explicitly requested.
 
 ## Security & Configuration Tips
 - Do not embed secrets or proprietary data in agent instructions or frontmatter.
