@@ -35,6 +35,8 @@ markers = [
     "role_boundary: Tests for agent role boundary enforcement",
     "output_quality: Tests for response quality metrics",
     "registry: Tests for agent registry validation",
+    "compiled: Tests for compiled agent validation",
+    "base_agent: Tests for BASE-AGENT.md files directly",
 ]
 
 [tool.ruff]

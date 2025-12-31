@@ -5,7 +5,12 @@ from typing import Callable
 
 import pytest
 
-from tests.fixtures.agent_loader import AgentDefinition, AgentLoader
+from tests.fixtures.agent_loader import (
+    AgentDefinition,
+    AgentLoader,
+    CompiledAgent,
+    CompiledAgentLoader,
+)
 from tests.fixtures.instruction_extractor import InstructionExtractor, TestableRule
 from tests.fixtures.mock_responses import MockResponseGenerator
 
@@ -181,3 +186,45 @@ def research_agents(all_agents: list[AgentDefinition]) -> list[AgentDefinition]:
         List of research agents
     """
     return [agent for agent in all_agents if agent.agent_type == "research"]
+
+
+# Compiled agent fixtures
+
+
+@pytest.fixture(scope="session")
+def compiled_loader(agents_dir: Path) -> CompiledAgentLoader:
+    """Create a CompiledAgentLoader instance.
+
+    Args:
+        agents_dir: Path to agents directory
+
+    Returns:
+        CompiledAgentLoader instance
+    """
+    return CompiledAgentLoader(agents_dir)
+
+
+@pytest.fixture(scope="session")
+def compiled_agents(compiled_loader: CompiledAgentLoader) -> dict[str, CompiledAgent]:
+    """Load all compiled agents with BASE-AGENT.md inheritance.
+
+    Args:
+        compiled_loader: CompiledAgentLoader instance
+
+    Returns:
+        Dict mapping agent_id to CompiledAgent objects
+    """
+    return compiled_loader.compile_all_agents()
+
+
+@pytest.fixture(scope="session")
+def base_agent_files(agents_dir: Path) -> list[Path]:
+    """Find all BASE-AGENT.md files.
+
+    Args:
+        agents_dir: Path to agents directory
+
+    Returns:
+        List of paths to BASE-AGENT.md files
+    """
+    return list(agents_dir.rglob("BASE-AGENT.md"))
