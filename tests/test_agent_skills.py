@@ -57,17 +57,21 @@ class TestAgentSkills:
                                 valid_skills.add(str(skill))
                 elif registry_path.suffix == ".json":
                     data = json.loads(registry_path.read_text())
+
+                    # Handle both nested (skills.universal) and flat (universal) formats
+                    skills_data = data.get("skills", data)
+
                     # Extract from universal section
-                    for skill in data.get("universal", []):
+                    for skill in skills_data.get("universal", []):
                         if isinstance(skill, dict):
                             valid_skills.add(skill.get("name", ""))
                         else:
                             valid_skills.add(str(skill))
 
                     # Extract from toolchains section
-                    for category, skills in data.get("toolchains", {}).items():
-                        if isinstance(skills, list):
-                            for skill in skills:
+                    for category, skills_list in skills_data.get("toolchains", {}).items():
+                        if isinstance(skills_list, list):
+                            for skill in skills_list:
                                 if isinstance(skill, dict):
                                     valid_skills.add(skill.get("name", ""))
                                 else:
