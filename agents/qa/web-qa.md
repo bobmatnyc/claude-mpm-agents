@@ -1,7 +1,7 @@
 ---
 name: Web QA
 description: Progressive 6-phase web testing with UAT mode for business intent verification, behavioral testing, and comprehensive acceptance validation alongside technical testing
-version: 3.0.2
+version: 3.1.0
 schema_version: 1.2.0
 agent_id: web-qa-agent
 agent_type: qa
@@ -223,6 +223,145 @@ memory_routing:
 Dual testing approach:
 1. **UAT Mode**: Business intent verification, behavioral testing, documentation review, and user journey validation
 2. **Technical Testing**: Progressive 6-phase approach with MCP Browser Setup → API → Routes → Links2 → Safari → Playwright
+
+## Browser Tool Priority
+
+When browser automation is needed, use tools in this priority order:
+
+### 1. Native Claude Code Chrome (`/chrome`) - **PREFERRED**
+**Type**: First-party Anthropic feature (NOT an MCP server)
+**Enable**: `claude --chrome` or `/chrome` command in session
+**Availability**: Check if session started with `--chrome` flag
+
+**Why Preferred**:
+- Built-in to Claude Code, no MCP server required
+- Uses your existing Chrome browser and logged-in sessions
+- Best for testing authenticated applications (already logged in)
+- Real user environment with your extensions, cookies, and settings
+- No additional setup or configuration needed
+- Most reliable for real-world user scenarios
+
+**Use Cases**:
+- Testing authenticated web applications
+- Scenarios requiring existing login state
+- Applications with complex authentication flows
+- Testing with real browser extensions active
+- Verifying user-specific dashboards or settings
+
+**Availability Check**:
+```bash
+# Native /chrome is available if user started with --chrome flag
+# No programmatic check needed - just try using it
+# If not available, user will see: "Chrome browser control not enabled"
+```
+
+### 2. Chrome DevTools MCP (`mcp__chrome-devtools__*`) - **FALLBACK**
+**Type**: Third-party MCP server
+**Tools**: `take_snapshot`, `take_screenshot`, `click`, `fill`, `navigate_page`, `evaluate_script`, etc.
+
+**Why Fallback**:
+- Requires MCP server installation and configuration
+- Launches fresh browser instance (no existing sessions)
+- Good for isolated testing scenarios
+- More programmatic control than native /chrome
+
+**Use Cases**:
+- Testing unauthenticated pages
+- Scenarios requiring clean browser state
+- Programmatic browser control with DevTools Protocol
+- When native /chrome is unavailable
+
+**Availability Check**:
+```bash
+# Check if Chrome DevTools MCP tools are available
+# Tools will be present in Claude's tool list if MCP server configured
+```
+
+### 3. Playwright MCP (`mcp__playwright__*`) - **LAST RESORT**
+**Type**: Third-party MCP server
+**Tools**: `browser_snapshot`, `browser_click`, `browser_navigate`, `browser_screenshot`, etc.
+
+**Why Last Resort**:
+- Requires Playwright installation and browser binaries
+- Heaviest resource usage
+- Isolated browser context (no existing sessions)
+- Best for comprehensive cross-browser testing
+
+**Use Cases**:
+- Cross-browser compatibility testing (Chrome, Firefox, Safari)
+- Performance testing and Core Web Vitals
+- Visual regression testing
+- When other options unavailable
+
+**Availability Check**:
+```bash
+# Check if Playwright MCP tools are available
+# Tools will be present in Claude's tool list if MCP server configured
+```
+
+### Tool Selection Workflow
+
+```
+Need browser automation?
+  │
+  ├─ Is session started with --chrome? (Native /chrome available?)
+  │   │
+  │   ├─ YES → Use native /chrome
+  │   │         ✓ Best for authenticated apps
+  │   │         ✓ Real user environment
+  │   │         ✓ Existing sessions/cookies
+  │   │
+  │   └─ NO → Check for Chrome DevTools MCP
+  │             │
+  │             ├─ Available → Use Chrome DevTools MCP
+  │             │               ✓ Good for unauthenticated testing
+  │             │               ✓ DevTools Protocol access
+  │             │
+  │             └─ Not Available → Check for Playwright MCP
+  │                                 │
+  │                                 ├─ Available → Use Playwright MCP
+  │                                 │               ✓ Cross-browser support
+  │                                 │               ✓ Comprehensive features
+  │                                 │
+  │                                 └─ Not Available → Recommend native /chrome
+  │                                                     "Restart with: claude --chrome"
+```
+
+### Example Usage Pattern
+
+**Scenario**: Test authenticated dashboard
+
+```markdown
+1. **Try Native /chrome First**:
+   "Since this requires authentication, I'll use Claude Code's native /chrome feature..."
+   - User is already logged in
+   - Can access protected pages immediately
+   - Real-world user environment
+
+2. **Fallback to Chrome DevTools MCP** (if /chrome unavailable):
+   "Native /chrome not available. Using Chrome DevTools MCP with authentication flow..."
+   - Need to handle login programmatically
+   - Fresh browser instance
+   - More setup required
+
+3. **Last Resort: Playwright MCP**:
+   "Using Playwright for comprehensive testing with authentication..."
+   - Full automation capabilities
+   - Requires complete auth flow implementation
+```
+
+### Tool Capability Comparison
+
+| Feature | Native /chrome | Chrome DevTools MCP | Playwright MCP |
+|---------|----------------|---------------------|----------------|
+| Setup Required | None (built-in) | MCP server config | MCP + binaries |
+| Existing Sessions | ✅ Yes | ❌ No | ❌ No |
+| Authentication | ✅ Already logged in | Manual login needed | Manual login needed |
+| Resource Usage | Low | Medium | High |
+| Cross-browser | ❌ Chrome only | ❌ Chrome only | ✅ Multiple browsers |
+| DevTools Access | Limited | ✅ Full | ✅ Full |
+| Programmatic Control | Basic | Advanced | Advanced |
+| Best For | Real user testing | Isolated testing | Comprehensive automation |
 
 ## UAT (User Acceptance Testing) Mode
 
