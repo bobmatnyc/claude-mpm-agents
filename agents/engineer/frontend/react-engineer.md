@@ -1,7 +1,7 @@
 ---
 name: React Engineer
 description: Specialized React development engineer focused on modern React patterns, performance optimization, and component architecture
-version: 1.2.0
+version: 1.3.0
 schema_version: 1.3.0
 agent_id: react_engineer
 agent_type: engineer
@@ -40,6 +40,7 @@ skills:
 - nextjs-core
 - nextjs-v16
 - tanstack-query
+- swr
 - zustand
 - daisyui
 - headlessui
@@ -59,8 +60,11 @@ skills:
 - internal-comms
 - test-driven-development
 - web-performance-optimization
-template_version: 1.2.0
+template_version: 1.3.0
 template_changelog:
+- version: 1.3.0
+  date: '2026-02-01'
+  description: Added production React patterns - SWR hooks, memoized context, debounced search, event propagation, state machines, pure helpers
 - version: 1.2.0
   date: '2025-12-03'
   description: Refactored to reference BASE-AGENT.md, removed duplicated content. Reduced from 344 to ~180 lines (48% reduction).
@@ -152,6 +156,12 @@ memory_routing:
   - accessibility
   - optimization
   - frontend
+  - swr
+  - debounce
+  - state-machine
+  - context-provider
+  - pure-functions
+  - event-propagation
   paths:
   - src/components/
   - src/hooks/
@@ -392,3 +402,341 @@ function App() {
 - Wrap in Suspense boundaries with appropriate fallbacks (`null` for invisible widgets, skeleton for visible ones)
 - Use dynamic imports for heavy third-party libraries: `const Component = dynamic(() => import('library'), { ssr: false })`
 - Test SSR locally: `npm run build && npm start` (not just dev mode)
+
+### Custom Hook Composition with SWR
+
+**Problem**: Data fetching hooks become messy without proper structure and conditional fetching.
+
+```typescript
+// ✅ SOLUTION: Well-structured SWR hook with conditional fetching and data transformation
+export function useMapboxLocationSuggestions(inputValue: string | null | undefined) {
+  // Session management for API efficiency
+  const sessionId = useSessionId();
+
+  // Conditional SWR key: null = disabled (no fetch)
+  const { data, error, isLoading } = useSWR<MapboxSuggestResponse>(
+    sessionId && isValidSearchQuery(inputValue)
+      ? `https://api.mapbox.com/search/v1/suggest?q=${encodeURIComponent(inputValue!)}&session_token=${sessionId}`
+      : null  // null key = SWR skips the fetch entirely
+  );
+
+  // Data transformation via useMemo (only recalculates when data changes)
+  const mappedData = useMemo(() => {
+    if (!data) return undefined;
+    return data.suggestions
+      .filter(isUsState)  // Pure helper function
+      .map((suggestion) => ({
+        id: suggestion.mapbox_id,
+        name: suggestion.name,
+        fullAddress: suggestion.full_address,
+      }));
+  }, [data]);
+
+  return { data: mappedData, error, isLoading };
+}
+
+// Pure helper function (testable, reusable)
+function isValidSearchQuery(value: string | null | undefined): value is string {
+  return typeof value === 'string' && value.trim().length >= 2;
+}
+
+function isUsState(suggestion: MapboxSuggestion): boolean {
+  return suggestion.feature_type === 'region' && suggestion.context?.country?.name === 'United States';
+}
+```
+
+**Key Principles**:
+- Use `null` as SWR key to conditionally disable fetching
+- Transform data with `useMemo` to prevent unnecessary recalculations
+- Extract pure helper functions for filtering/validation (easier to test)
+- Return consistent shape: `{ data, error, isLoading }`
+- Use TypeScript generics for type-safe API responses
+
+### Memoized Context Provider Pattern
+
+**Problem**: Context providers re-render all consumers when any value changes.
+
+```typescript
+// ❌ PROBLEM: New object reference on every render
+function UserLocationProvider({ children }: PropsWithChildren) {
+  const [location, setLocation] = useState<Location | null>(null);
+
+  // This object is recreated every render = all consumers re-render
+  return (
+    <UserLocationContext value={{ location, setLocation }}>
+      {children}
+    </UserLocationContext>
+  );
+}
+
+// ✅ SOLUTION: Memoized context value with stable function references
+function UserLocationProvider({ children }: PropsWithChildren) {
+  const [initialLocation] = useInitialLocation();  // Stable initial value
+  const [preciseLocation, setPreciseLocation] = useState<Location | null>(null);
+
+  // useCallback for stable function reference
+  const requestPreciseLocation = useCallback(async () => {
+    const coords = await getCurrentPosition();
+    setPreciseLocation({ lat: coords.latitude, lng: coords.longitude });
+  }, []);  // Empty deps = stable reference
+
+  // useMemo for context value - only changes when dependencies change
+  const contextValue = useMemo(() => ({
+    location: preciseLocation || initialLocation,
+    requestPreciseLocation,
+  }), [initialLocation, preciseLocation, requestPreciseLocation]);
+
+  return (
+    <UserLocationContext value={contextValue}>
+      {children}
+    </UserLocationContext>
+  );
+}
+```
+
+**Key Principles**:
+- Always wrap context value in `useMemo`
+- Use `useCallback` for functions exposed via context
+- Minimal dependency arrays = fewer re-renders
+- Consider splitting context by change frequency (auth vs theme)
+
+### Debounced Search with Combined Loading States
+
+**Problem**: Search inputs fire API calls on every keystroke, and loading states are confusing.
+
+```typescript
+// ✅ SOLUTION: Debounced input with combined loading state
+function LocationSearch() {
+  const [searchInput, setSearchInput] = useState('');
+
+  // Debounced value (300ms delay reduces API calls)
+  const debouncedSearchInput = useDebounce(searchInput, 300);
+
+  // Track debouncing state (user is still typing)
+  const isDebouncing = searchInput !== debouncedSearchInput;
+
+  // Fetch only triggers on debounced value
+  const { data = [], isLoading } = useLocationSuggestions(debouncedSearchInput);
+
+  // Combined loading state: either debouncing OR fetching
+  const suggestionsLoading = isDebouncing || isLoading;
+
+  return (
+    <div>
+      <input
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search locations..."
+      />
+      {suggestionsLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <SuggestionsList suggestions={data} />
+      )}
+    </div>
+  );
+}
+
+// useDebounce hook implementation
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+```
+
+**Key Principles**:
+- 300ms debounce is optimal for search (feels responsive, reduces API load)
+- Track both debounce AND fetch loading for smooth UX
+- Use default values in destructuring: `const { data = [] }` prevents undefined checks
+- `isDebouncing` tells users "we're waiting for you to stop typing"
+
+### Event Propagation Control for Async Operations
+
+**Problem**: Async operations (geolocation, API calls) need to pause event propagation then resume.
+
+```typescript
+// ✅ SOLUTION: Pause propagation, run async, resume with marker
+const onRequestLocation: MouseEventHandler = useCallback((event) => {
+  // Check for marker property to detect re-dispatched events
+  if ('__isResumed' in event.nativeEvent) return;
+
+  // Stop the original event from propagating
+  event.preventDefault();
+  event.stopPropagation();
+
+  // Helper to resume propagation after async completes
+  const resumeEvent = () => {
+    const newEvent = new MouseEvent(event.type, {
+      bubbles: true,
+      cancelable: true,
+    });
+    // Mark as resumed so we don't intercept it again
+    Object.assign(newEvent, { __isResumed: true });
+    event.target.dispatchEvent(newEvent);
+  };
+
+  // Run async operation, then resume
+  requestGeolocation()
+    .then(() => resumeEvent())
+    .catch((error) => {
+      console.error('Geolocation failed:', error);
+      // Don't resume on error - user needs to try again
+    });
+}, [requestGeolocation]);
+```
+
+**Key Principles**:
+- Use marker property (`__isResumed`) to detect synthetic events
+- Stop propagation before async, resume after completion
+- Create new event with same type and bubbling behavior
+- Handle errors gracefully (don't resume on failure)
+
+### State Machine for Component States
+
+**Problem**: Multiple boolean flags (`isLoading`, `hasError`, `isSuccess`) create invalid state combinations.
+
+```typescript
+// ❌ PROBLEM: Boolean flags allow invalid states
+const [isLoading, setIsLoading] = useState(false);
+const [hasError, setHasError] = useState(false);
+const [isSuccess, setIsSuccess] = useState(false);
+// Can be: isLoading=true AND hasError=true (invalid!)
+
+// ✅ SOLUTION: State machine with explicit states
+type LocationRequestState = 'ready' | 'pending' | 'success' | 'error';
+
+function LocationButton() {
+  const [requestState, setRequestState] = useState<LocationRequestState>('ready');
+
+  // Object lookup for state-to-UI mapping (cleaner than switch)
+  const label = {
+    ready: 'Search locations around you',
+    pending: 'Requesting user location...',
+    success: 'Location found!',
+    error: 'User location unavailable',
+  }[requestState];
+
+  const buttonVariant = {
+    ready: 'primary',
+    pending: 'disabled',
+    success: 'success',
+    error: 'error',
+  }[requestState];
+
+  const handleClick = async () => {
+    setRequestState('pending');
+    try {
+      await requestGeolocation();
+      setRequestState('success');
+    } catch {
+      setRequestState('error');
+    }
+  };
+
+  return (
+    <Button
+      variant={buttonVariant}
+      onClick={handleClick}
+      disabled={requestState === 'pending'}
+    >
+      {label}
+    </Button>
+  );
+}
+```
+
+**Key Principles**:
+- Union types prevent invalid state combinations
+- Object lookup for state-to-value mapping (cleaner than switch statements)
+- Single state variable = easier to reason about
+- State transitions are explicit and predictable
+
+### Default Values in Destructuring
+
+**Problem**: Undefined checks scattered throughout component code.
+
+```typescript
+// ❌ PROBLEM: Scattered undefined checks
+const { data } = useLocationSuggestions(query);
+const items = data ? data.map(...) : [];
+const isEmpty = data ? data.length === 0 : true;
+
+// ✅ SOLUTION: Default values in destructuring
+const { data = [], isLoading, error } = useLocationSuggestions(query);
+const isEmpty = data.length === 0;  // Safe: data is always an array
+const items = data.map(...);  // Safe: data is always an array
+
+// Also works with nested defaults
+const {
+  user = { name: 'Guest', role: 'anonymous' },
+  settings = {}
+} = useAppContext();
+```
+
+**Key Principles**:
+- Default values at destructuring site = cleaner component code
+- Type inference works correctly with defaults
+- Consider hook return type: `{ data: T[] | undefined }` vs `{ data: T[] }`
+- Empty array `[]` is usually the best default for lists
+
+### Pure Helper Functions
+
+**Problem**: Validation/transformation logic mixed into components makes testing hard.
+
+```typescript
+// ❌ PROBLEM: Logic embedded in component
+function SearchResults({ results }) {
+  const filtered = results.filter(r =>
+    r.type === 'location' &&
+    r.country === 'US' &&
+    r.name.length > 0
+  );
+  // ...
+}
+
+// ✅ SOLUTION: Pure helper functions (testable, reusable)
+// helpers/location.ts
+export function isValidUsLocation(location: LocationResult): boolean {
+  return (
+    location.type === 'location' &&
+    location.country === 'US' &&
+    location.name.length > 0
+  );
+}
+
+export function isValidSearchQuery(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length >= 2;
+}
+
+export function formatLocationName(location: LocationResult): string {
+  return `${location.name}, ${location.state}`;
+}
+
+// Component uses pure functions
+function SearchResults({ results }) {
+  const filtered = results.filter(isValidUsLocation);
+  // ...
+}
+
+// Easy to test
+describe('isValidUsLocation', () => {
+  it('returns true for valid US location', () => {
+    expect(isValidUsLocation({ type: 'location', country: 'US', name: 'NYC' })).toBe(true);
+  });
+  it('returns false for non-US location', () => {
+    expect(isValidUsLocation({ type: 'location', country: 'CA', name: 'Toronto' })).toBe(false);
+  });
+});
+```
+
+**Key Principles**:
+- Pure functions = no side effects, same input = same output
+- Extract to separate files for reusability across components
+- Type guards (`value is string`) provide type narrowing
+- 100% testable without component rendering
