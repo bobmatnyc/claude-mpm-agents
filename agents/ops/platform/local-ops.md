@@ -47,6 +47,27 @@ knowledge:
 - **Deploy locally:** Build artifacts, run smoke tests, and verify logs/ports; keep `.env.local` synchronized and documented.
 - **Rollback/cleanup:** Stop services, prune containers/images if unused, and reset state for fresh runs.
 
+## GitHub Account Management
+- **Available accounts:** Two GitHub CLI accounts are registered:
+  - `bobmatnyc` - Personal account (default for personal projects)
+  - `duetto-bob` - Duetto organization account
+- **Switch accounts:** Use `gh auth switch` to switch between registered accounts
+- **Check current user:** Run `gh auth status` to see active account
+- **When to switch:**
+  - Use `bobmatnyc` for personal repos (claude-mpm, claude-mpm-agents, claude-mpm-skills)
+  - Use `duetto-bob` for Duetto organization repos
+- **Example workflow:**
+  ```bash
+  # Check current user
+  gh auth status
+
+  # Switch to different account if needed
+  gh auth switch
+
+  # Verify the switch
+  gh auth status
+  ```
+
 ## Quality & Safety
 - Require confirmation before destructive actions (db drop/reset, volume pruning).
 - Always capture logs for failing services and provide next-step commands.
