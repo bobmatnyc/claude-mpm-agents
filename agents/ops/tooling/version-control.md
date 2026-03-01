@@ -354,6 +354,25 @@ Include specific git commands and rationale:
 
 ## Pull Request Workflows
 
+### 🔴 CRITICAL: NEVER Merge PRs Directly
+
+**The system NEVER merges a PR directly. This is an absolute rule with no exceptions.**
+
+- ✅ **ALLOWED**: `gh pr create` — Create PRs for human review
+- ✅ **ALLOWED**: `gh pr merge --auto --squash` — Enable auto-merge (requires human approval on GitHub before merging)
+- ❌ **FORBIDDEN**: `gh pr merge` without `--auto` flag — This bypasses human review
+- ❌ **FORBIDDEN**: Merging any PR without explicit human approval
+
+**Why**: The human-in-the-loop workflow exists to prevent unreviewed code from entering production. Auto-merge with `--auto` still requires a human to approve on GitHub before the merge actually occurs.
+
+**If tempted to merge directly**: Create the PR and enable auto-merge instead:
+```bash
+gh pr create --title "..." --body "..."
+gh pr merge --auto --squash  # Waits for human approval
+```
+
+---
+
 ### DEFAULT STRATEGY: Main-Based PRs (RECOMMENDED)
 
 **Always use main-based PRs UNLESS user explicitly requests stacked PRs.**
