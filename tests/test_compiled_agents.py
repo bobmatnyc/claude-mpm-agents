@@ -28,9 +28,9 @@ class TestBaseAgentInheritance:
     def test_all_agents_have_root_base_agent(self, compiled_agents: dict):
         """Verify all compiled agents include root BASE-AGENT.md content."""
         for agent_id, agent in compiled_agents.items():
-            assert any(
-                "BASE-AGENT.md" in str(b["relative"]) for b in agent.base_agents
-            ), f"{agent_id} missing root BASE-AGENT.md inheritance"
+            assert any("BASE-AGENT.md" in str(b["relative"]) for b in agent.base_agents), (
+                f"{agent_id} missing root BASE-AGENT.md inheritance"
+            )
 
     def test_engineer_agents_have_engineer_base(self, compiled_agents: dict):
         """Verify engineer agents include engineer/BASE-AGENT.md."""
@@ -97,23 +97,23 @@ class TestCompiledAgentInstructions:
     def test_all_agents_have_git_workflow(self, compiled_agents: dict):
         """All agents must have Git Workflow instructions."""
         for agent_id, agent in compiled_agents.items():
-            assert agent.has_instruction(
-                r"Git Workflow"
-            ), f"{agent_id} missing Git Workflow section"
+            assert agent.has_instruction(r"Git Workflow"), (
+                f"{agent_id} missing Git Workflow section"
+            )
 
     def test_all_agents_have_conventional_commits(self, compiled_agents: dict):
         """All agents must have conventional commits instructions."""
         for agent_id, agent in compiled_agents.items():
-            assert agent.has_instruction(
-                r"(feat|fix|docs|refactor|perf|test|chore)"
-            ), f"{agent_id} missing conventional commits examples"
+            assert agent.has_instruction(r"(feat|fix|docs|refactor|perf|test|chore)"), (
+                f"{agent_id} missing conventional commits examples"
+            )
 
     def test_all_agents_have_output_format(self, compiled_agents: dict):
         """All agents must have Output Format instructions."""
         for agent_id, agent in compiled_agents.items():
-            assert agent.has_instruction(
-                r"Output Format"
-            ), f"{agent_id} missing Output Format section"
+            assert agent.has_instruction(r"Output Format"), (
+                f"{agent_id} missing Output Format section"
+            )
 
     def test_all_agents_have_handoff_protocol(self, compiled_agents: dict):
         """All agents must have Handoff Protocol instructions."""
@@ -123,16 +123,16 @@ class TestCompiledAgentInstructions:
     def test_all_agents_have_search_before_implement(self, compiled_agents: dict):
         """All agents should have search-before-implement instructions."""
         for agent_id, agent in compiled_agents.items():
-            assert agent.has_instruction(
-                r"Search Before|search.*existing|grep"
-            ), f"{agent_id} missing search-before-implement instructions"
+            assert agent.has_instruction(r"Search Before|search.*existing|grep"), (
+                f"{agent_id} missing search-before-implement instructions"
+            )
 
     def test_all_agents_have_quality_standards(self, compiled_agents: dict):
         """All agents should have quality standards."""
         for agent_id, agent in compiled_agents.items():
-            assert agent.has_instruction(
-                r"Quality|quality standards|best practices"
-            ), f"{agent_id} missing quality standards"
+            assert agent.has_instruction(r"Quality|quality standards|best practices"), (
+                f"{agent_id} missing quality standards"
+            )
 
     # Engineer-specific instructions
 
@@ -141,27 +141,27 @@ class TestCompiledAgentInstructions:
         engineers = {k: v for k, v in compiled_agents.items() if v.agent_type == "engineer"}
 
         for agent_id, agent in engineers.items():
-            assert agent.has_instruction(
-                r"type.?safe|type coverage|100%.*type"
-            ), f"{agent_id} missing type safety instructions"
+            assert agent.has_instruction(r"type.?safe|type coverage|100%.*type"), (
+                f"{agent_id} missing type safety instructions"
+            )
 
     def test_engineer_agents_have_testing_requirements(self, compiled_agents: dict):
         """Engineer agents must have testing requirements."""
         engineers = {k: v for k, v in compiled_agents.items() if v.agent_type == "engineer"}
 
         for agent_id, agent in engineers.items():
-            assert agent.has_instruction(
-                r"test|coverage|90%"
-            ), f"{agent_id} missing testing requirements"
+            assert agent.has_instruction(r"test|coverage|90%"), (
+                f"{agent_id} missing testing requirements"
+            )
 
     def test_engineer_agents_have_architecture_guidance(self, compiled_agents: dict):
         """Engineer agents should have architecture guidance."""
         engineers = {k: v for k, v in compiled_agents.items() if v.agent_type == "engineer"}
 
         for agent_id, agent in engineers.items():
-            assert agent.has_instruction(
-                r"SOLID|architecture|design pattern"
-            ), f"{agent_id} missing architecture guidance"
+            assert agent.has_instruction(r"SOLID|architecture|design pattern"), (
+                f"{agent_id} missing architecture guidance"
+            )
 
     # QA-specific instructions
 
@@ -177,9 +177,9 @@ class TestCompiledAgentInstructions:
         qa_agents = {k: v for k, v in compiled_agents.items() if v.agent_type == "qa"}
 
         for agent_id, agent in qa_agents.items():
-            assert agent.has_instruction(
-                r"steps to reproduce|expected.*actual"
-            ), f"{agent_id} missing bug report format"
+            assert agent.has_instruction(r"steps to reproduce|expected.*actual"), (
+                f"{agent_id} missing bug report format"
+            )
 
     # Ops-specific instructions
 
@@ -188,9 +188,9 @@ class TestCompiledAgentInstructions:
         ops_agents = {k: v for k, v in compiled_agents.items() if v.agent_type == "ops"}
 
         for agent_id, agent in ops_agents.items():
-            assert agent.has_instruction(
-                r"verif|health.?check|deployment"
-            ), f"{agent_id} missing deployment verification"
+            assert agent.has_instruction(r"verif|health.?check|deployment"), (
+                f"{agent_id} missing deployment verification"
+            )
 
     def test_ops_agents_have_rollback_guidance(self, compiled_agents: dict):
         """Ops agents in ops/ directory should have rollback/recovery guidance."""
@@ -202,9 +202,9 @@ class TestCompiledAgentInstructions:
         }
 
         for agent_id, agent in ops_agents.items():
-            assert agent.has_instruction(
-                r"rollback|revert|recovery"
-            ), f"{agent_id} missing rollback guidance"
+            assert agent.has_instruction(r"rollback|revert|recovery"), (
+                f"{agent_id} missing rollback guidance"
+            )
 
 
 @pytest.mark.base_agent
@@ -298,9 +298,9 @@ class TestInstructionExtraction:
         rules = extractor.extract_root_rules()
 
         for rule in rules:
-            assert (
-                len(rule.positive_patterns) > 0 or len(rule.negative_patterns) > 0
-            ), f"Rule {rule.rule_id} has no patterns"
+            assert len(rule.positive_patterns) > 0 or len(rule.negative_patterns) > 0, (
+                f"Rule {rule.rule_id} has no patterns"
+            )
 
 
 @pytest.mark.compiled
@@ -323,9 +323,9 @@ class TestCompilationCorrectness:
             compiled = compiled_loader.compile_agent(sample_agent)
 
             # Agent body should be in compiled content
-            assert (
-                compiled.agent_body in compiled.compiled_content
-            ), "Agent body not preserved in compilation"
+            assert compiled.agent_body in compiled.compiled_content, (
+                "Agent body not preserved in compilation"
+            )
 
     def test_base_content_appended(self, compiled_loader: CompiledAgentLoader, agents_dir: Path):
         """Verify BASE-AGENT.md content is appended to compiled agent."""
@@ -351,9 +351,9 @@ class TestCompilationCorrectness:
                     if lines:
                         # Check if any distinctive line from base is in compiled
                         marker = lines[0][:50]  # First 50 chars of first line
-                        assert (
-                            marker in compiled.compiled_content
-                        ), f"Base content from {base['relative']} not found in compiled agent (marker: {marker[:30]}...)"
+                        assert marker in compiled.compiled_content, (
+                            f"Base content from {base['relative']} not found in compiled agent (marker: {marker[:30]}...)"
+                        )
 
     def test_frontmatter_extracted(self, compiled_loader: CompiledAgentLoader, agents_dir: Path):
         """Verify frontmatter is correctly extracted."""
@@ -384,6 +384,6 @@ class TestCompilationCorrectness:
 
             # Compiled should be larger if there are BASE-AGENT.md files
             if len(compiled.base_agents) > 0:
-                assert len(compiled.compiled_content) > len(
-                    compiled.agent_body
-                ), "Compiled content should be larger than agent body"
+                assert len(compiled.compiled_content) > len(compiled.agent_body), (
+                    "Compiled content should be larger than agent body"
+                )

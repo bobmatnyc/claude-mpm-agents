@@ -180,9 +180,9 @@ class TestPersonaCompliance:
         avg_novice = sum(novice_delays) / len(novice_delays)
         avg_expert = sum(expert_delays) / len(expert_delays)
 
-        assert (
-            avg_novice > avg_expert
-        ), f"Novice avg delay ({avg_novice}ms) should exceed expert ({avg_expert}ms)"
+        assert avg_novice > avg_expert, (
+            f"Novice avg delay ({avg_novice}ms) should exceed expert ({avg_expert}ms)"
+        )
         assert avg_novice >= 2000, "Novice minimum delay should be >= 2000ms"
 
     @pytest.mark.persona
@@ -222,9 +222,9 @@ class TestBehavioralAuthenticity:
         long_content_time = agent.calculate_reading_time(500)  # 500 words
 
         assert long_content_time > short_content_time
-        assert (
-            long_content_time == short_content_time * 5
-        ), "500 words should take 5x longer than 100 words"
+        assert long_content_time == short_content_time * 5, (
+            "500 words should take 5x longer than 100 words"
+        )
 
     @pytest.mark.behavioral
     def test_random_delays_within_expected_range(self, expert_persona):
@@ -234,9 +234,9 @@ class TestBehavioralAuthenticity:
 
         delays = [agent.get_action_delay() for _ in range(100)]
 
-        assert all(
-            min_delay <= d <= max_delay for d in delays
-        ), f"All delays should be between {min_delay} and {max_delay}ms"
+        assert all(min_delay <= d <= max_delay for d in delays), (
+            f"All delays should be between {min_delay} and {max_delay}ms"
+        )
         # Verify randomness (not all same value)
         assert len(set(delays)) > 1, "Delays should be randomized"
 

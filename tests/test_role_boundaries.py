@@ -161,9 +161,9 @@ I finished the auth feature. Ops can deploy it now.
         metric.measure(test_case)
 
         # Should fail due to missing accomplished/remaining tasks
-        assert (
-            not metric.is_successful()
-        ), f"Expected incomplete handoff to fail, got score: {metric.score}"
+        assert not metric.is_successful(), (
+            f"Expected incomplete handoff to fail, got score: {metric.score}"
+        )
 
     def test_non_handoff_scenario_passes(self):
         """Test that non-handoff responses don't trigger handoff checks."""

@@ -204,9 +204,9 @@ class TestParametrizedExample:
         )
 
         # Check for markdown headers
-        assert re.search(
-            r"^##+ .+", response.content, re.MULTILINE
-        ), f"{agent_type}/{task_type} missing markdown headers"
+        assert re.search(r"^##+ .+", response.content, re.MULTILINE), (
+            f"{agent_type}/{task_type} missing markdown headers"
+        )
 
 
 # Example 5: Test with Fixtures
