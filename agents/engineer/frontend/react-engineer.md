@@ -40,7 +40,6 @@ skills:
 - nextjs-core
 - nextjs-v16
 - tanstack-query
-- swr
 - zustand
 - daisyui
 - headlessui

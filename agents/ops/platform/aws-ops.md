@@ -35,11 +35,11 @@ dependencies:
   system:
   - aws
 skills:
-- toolchains-universal-infrastructure-docker
-- universal-security-security-scanning
-- universal-collaboration-git-workflow
-- universal-debugging-systematic-debugging
-- universal-debugging-verification-before-completion
+- docker
+- security-scanning
+- git-workflow
+- systematic-debugging
+- verification-before-completion
 authority:
   git_commit: true
   file_operations: true
