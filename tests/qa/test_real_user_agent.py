@@ -10,22 +10,27 @@ Usage:
     pytest test_real_user_agent.py -v -m browser_tools
 """
 
+import os
 import random
-import pytest
 from dataclasses import dataclass
+from types import SimpleNamespace
 from typing import Dict, List, Optional
-from unittest.mock import Mock
+
+import pytest
 
 # DeepEval imports (install: pip install deepeval)
 try:
     from deepeval import assert_test
-    from deepeval.metrics import BiasMetric, ToxicityMetric, AnswerRelevancyMetric
+    from deepeval.metrics import AnswerRelevancyMetric, BiasMetric, ToxicityMetric
     from deepeval.test_case import LLMTestCase
 
     DEEPEVAL_AVAILABLE = True
 except ImportError:
     DEEPEVAL_AVAILABLE = False
     pytest.skip("deepeval not installed", allow_module_level=True)
+
+# Skip DeepEval tests that require OpenAI API key in CI
+OPENAI_AVAILABLE = bool(os.environ.get("OPENAI_API_KEY"))
 
 
 # =============================================================================
@@ -95,11 +100,15 @@ def mobile_persona() -> Persona:
 
 @pytest.fixture
 def mock_browser_tools():
-    """Mock browser tool availability."""
+    """Mock browser tool availability.
+
+    Note: Uses SimpleNamespace instead of Mock because Mock(name=...) sets the
+    mock's display name for repr, not an accessible .name attribute.
+    """
     return {
-        "native_browser": Mock(available=True, name="mcp__browser__navigate"),
-        "chrome_devtools": Mock(available=True, name="mcp__chrome-devtools__navigate"),
-        "playwright": Mock(available=True, name="mcp__playwright__navigate"),
+        "native_browser": SimpleNamespace(available=True, name="mcp__browser__navigate"),
+        "chrome_devtools": SimpleNamespace(available=True, name="mcp__chrome-devtools__navigate"),
+        "playwright": SimpleNamespace(available=True, name="mcp__playwright__navigate"),
     }
 
 
@@ -285,6 +294,7 @@ class TestBrowserToolSelection:
 
 
 @pytest.mark.skipif(not DEEPEVAL_AVAILABLE, reason="deepeval not installed")
+@pytest.mark.skipif(not OPENAI_AVAILABLE, reason="OPENAI_API_KEY not set")
 class TestDeepEvalMetrics:
     """Test agent outputs using DeepEval metrics."""
 

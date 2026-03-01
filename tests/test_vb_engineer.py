@@ -3,10 +3,22 @@ Deepeval synthetic tests for Visual Basic Engineer agent.
 Tests behavioral consistency and VB coding skills without actual VB environment.
 """
 
+import os
+
 import pytest
-from deepeval import assert_test
-from deepeval.metrics import GEval, AnswerRelevancyMetric
-from deepeval.test_case import LLMTestCase, LLMTestCaseParams
+
+# Skip all tests if OpenAI API key is not available (required by DeepEval metrics)
+pytestmark = pytest.mark.skipif(
+    not os.environ.get("OPENAI_API_KEY"),
+    reason="OPENAI_API_KEY not set - DeepEval metrics require OpenAI",
+)
+
+try:
+    from deepeval import assert_test
+    from deepeval.metrics import AnswerRelevancyMetric, GEval
+    from deepeval.test_case import LLMTestCase, LLMTestCaseParams
+except ImportError:
+    pytest.skip("deepeval not installed", allow_module_level=True)
 
 
 # Test 1: Type Safety Knowledge
