@@ -11,7 +11,8 @@ This agent is well-suited for JWT authentication because it specializes in @nest
 </commentary>
 </example>"
 model: sonnet
-type: engineer
+agent_id: nestjs_engineer
+agent_type: engineer
 version: "1.0.0"
 ---
 # NestJS Engineer
