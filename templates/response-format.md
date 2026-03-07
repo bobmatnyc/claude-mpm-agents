@@ -163,7 +163,7 @@ Container for all QA and verification evidence.
 #### `qa_agent_used` (string, required)
 - **Purpose**: Track which QA agent verified the work
 - **Format**: Agent name
-- **Example**: `"web-qa"`, `"api-qa"`, `"local-ops-agent"`
+- **Example**: `"web-qa"`, `"api-qa"`, `"local-ops"`
 
 #### `evidence_type` (string, required)
 - **Purpose**: Categorize the type of verification evidence
@@ -287,13 +287,13 @@ Container for all claims made and their evidence sources.
 {
   "session_summary": {
     "user_request": "Implement user authentication with JWT tokens",
-    "approach": "Research → Code Analysis → Engineer Implementation → local-ops-agent Deployment → QA Verification → Documentation",
+    "approach": "Research → Code Analysis → Engineer Implementation → local-ops Deployment → QA Verification → Documentation",
     "delegation_summary": {
       "tasks_delegated": [
         "Research: Analyze authentication requirements and JWT best practices",
         "Code Analyzer: Review existing auth patterns in codebase",
         "Engineer: Implement JWT authentication middleware",
-        "local-ops-agent: Deploy to localhost:3000 with PM2",
+        "local-ops: Deploy to localhost:3000 with PM2",
         "web-qa: Verify login and protected endpoints",
         "Documentation: Update API docs with auth requirements"
       ],
@@ -351,15 +351,15 @@ Container for all claims made and their evidence sources.
 {
   "session_summary": {
     "user_request": "Build a complete e-commerce checkout flow with payment integration",
-    "approach": "Research → Code Analysis → react-engineer (UI) + python-engineer (API) → vercel-ops-agent Deployment → web-qa + api-qa Verification → Security Review → Documentation",
+    "approach": "Research → Code Analysis → react-engineer (UI) + python-engineer (API) → vercel-ops Deployment → web-qa + api-qa Verification → Security Review → Documentation",
     "delegation_summary": {
       "tasks_delegated": [
         "Research: Analyze e-commerce checkout best practices and Stripe integration",
         "Code Analyzer: Review existing cart and payment infrastructure",
         "react-engineer: Build checkout UI components and flow",
         "python-engineer: Implement Stripe payment API integration",
-        "vercel-ops-agent: Deploy frontend to Vercel",
-        "railway-ops-agent: Deploy backend API to Railway",
+        "vercel-ops: Deploy frontend to Vercel",
+        "railway-ops: Deploy backend API to Railway",
         "api-qa: Verify payment API endpoints",
         "web-qa: Test checkout flow with Playwright",
         "Security: Review payment handling and PCI compliance",
@@ -410,8 +410,8 @@ Container for all claims made and their evidence sources.
       "Checkout flow works": "web-qa verified complete flow with Playwright - screenshot captured",
       "Payment processing functional": "api-qa tested with Stripe test cards - successful payment confirmed",
       "Webhooks operational": "api-qa verified webhook signature validation and event processing",
-      "UI deployed to Vercel": "vercel-ops-agent confirmed deployment - https://myapp.vercel.app/checkout accessible",
-      "API deployed to Railway": "railway-ops-agent verified deployment - https://api.railway.app/health returning 200",
+      "UI deployed to Vercel": "vercel-ops confirmed deployment - https://myapp.vercel.app/checkout accessible",
+      "API deployed to Railway": "railway-ops verified deployment - https://api.railway.app/health returning 200",
       "Security reviewed": "Security agent confirmed PCI-compliant implementation, no sensitive data stored"
     },
     "blockers": [],
@@ -492,7 +492,7 @@ Before submitting a PM response, verify ALL of these requirements:
 ✅ **CORRECT**:
 ```
 "assertions_made": {
-  "API deployed": "vercel-ops-agent verified with curl - HTTP 200 response from https://api.vercel.app"
+  "API deployed": "vercel-ops verified with curl - HTTP 200 response from https://api.vercel.app"
 }
 ```
 

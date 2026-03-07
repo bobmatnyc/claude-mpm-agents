@@ -10,7 +10,7 @@ usage: Reference patterns from specific specialized agent templates using extend
 
 ## Purpose
 
-This base template provides common patterns for specialized agents that focus on specific domains, tools, or technologies (imagemagick, circuit-breakers, git-file-tracking, content-agent, etc.). Agent templates inherit these patterns and customize them for their specialized domains.
+This base template provides common patterns for specialized agents that focus on specific domains, tools, or technologies (imagemagick, circuit-breakers, git-file-tracking, content, etc.). Agent templates inherit these patterns and customize them for their specialized domains.
 
 ## Pattern Categories
 

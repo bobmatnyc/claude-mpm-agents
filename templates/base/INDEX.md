@@ -146,7 +146,7 @@ overrides:
 
 ```yaml
 ---
-name: qa-agent
+name: qa
 extends: base-qa
 inherits:
   - testing_methodology

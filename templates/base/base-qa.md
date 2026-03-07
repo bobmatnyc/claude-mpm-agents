@@ -10,7 +10,7 @@ usage: Reference patterns from specific QA agent templates using extends/inherit
 
 ## Purpose
 
-This base template provides common QA and testing patterns shared across all QA agent templates (qa-agent, web-qa, api-qa, test-quality-inspector, etc.). Agent templates inherit these patterns and customize them for specific testing domains.
+This base template provides common QA and testing patterns shared across all QA agent templates (qa, web-qa, api-qa, test-quality-inspector, etc.). Agent templates inherit these patterns and customize them for specific testing domains.
 
 ## Pattern Categories
 
@@ -418,7 +418,7 @@ QA agent templates can extend this base with:
 **Current Version**: 1.0.0
 
 **Changelog**:
-- **1.0.0** (2025-11-30): Initial base QA template with core patterns extracted from qa-agent and web-qa templates
+- **1.0.0** (2025-11-30): Initial base QA template with core patterns extracted from qa and web-qa templates
 
 ---
 

@@ -185,7 +185,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Example: Java Engineer Agent
 
 ```bash
-git add src/claude_mpm/agents/templates/java_engineer.json
+git add src/claude_mpm/agents/templates/java-engineer.json
 git commit -m "feat: add Java Engineer agent template
 
 - Created comprehensive Java 21+ agent template
@@ -394,9 +394,9 @@ git status
 **Example**:
 ```bash
 # Agent creates multiple related files
-git add src/claude_mpm/agents/templates/java_engineer.json
-git add src/claude_mpm/agents/templates/kotlin_engineer.json
-git add src/claude_mpm/agents/templates/scala_engineer.json
+git add src/claude_mpm/agents/templates/java-engineer.json
+git add src/claude_mpm/agents/templates/kotlin-engineer.json
+git add src/claude_mpm/agents/templates/scala-engineer.json
 
 git commit -m "feat: add JVM language engineer templates
 

@@ -10,7 +10,7 @@ usage: Reference patterns from specific research agent templates using extends/i
 
 ## Purpose
 
-This base template provides common research and analysis patterns shared across all research agent templates (research-agent, code-analyzer, documentation-agent, etc.). Agent templates inherit these patterns and customize them for specific research domains.
+This base template provides common research and analysis patterns shared across all research agent templates (research, code-analyzer, documentation, etc.). Agent templates inherit these patterns and customize them for specific research domains.
 
 ## Pattern Categories
 
@@ -411,7 +411,7 @@ Research agent templates can extend this base with:
 **Current Version**: 1.0.0
 
 **Changelog**:
-- **1.0.0** (2025-11-30): Initial base research template with core patterns extracted from research-agent template
+- **1.0.0** (2025-11-30): Initial base research template with core patterns extracted from research template
 
 ---
 
