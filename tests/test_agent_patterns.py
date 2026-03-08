@@ -136,6 +136,18 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
 
 
 @pytest.mark.patterns
+def test_agent_patterns_keys_match_compiled_agents(
+    compiled_agents: Dict[str, CompiledAgent],
+) -> None:
+    """Verify AGENT_PATTERNS keys all correspond to real compiled agents."""
+    stale_keys = [key for key in AGENT_PATTERNS if key not in compiled_agents]
+    assert not stale_keys, (
+        f"AGENT_PATTERNS has keys for non-existent agents: {stale_keys}\n"
+        f"Available agents: {sorted(compiled_agents.keys())}"
+    )
+
+
+@pytest.mark.patterns
 @pytest.mark.parametrize("agent_id,patterns", AGENT_PATTERNS.items())
 def test_agent_has_domain_patterns(
     compiled_agents: Dict[str, CompiledAgent], agent_id: str, patterns: List[str]

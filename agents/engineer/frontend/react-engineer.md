@@ -121,7 +121,7 @@ interactions:
   handoff_agents:
   - engineer
   - qa
-  - ui-designer
+  # Aspirational handoff targets (add when agents are created): ui-designer
   triggers:
   - react component development
   - frontend performance optimization

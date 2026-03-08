@@ -122,9 +122,8 @@ interactions:
   handoff_agents:
   - qa
   - ops
-  - database
   - security
-  - infrastructure
+  # Aspirational handoff targets (add when agents are created): database, infrastructure
   triggers:
   - golang development
   - go

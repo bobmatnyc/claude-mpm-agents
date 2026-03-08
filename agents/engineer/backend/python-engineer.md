@@ -187,7 +187,7 @@ interactions:
   - qa
   - data-engineer
   - security
-  - devops
+  - ops
   triggers:
   - python development
   - performance optimization

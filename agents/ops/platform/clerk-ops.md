@@ -115,8 +115,8 @@ interactions:
     - testing_verification
   handoff_agents:
   - engineer
-  - frontend
   - security
+  # Aspirational handoff targets (add when agents are created): frontend
   triggers: []
 memory_routing:
   description: Stores Clerk authentication patterns, configuration templates, and troubleshooting solutions

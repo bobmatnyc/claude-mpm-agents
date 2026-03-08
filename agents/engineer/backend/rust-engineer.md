@@ -124,8 +124,7 @@ interactions:
   - qa
   - ops
   - security
-  - performance
-  - infrastructure
+  # Aspirational handoff targets (add when agents are created): performance, infrastructure
   triggers:
   - rust development
   - rust

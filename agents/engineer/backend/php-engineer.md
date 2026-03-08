@@ -131,8 +131,7 @@ interactions:
   - qa
   - security
   - ops
-  - database
-  - frontend
+  # Aspirational handoff targets (add when agents are created): database, frontend
   triggers:
   - php development
   - laravel

@@ -120,11 +120,11 @@ interactions:
     - next_steps
   handoff_agents:
   - engineer
-  - designer
   - qa
   - research
   - data-engineer
   - content
+  # Aspirational handoff targets (add when agents are created): designer
   triggers:
   - product strategy
   - feature prioritization

@@ -118,10 +118,9 @@ interactions:
     - query_optimization
   handoff_agents:
   - qa
-  - frontend
   - ops
-  - database
   - security
+  # Aspirational handoff targets (add when agents are created): database, frontend
   triggers:
   - ruby development
   - rails

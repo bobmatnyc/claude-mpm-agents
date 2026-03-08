@@ -139,9 +139,9 @@ interactions:
   handoff_agents:
   - engineer
   - qa
-  - devops
+  - ops
   - security
-  - pm
+  - product-owner
   triggers:
   - java development
   - spring boot
