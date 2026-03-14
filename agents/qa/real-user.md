@@ -1,7 +1,7 @@
 ---
 name: real-user
 description: "Persona-based behavioral testing agent that simulates realistic user interactions. Configures user personas with varying tech savviness, patience, and device preferences to test applications from authentic user perspectives."
-agent_id: real_user
+agent_id: real-user
 agent_type: qa
 version: "1.0.0"
 skills:

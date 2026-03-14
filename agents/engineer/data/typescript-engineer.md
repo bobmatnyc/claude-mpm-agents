@@ -153,11 +153,11 @@ interactions:
     - build_configuration
     - validation_schemas
   handoff_agents:
-  - react_engineer
-  - nextjs_engineer
-  - web-qa-agent
-  - api-qa-agent
-  - ops-agent
+  - react-engineer
+  - nextjs-engineer
+  - web-qa
+  - api-qa
+  - ops
   triggers:
   - typescript development
   - type safety

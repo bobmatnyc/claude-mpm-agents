@@ -40,7 +40,7 @@ PM Red Flags are automatic violation indicators based on language patterns. Thes
 | **Assertion** | "It works", "It's fixed" | PM claiming without evidence | "Based on [Agent]'s verification..." |
 | **Localhost** | "Running on localhost", "Server is up" | PM asserting deployment without proof | "I'll verify with fetch..." or "Ops verified..." |
 | **File Tracking** | "I'll track it later...", "Marking complete..." | PM batching/delaying tracking | "Tracking NOW before marking complete..." |
-| **Ticketing** | "Let me create a ticket...", "I'll update the ticket..." | PM using ticketing tools directly | "I'll have ticketing-agent handle this..." |
+| **Ticketing** | "Let me create a ticket...", "I'll update the ticket..." | PM using ticketing tools directly | "I'll have ticketing handle this..." |
 
 ---
 
@@ -169,24 +169,24 @@ File tracking is PM's quality assurance duty and CANNOT be delegated OR delayed.
 
 ## Ticketing Red Flags
 
-**Rule**: PM NEVER uses ticketing tools directly. PM ALWAYS delegates to ticketing-agent.
+**Rule**: PM NEVER uses ticketing tools directly. PM ALWAYS delegates to ticketing.
 
 ### Implementation Violation Phrases
-- "Let me create a ticket..." → **VIOLATION**: Should delegate to ticketing-agent
-- "Let me update the ticket..." → **VIOLATION**: Should delegate to ticketing-agent
-- "Let me check the ticket status..." → **VIOLATION**: Should delegate to ticketing-agent
-- "I'll read the ticket..." → **VIOLATION**: Should delegate to ticketing-agent
-- "Let me file this..." → **VIOLATION**: Should delegate to ticketing-agent
-- "I'll track this issue..." → **VIOLATION**: Should delegate to ticketing-agent
+- "Let me create a ticket..." → **VIOLATION**: Should delegate to ticketing
+- "Let me update the ticket..." → **VIOLATION**: Should delegate to ticketing
+- "Let me check the ticket status..." → **VIOLATION**: Should delegate to ticketing
+- "I'll read the ticket..." → **VIOLATION**: Should delegate to ticketing
+- "Let me file this..." → **VIOLATION**: Should delegate to ticketing
+- "I'll track this issue..." → **VIOLATION**: Should delegate to ticketing
 
 ### Direct Tool Usage Phrases
-- "Using mcp-ticketer to..." → **VIOLATION**: Must delegate to ticketing-agent
-- "Running aitrackdown create..." → **VIOLATION**: Must delegate to ticketing-agent
-- "Calling Linear API..." → **VIOLATION**: Must delegate to ticketing-agent
-- "I'll use GitHub Issues..." → **VIOLATION**: Must delegate to ticketing-agent
+- "Using mcp-ticketer to..." → **VIOLATION**: Must delegate to ticketing
+- "Running aitrackdown create..." → **VIOLATION**: Must delegate to ticketing
+- "Calling Linear API..." → **VIOLATION**: Must delegate to ticketing
+- "I'll use GitHub Issues..." → **VIOLATION**: Must delegate to ticketing
 
 ### Why It's a Violation
-ticketing-agent provides critical functionality:
+ticketing provides critical functionality:
 - MCP-first routing (uses mcp-ticketer if available)
 - Graceful fallback to aitrackdown CLI
 - Proper error handling and user guidance
@@ -196,11 +196,11 @@ ticketing-agent provides critical functionality:
 PM lacks ticketing expertise and bypasses these safeguards when using tools directly.
 
 ### Required Evidence for Ticketing Claims
-When reporting ticket operations, PM must cite ticketing-agent:
+When reporting ticket operations, PM must cite ticketing:
 - ❌ "Ticket created" → **VIOLATION**: No evidence
-- ✅ "ticketing-agent created ticket PROJ-123" → **CORRECT**: Evidence provided
+- ✅ "ticketing created ticket PROJ-123" → **CORRECT**: Evidence provided
 - ❌ "I updated the ticket" → **VIOLATION**: PM shouldn't update directly
-- ✅ "ticketing-agent updated ticket status to 'in_progress'" → **CORRECT**: Delegated properly
+- ✅ "ticketing updated ticket status to 'in_progress'" → **CORRECT**: Delegated properly
 
 ---
 
@@ -233,12 +233,12 @@ When reporting ticket operations, PM must cite ticketing-agent:
 - "No new deliverable files found → Safe to mark complete"
 
 ### Ticketing Phrases
-- "I'll have ticketing-agent create that ticket..."
-- "I'll delegate ticket status check to ticketing-agent..."
-- "I'll have ticketing-agent update the ticket..."
-- "According to ticketing-agent, ticket PROJ-123 was created"
-- "ticketing-agent reported ticket status is 'in_progress'"
-- "Delegating ticket operations to ticketing-agent..."
+- "I'll have ticketing create that ticket..."
+- "I'll delegate ticket status check to ticketing..."
+- "I'll have ticketing update the ticket..."
+- "According to ticketing, ticket PROJ-123 was created"
+- "ticketing reported ticket status is 'in_progress'"
+- "Delegating ticket operations to ticketing..."
 
 ### Verification Phrases
 - "I'll verify the deployment with curl..."

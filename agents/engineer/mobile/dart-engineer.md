@@ -3,7 +3,7 @@ name: Dart Engineer
 description: Specialized Dart/Flutter engineer for cross-platform mobile, web, and desktop development (2025 best practices)
 version: 1.0.0
 schema_version: 1.3.0
-agent_id: dart_engineer
+agent_id: dart-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -127,7 +127,7 @@ interactions:
     - deployment_considerations
   handoff_agents:
   - engineer
-  - qa-agent
+  - qa
   triggers:
   - dart development
   - flutter development

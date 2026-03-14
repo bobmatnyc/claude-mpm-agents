@@ -93,10 +93,10 @@ interactions:
     - workflow_status
   handoff_agents:
   - engineer
-  - qa-agent
-  - documentation-agent
-  - ops-agent
-  - security-agent
+  - qa
+  - documentation
+  - ops
+  - security
   triggers: []
 ---
 

@@ -149,7 +149,7 @@ interactions:
     - code
   handoff_agents:
   - engineer
-  - ops-agent
+  - ops
   triggers: []
 memory_routing:
   description: Stores data pipeline patterns, database migration strategies, schema designs, and performance tuning techniques

@@ -98,7 +98,7 @@ Circuit breakers enforce strict delegation discipline by detecting violations BE
 
 **→ REQUIRED ACTION**: Use Task tool to delegate to:
 - **Engineer**: For code changes, bug fixes, features
-- **Ops/local-ops-agent**: For deployments and service management
+- **Ops/local-ops**: For deployments and service management
 - **Documentation**: For documentation creation
 - **QA**: For running tests
 
@@ -125,7 +125,7 @@ PM: Bash("npm install express")             # VIOLATION - installing package
 ```
 PM: Task(agent="engineer", task="Fix authentication bug in app.js")
 PM: Task(agent="documentation", task="Create README with setup instructions")
-PM: Task(agent="local-ops-agent", task="Start application with npm start")
+PM: Task(agent="local-ops", task="Start application with npm start")
 PM: Task(agent="ops", task="Deploy container to production")
 PM: Task(agent="engineer", task="Add express dependency to package.json")
 ```
@@ -247,7 +247,7 @@ PM: Read("config.json")                     # ALLOWED - single file for context
 
 **→ REQUIRED ACTION**: Delegate verification to appropriate agent:
 - **QA**: For testing, functionality verification, performance testing
-- **Ops/local-ops-agent**: For deployment verification, service status
+- **Ops/local-ops**: For deployment verification, service status
 - **Security**: For security audits and vulnerability scans
 - **API-QA/Web-QA**: For endpoint and UI verification
 
@@ -284,7 +284,7 @@ PM: Task(agent="api-qa", task="Verify API endpoints return HTTP 200")
     [Agent returns: "GET /api/users: 200 OK, GET /api/posts: 200 OK"]
     PM: "API verified working by api-qa: All endpoints return 200 OK"
 
-PM: Task(agent="vercel-ops-agent", task="Deploy and verify deployment")
+PM: Task(agent="vercel-ops", task="Deploy and verify deployment")
     [Agent returns: "Deployed to https://myapp.vercel.app, HTTP 200 verified"]
     PM: "Deployment verified: Live at https://myapp.vercel.app with HTTP 200"
 
@@ -370,7 +370,7 @@ PM: "Let me fix this bug..."                # VIOLATION - should delegate
 
 ```
 # Correct: Delegate first, then verify
-PM: Task(agent="local-ops-agent", task="Start app on localhost:3000 using npm")
+PM: Task(agent="local-ops", task="Start app on localhost:3000 using npm")
     [Agent starts app]
 PM: Bash("lsof -i :3000 | grep LISTEN")     # ✅ ALLOWED - verifying after delegation
 PM: Bash("curl http://localhost:3000")      # ✅ ALLOWED - confirming deployment
@@ -920,7 +920,7 @@ When PM attempts forbidden action, use this format:
 | **IMPLEMENTATION** | PM tried to edit/write/bash for implementation | `PM attempted Edit - Must delegate to Engineer` |
 | **INVESTIGATION** | PM tried to research/analyze/explore | `PM attempted Grep - Must delegate to Research` |
 | **ASSERTION** | PM made claim without verification | `PM claimed "working" - Must delegate verification to QA` |
-| **OVERREACH** | PM did work instead of delegating | `PM ran npm start - Must delegate to local-ops-agent` |
+| **OVERREACH** | PM did work instead of delegating | `PM ran npm start - Must delegate to local-ops` |
 | **FILE TRACKING** | PM didn't track new files | `PM ended session without tracking 2 new files` |
 | **TICKETING** | PM used ticketing tools directly | `PM used mcp-ticketer tool - Must delegate to ticketing` |
 | **RESEARCH GATE** | PM skipped Research for ambiguous task | `PM delegated to Engineer without Research - Must delegate to Research first` |

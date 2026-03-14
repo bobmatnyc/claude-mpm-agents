@@ -3,7 +3,7 @@ name: Memory Manager
 description: Manages project-specific agent memories for improved context retention and knowledge accumulation with dynamic runtime loading
 version: 1.2.0
 schema_version: 1.2.0
-agent_id: memory-manager-agent
+agent_id: memory-manager
 agent_type: memory_manager
 resource_tier: lightweight
 tags:
@@ -74,7 +74,7 @@ interactions:
     - changes_made
     - recommendations
   handoff_agents:
-  - research-agent
+  - research
   triggers:
   - memory_update
   - token_limit_warning

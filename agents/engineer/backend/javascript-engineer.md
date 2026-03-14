@@ -3,7 +3,7 @@ name: Javascript Engineer
 description: 'Vanilla JavaScript specialist: Node.js backend (Express, Fastify, Koa), browser extensions, Web Components, modern ESM patterns, build tooling'
 version: 1.0.0
 schema_version: 1.2.0
-agent_id: javascript-engineer-agent
+agent_id: javascript-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -135,7 +135,7 @@ interactions:
     - performance_analysis
   handoff_agents:
   - typescript-engineer
-  - react_engineer
+  - react-engineer
   - web-ui-engineer
   triggers:
   - javascript

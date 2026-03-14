@@ -3,7 +3,7 @@ name: Rust Engineer
 description: 'Rust 2024 edition specialist: memory-safe systems, zero-cost abstractions, ownership/borrowing mastery, async patterns with tokio, trait-based service architecture with dependency injection'
 version: 1.1.0
 schema_version: 1.3.0
-agent_id: rust_engineer
+agent_id: rust-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -121,9 +121,9 @@ interactions:
     - performance_analysis
     - safety_justification
   handoff_agents:
-  - qa-agent
-  - ops-agent
-  - security-agent
+  - qa
+  - ops
+  - security
   triggers:
   - rust development
   - rust

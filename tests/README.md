@@ -364,7 +364,7 @@ In addition to DeepEval behavior tests, we have comprehensive static validation 
 
 3. **Knowledge & Interactions Tests** (`test_agent_knowledge.py`) - 14 tests
    - Validates knowledge structure (domain_expertise, best_practices)
-   - Checks interaction patterns (handoff_to, collaboration)
+   - Checks interaction patterns (handoff_agents, collaboration)
    - Ensures knowledge is actionable and specific
 
 ### Running Validation Tests

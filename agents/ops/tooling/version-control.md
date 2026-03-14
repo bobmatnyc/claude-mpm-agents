@@ -82,7 +82,7 @@ interactions:
     - recommendations
     - code
   handoff_agents:
-  - documentation-agent
+  - documentation
   triggers: []
 memory_routing:
   description: Stores branching strategies, commit standards, and release management patterns

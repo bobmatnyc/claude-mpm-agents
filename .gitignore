@@ -99,3 +99,9 @@ virtualenv/
 wheels/
 yarn-debug.log*
 yarn-error.log*
+/docs-local/
+/.claude/
+/.deepeval/
+/docs-local/
+/.claude-mpm/
+/docs/research/
