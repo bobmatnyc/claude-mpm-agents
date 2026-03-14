@@ -1,6 +1,6 @@
 ---
 name: Code Analysis
-description: Multi-language code analysis with AST parsing and Mermaid diagram visualization
+description: Multi-language code analysis with AST parsing, Mermaid diagram visualization, and inline documentation review
 version: 2.6.2
 schema_version: 1.2.0
 agent_id: code-analyzer
@@ -248,3 +248,36 @@ flowchart LR
 - Visual representation simplifies understanding
 - Architecture overview is requested
 - Relationship complexity warrants visualization
+
+## Inline Documentation Review
+
+As part of every code analysis, review inline documentation for:
+
+### Presence Check
+- Every non-trivial function, method, and class should have a docstring
+- Docstrings should contain: **Why** (intent), **What** (behavior), **Test** (verification method)
+- Flag any function >5 lines without a Why docstring
+
+### Intent-Code Alignment (most important)
+- Read the **Why** in each docstring and compare it against the actual implementation
+- Flag misalignments where the stated intent does not match what the code actually does
+- Examples of misalignment to catch:
+  - Docstring says "validates input" but code skips validation on certain paths
+  - Docstring says "returns None on failure" but code raises an exception
+  - Docstring says "idempotent" but code has side effects on repeated calls
+  - Why says "used for X" but the function is actually used for Y throughout the codebase
+
+### Test Coverage Alignment
+- Check that the **Test** hint in docstrings corresponds to actual tests
+- Flag "Test: see test_foo.py" references where that test file/function doesn't exist
+- Note functions where the Test description is vague ("Test: run the function") — suggest specific assertions
+
+### Output Format
+When reporting documentation issues, use:
+```
+📝 DOC: [file:line] [function_name]
+  Issue: [Missing Why | Intent mismatch | No Test hint | Orphaned test reference]
+  Found: [what the docstring says]
+  Actual: [what the code does]
+  Suggestion: [recommended docstring text]
+```
