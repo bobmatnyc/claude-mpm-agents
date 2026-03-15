@@ -13,11 +13,21 @@ Usage:
     ./build-agent.py --all                     # Build all agents
     ./build-agent.py --output-dir <path>       # Specify output directory
     ./build-agent.py --validate                # Validate all agents
+    ./build-agent.py --no-base-agent-append    # Skip BASE-AGENT.md inheritance
+    ./build-agent.py --flatten                 # Flatten output (no subdirs)
 
 Examples:
     ./build-agent.py agents/engineer/frontend/react-engineer.md
     ./build-agent.py --all --output-dir dist/agents
+    ./build-agent.py --all --flatten --output-dir dist/flat-agents
+    ./build-agent.py --all --no-base-agent-append
     ./build-agent.py --validate
+
+Examples - Development & Debugging:
+    # Copy agents to claude mpm cache
+    ./build-agent.py --all --output-dir ~/.claude-mpm/cache/agents/bobmatnyc/claude-mpm-agents/agents
+    # Copy agents to a project directory
+    ./build-agent.py --all --no-base-agent-append --flatten --output-dir ~/workspace/myProject/.claude/agents/
 """
 
 import argparse
@@ -31,11 +41,19 @@ import json
 class AgentBuilder:
     """Builds flattened agent definitions from modular sources with BASE-AGENT.md inheritance."""
 
-    def __init__(self, root_dir: Path, output_dir: Optional[Path] = None):
+    def __init__(
+        self,
+        root_dir: Path,
+        output_dir: Optional[Path] = None,
+        no_base_agent_append: bool = False,
+        flatten: bool = False,
+    ):
         self.root_dir = root_dir
         self.output_dir = output_dir or root_dir / "dist" / "agents"
         self._valid_skills: Optional[Set[str]] = None
         self.agents_dir = root_dir / "agents"
+        self.no_base_agent_append = no_base_agent_append
+        self.flatten = flatten
 
     def find_base_agents(self, agent_path: Path) -> List[Path]:
         """
@@ -43,7 +61,7 @@ class AgentBuilder:
 
         Returns list ordered from root to agent directory (append order).
         """
-        base_files = []
+        base_files: List[Path] = []
         current = agent_path.parent
 
         # Walk up from agent directory to root
@@ -61,7 +79,7 @@ class AgentBuilder:
 
         Returns: (frontmatter, body)
         """
-        pattern = r'^---\n(.*?)\n---\n(.*)$'
+        pattern = r"^---\n(.*?)\n---\n(.*)$"
         match = re.match(pattern, content, re.DOTALL)
 
         if match:
@@ -82,7 +100,7 @@ class AgentBuilder:
             raise FileNotFoundError(f"Agent file not found: {agent_path}")
 
         # Read agent-specific content
-        agent_content = agent_path.read_text(encoding='utf-8')
+        agent_content = agent_path.read_text(encoding="utf-8")
         frontmatter, body = self.extract_frontmatter(agent_content)
 
         # Find all BASE-AGENT.md files in hierarchy
@@ -98,14 +116,17 @@ class AgentBuilder:
         # 2. Agent-specific body
         parts.append(body.strip())
 
-        # 3. Append BASE-AGENT.md files (root to local)
-        for base_file in base_files:
-            base_content = base_file.read_text(encoding='utf-8')
-            # Remove frontmatter from base files
-            _, base_body = self.extract_frontmatter(base_content)
-            if base_body.strip():
-                parts.append(f"\n<!-- Inherited from {base_file.relative_to(self.agents_dir)} -->\n")
-                parts.append(base_body.strip())
+        # 3. Append BASE-AGENT.md files (root to local) unless suppressed
+        if not self.no_base_agent_append:
+            for base_file in base_files:
+                base_content = base_file.read_text(encoding="utf-8")
+                # Remove frontmatter from base files
+                _, base_body = self.extract_frontmatter(base_content)
+                if base_body.strip():
+                    parts.append(
+                        f"\n<!-- Inherited from {base_file.relative_to(self.agents_dir)} -->\n"
+                    )
+                    parts.append(base_body.strip())
 
         return "\n\n".join(parts)
 
@@ -132,19 +153,27 @@ class AgentBuilder:
 
     def write_agent(self, agent_path: Path, content: str) -> Path:
         """
-        Write built agent to output directory, preserving structure.
+        Write built agent to output directory.
+
+        When flatten=True, all files are placed directly in the output directory
+        without subdirectories. When flatten=False, the original directory
+        structure relative to agents/ is preserved.
 
         Returns: Path to output file
         """
-        # Preserve directory structure relative to agents/
-        relative_path = agent_path.relative_to(self.agents_dir)
-        output_path = self.output_dir / relative_path
+        if self.flatten:
+            # Flatten: place file directly in output directory (no subdirs)
+            output_path = self.output_dir / agent_path.name
+        else:
+            # Preserve directory structure relative to agents/
+            relative_path = agent_path.relative_to(self.agents_dir)
+            output_path = self.output_dir / relative_path
 
         # Create output directory
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Write content
-        output_path.write_text(content, encoding='utf-8')
+        output_path.write_text(content, encoding="utf-8")
 
         return output_path
 
@@ -171,24 +200,24 @@ class AgentBuilder:
             skills = set()
 
             # Handle universal skills (list of dicts)
-            if 'universal' in manifest.get('skills', {}):
-                for skill in manifest['skills']['universal']:
-                    if isinstance(skill, dict) and 'name' in skill:
-                        skills.add(skill['name'])
+            if "universal" in manifest.get("skills", {}):
+                for skill in manifest["skills"]["universal"]:
+                    if isinstance(skill, dict) and "name" in skill:
+                        skills.add(skill["name"])
 
             # Handle toolchains (nested dict of lists of dicts)
-            if 'toolchains' in manifest.get('skills', {}):
-                for toolchain, toolchain_skills in manifest['skills']['toolchains'].items():
+            if "toolchains" in manifest.get("skills", {}):
+                for toolchain, toolchain_skills in manifest["skills"]["toolchains"].items():
                     if isinstance(toolchain_skills, list):
                         for skill in toolchain_skills:
-                            if isinstance(skill, dict) and 'name' in skill:
-                                skills.add(skill['name'])
+                            if isinstance(skill, dict) and "name" in skill:
+                                skills.add(skill["name"])
 
             # Handle examples (if present)
-            if 'examples' in manifest.get('skills', {}):
-                for skill in manifest['skills']['examples']:
-                    if isinstance(skill, dict) and 'name' in skill:
-                        skills.add(skill['name'])
+            if "examples" in manifest.get("skills", {}):
+                for skill in manifest["skills"]["examples"]:
+                    if isinstance(skill, dict) and "name" in skill:
+                        skills.add(skill["name"])
 
             self._valid_skills = skills
             return skills
@@ -207,14 +236,14 @@ class AgentBuilder:
         errors = []
 
         try:
-            content = agent_path.read_text(encoding='utf-8')
+            content = agent_path.read_text(encoding="utf-8")
             frontmatter, body = self.extract_frontmatter(content)
 
             # Check for required frontmatter fields
             if not frontmatter:
                 errors.append("Missing YAML frontmatter")
             else:
-                required_fields = ['name', 'description', 'agent_id', 'agent_type']
+                required_fields = ["name", "description", "agent_id", "agent_type"]
                 for field in required_fields:
                     if f"{field}:" not in frontmatter:
                         errors.append(f"Missing required field: {field}")
@@ -223,20 +252,22 @@ class AgentBuilder:
                 valid_skills = self.load_valid_skills()
                 if valid_skills:  # Only validate if manifest was loaded
                     # Extract skills from frontmatter
-                    skills_match = re.search(r'skills:\s*\n((?:- .+\n)+)', content)
+                    skills_match = re.search(r"skills:\s*\n((?:- .+\n)+)", content)
                     if skills_match:
                         skills_text = skills_match.group(1)
                         agent_skills = []
-                        for line in skills_text.split('\n'):
+                        for line in skills_text.split("\n"):
                             line = line.strip()
-                            if line.startswith('- '):
+                            if line.startswith("- "):
                                 skill = line[2:].strip()
                                 agent_skills.append(skill)
 
                         # Check for invalid skills
                         invalid_skills = [s for s in agent_skills if s not in valid_skills]
                         if invalid_skills:
-                            errors.append(f"Invalid skill references (not in claude-mpm-skills): {', '.join(invalid_skills)}")
+                            errors.append(
+                                f"Invalid skill references (not in claude-mpm-skills): {', '.join(invalid_skills)}"
+                            )
 
             # Check for content
             if not body.strip():
@@ -270,51 +301,51 @@ def main():
     parser = argparse.ArgumentParser(
         description="Build flattened agent definitions with BASE-AGENT.md inheritance",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=__doc__
+        epilog=__doc__,
     )
 
-    parser.add_argument(
-        'agent_path',
-        nargs='?',
-        type=Path,
-        help='Path to agent file to build'
-    )
+    parser.add_argument("agent_path", nargs="?", type=Path, help="Path to agent file to build")
+
+    parser.add_argument("--all", action="store_true", help="Build all agents in repository")
 
     parser.add_argument(
-        '--all',
-        action='store_true',
-        help='Build all agents in repository'
+        "--output-dir", type=Path, help="Output directory for built agents (default: dist/agents)"
     )
 
-    parser.add_argument(
-        '--output-dir',
-        type=Path,
-        help='Output directory for built agents (default: dist/agents)'
-    )
+    parser.add_argument("--validate", action="store_true", help="Validate all agent definitions")
 
     parser.add_argument(
-        '--validate',
-        action='store_true',
-        help='Validate all agent definitions'
-    )
-
-    parser.add_argument(
-        '--root',
+        "--root",
         type=Path,
         default=Path.cwd(),
-        help='Root directory of repository (default: current directory)'
+        help="Root directory of repository (default: current directory)",
     )
 
     parser.add_argument(
-        '--preview',
-        action='store_true',
-        help='Print built agent content to stdout after build'
+        "--preview", action="store_true", help="Print built agent content to stdout after build"
+    )
+
+    parser.add_argument(
+        "--no-base-agent-append",
+        action="store_true",
+        help="Do not append BASE-AGENT.md content to built agent files",
+    )
+
+    parser.add_argument(
+        "--flatten",
+        action="store_true",
+        help="Flatten output files into the output directory without subdirectories",
     )
 
     args = parser.parse_args()
 
     # Initialize builder
-    builder = AgentBuilder(args.root, args.output_dir)
+    builder = AgentBuilder(
+        args.root,
+        args.output_dir,
+        no_base_agent_append=args.no_base_agent_append,
+        flatten=args.flatten,
+    )
 
     # Validate mode
     if args.validate:
@@ -342,7 +373,10 @@ def main():
         for agent_path, content in results.items():
             output_path = builder.write_agent(agent_path, content)
             rel_input = agent_path.relative_to(builder.agents_dir)
-            rel_output = output_path.relative_to(builder.root_dir)
+            try:
+                rel_output = output_path.relative_to(builder.root_dir)
+            except ValueError:
+                rel_output = output_path
             print(f"✅ {rel_input} -> {rel_output}")
 
         print(f"\n✅ Built {len(results)} agents to {builder.output_dir}")
