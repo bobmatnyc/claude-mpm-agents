@@ -306,11 +306,62 @@ Deletions:
 
 ## Documentation Requirements
 
-### Code Documentation
-- Document WHY, not WHAT (code shows what)
-- Explain non-obvious decisions
-- Document assumptions and constraints
-- Include usage examples for APIs
+### Code Documentation (MANDATORY)
+
+Every function, method, and class MUST include a minimal docstring covering three things:
+- **Why** — the intent or purpose (why this exists, what problem it solves)
+- **What it does** — one-line behavioral summary
+- **How to test** — at least one sentence on how to verify correct behavior
+
+**Python format:**
+```python
+def calculate_retry_delay(attempt: int, base: float = 1.0) -> float:
+    """Calculate exponential backoff delay for retry attempts.
+
+    Why: Prevents thundering herd by spacing out retries with increasing delays.
+    What: Returns base * 2^attempt seconds, capped at 60 seconds.
+    Test: Assert attempt=0 returns base, attempt=3 returns 8*base, attempt=10 caps at 60.
+    """
+    return min(base * (2 ** attempt), 60.0)
+```
+
+**TypeScript/JavaScript format:**
+```typescript
+/**
+ * Why: Centralizes auth token refresh to avoid race conditions across parallel requests.
+ * What: Refreshes the OAuth token if expired, returns the valid token string.
+ * Test: Mock an expired token, call this, assert the returned token differs and is non-empty.
+ */
+async function ensureValidToken(client: OAuthClient): Promise<string> { ... }
+```
+
+**Class-level documentation** — describe the role the class plays, not its methods:
+```python
+class RetryPolicy:
+    """Encapsulates retry behavior for external service calls.
+
+    Why: Decouples retry logic from business logic so policies can be swapped without
+    touching call sites (e.g., switch from fixed to exponential backoff in one place).
+    What: Holds max_attempts and backoff strategy; provides should_retry() and delay().
+    Test: Instantiate with max_attempts=3, simulate failures, assert retry stops at 3.
+    """
+```
+
+**Minimal acceptable docstring** (when the function is short and obvious):
+```python
+def is_retryable(status_code: int) -> bool:
+    """Why: Centralizes retryable HTTP status logic to keep callers clean.
+    What: Returns True for 429 and 5xx status codes.
+    Test: Assert True for 500, 503, 429; False for 200, 400, 404.
+    """
+    return status_code == 429 or status_code >= 500
+```
+
+**DO NOT:**
+- Restate the function name ("get_user gets the user")
+- Skip the Why (most important — forces you to justify the code's existence)
+- Skip the How to test (forces you to think about verifiability before writing)
+- Write vague How to test entries ("test that it works correctly")
 
 ### API Documentation
 - Document all public interfaces
