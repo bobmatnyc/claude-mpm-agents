@@ -26,23 +26,23 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
         r"npm|yarn|pnpm",
         r"Promise|async/await",
     ],
-    "rust_engineer": [
+    "rust-engineer": [
         r"Rust|cargo|ownership|borrow|lifetime|Result<",
         r"trait|impl|struct",
     ],
-    "golang_engineer": [
+    "golang-engineer": [
         r"Go|goroutine|channel|defer|interface\{\}",
         r"package|import",
     ],
-    "java_engineer": [
+    "java-engineer": [
         r"Java|Spring|Maven|Gradle|@Autowired|interface",
         r"class|public|private",
     ],
-    "ruby_engineer": [
+    "ruby-engineer": [
         r"Ruby|Rails|Gem|ActiveRecord|RSpec",
         r"def |class |module",
     ],
-    "php_engineer": [
+    "php-engineer": [
         r"PHP|Laravel|Composer|Eloquent|Blade",
         r"class|namespace",
     ],
@@ -51,53 +51,53 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
         r"defmodule|def ",
     ],
     # Frontend Engineer agents
-    "react_engineer": [
+    "react-engineer": [
         r"React|useState|useEffect|component|JSX|props",
         r"hook|render",
     ],
-    "nextjs_engineer": [
+    "nextjs-engineer": [
         r"Next\.js|getServerSideProps|App Router|Server Component",
         r"router|route",
     ],
-    "svelte_engineer": [
+    "svelte-engineer": [
         r"Svelte|runes|\$state|\$effect|SvelteKit",
         r"component|store",
     ],
-    "dart_engineer": [
+    "dart-engineer": [
         r"Dart|Flutter|Widget|StatefulWidget|Bloc",
         r"class|void",
     ],
-    "tauri_engineer": [
+    "tauri-engineer": [
         r"Tauri|Rust|WebView|IPC|invoke",
         r"command|event",
     ],
     # QA agents
-    "qa-agent": [
+    "qa": [
         r"test|coverage|assert|mock|fixture",
         r"quality|validation",
     ],
-    "api-qa-agent": [
+    "api-qa": [
         r"API|endpoint|HTTP|request|response|status",
         r"REST|GraphQL",
     ],
-    "web-qa-agent": [
+    "web-qa": [
         r"Playwright|browser|DOM|screenshot|accessibility",
         r"e2e|integration",
     ],
     # Ops agents
-    "ops-agent": [
+    "ops": [
         r"deploy|infrastructure|container|CI/CD|monitor",
         r"docker|kubernetes",
     ],
-    "local-ops-agent": [
+    "local-ops": [
         r"localhost|PM2|docker|port|process",
         r"dev|development",
     ],
-    "vercel-ops-agent": [
+    "vercel-ops": [
         r"Vercel|serverless|edge|deployment",
         r"preview|production",
     ],
-    "gcp-ops-agent": [
+    "gcp-ops": [
         r"GCP|Google Cloud|IAM|OAuth|Cloud Run",
         r"project|service",
     ],
@@ -105,12 +105,12 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
         r"Clerk|auth|OAuth|middleware|session",
         r"user|authentication",
     ],
-    "digitalocean-ops-agent": [
+    "digitalocean-ops": [
         r"DigitalOcean|Droplet|Spaces|App Platform",
         r"deploy|infrastructure",
     ],
     # Research/Analysis
-    "research-agent": [
+    "research": [
         r"research|analysis|investigate|pattern|finding",
         r"explore|discover",
     ],
@@ -119,12 +119,12 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
         r"metric|quality",
     ],
     # Security
-    "security-agent": [
+    "security": [
         r"security|vulnerability|OWASP|authentication|encryption",
         r"threat|risk",
     ],
     # Documentation
-    "documentation-agent": [
+    "documentation": [
         r"document|README|API doc|guide|specification",
         r"markdown|write",
     ],
@@ -133,6 +133,18 @@ AGENT_PATTERNS: Dict[str, List[str]] = {
         r"Linear|Jira",
     ],
 }
+
+
+@pytest.mark.patterns
+def test_agent_patterns_keys_match_compiled_agents(
+    compiled_agents: Dict[str, CompiledAgent],
+) -> None:
+    """Verify AGENT_PATTERNS keys all correspond to real compiled agents."""
+    stale_keys = [key for key in AGENT_PATTERNS if key not in compiled_agents]
+    assert not stale_keys, (
+        f"AGENT_PATTERNS has keys for non-existent agents: {stale_keys}\n"
+        f"Available agents: {sorted(compiled_agents.keys())}"
+    )
 
 
 @pytest.mark.patterns
@@ -184,10 +196,10 @@ def test_engineer_agents_mention_testing_tools(
     engineer_patterns = {
         "python-engineer": r"pytest|unittest|hypothesis",
         "typescript-engineer": r"jest|vitest|testing-library",
-        "react_engineer": r"jest|vitest|testing-library|cypress",
-        "rust_engineer": r"#\[test\]|cargo test",
-        "golang_engineer": r"testing\.T|go test",
-        "java_engineer": r"JUnit|TestNG|Mockito",
+        "react-engineer": r"jest|vitest|testing-library|cypress",
+        "rust-engineer": r"#\[test\]|cargo test",
+        "golang-engineer": r"testing\.T|go test",
+        "java-engineer": r"JUnit|TestNG|Mockito",
     }
 
     missing_testing = []

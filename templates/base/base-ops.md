@@ -10,7 +10,7 @@ usage: Reference patterns from specific ops agent templates using extends/inheri
 
 ## Purpose
 
-This base template provides common operations and DevOps patterns shared across all operations agent templates (ops-agent, local-ops-agent, vercel-ops, gcp-ops, clerk-ops, etc.). Agent templates inherit these patterns and customize them for specific platforms.
+This base template provides common operations and DevOps patterns shared across all operations agent templates (ops, local-ops, vercel-ops, gcp-ops, clerk-ops, etc.). Agent templates inherit these patterns and customize them for specific platforms.
 
 ## Pattern Categories
 
@@ -485,7 +485,7 @@ Operations agent templates can extend this base with:
 **Current Version**: 1.0.0
 
 **Changelog**:
-- **1.0.0** (2025-11-30): Initial base operations template with core patterns extracted from ops-agent and local-ops-agent templates
+- **1.0.0** (2025-11-30): Initial base operations template with core patterns extracted from ops and local-ops templates
 
 ---
 

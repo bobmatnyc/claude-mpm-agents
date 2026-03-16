@@ -3,7 +3,7 @@ name: Ops
 description: Infrastructure automation with IaC validation and container security
 version: 2.2.4
 schema_version: 1.2.0
-agent_id: ops-agent
+agent_id: ops
 agent_type: ops
 resource_tier: standard
 tags:
@@ -98,7 +98,7 @@ interactions:
     - code
   handoff_agents:
   - engineer
-  - security-agent
+  - security
   triggers: []
 memory_routing:
   description: Stores deployment patterns, infrastructure configurations, and monitoring strategies

@@ -1,0 +1,28 @@
+name: Agent Naming Convention
+
+on: [push, pull_request]
+
+jobs:
+  naming-check:
+    name: Enforce Naming Conventions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+
+      - name: Run naming convention tests
+        run: |
+          python -m pytest tests/test_agent_registry.py -v --tb=short \
+            -k "naming_convention or filename_convention or matches_filename or handoff_agents_follow"

@@ -1,5 +1,7 @@
 """Tests for agent registry validation."""
 
+import re
+
 import pytest
 
 from tests.fixtures.agent_loader import AgentDefinition
@@ -99,17 +101,116 @@ class TestAgentFrontmatter:
             if not isinstance(interactions, dict):
                 continue
 
-            handoff_to = interactions.get("handoff_to", [])
-            if isinstance(handoff_to, str):
-                handoff_to = [handoff_to]
+            handoff_agents = interactions.get("handoff_agents", [])
+            if isinstance(handoff_agents, str):
+                handoff_agents = [handoff_agents]
 
-            for target_id in handoff_to:
+            for target_id in handoff_agents:
                 if target_id and target_id not in agent_ids:
                     missing_refs.append((agent.path, target_id))
 
         assert not missing_refs, (
             f"Agents reference non-existent handoff targets: "
             f"{[(str(p), t) for p, t in missing_refs]}"
+        )
+
+    def test_agent_id_naming_convention(self, all_agents: list[AgentDefinition]):
+        """Test that all agent_ids use kebab-case without -agent suffix.
+
+        Convention: agent_id must be lowercase alphanumeric segments separated
+        by hyphens. No underscores, no -agent suffix.
+        See AGENT_TEMPLATE_REFERENCE.md for the naming standard.
+        """
+        if not all_agents:
+            pytest.skip("No agents found")
+
+        NAMING_EXCEPTIONS: set[str] = set()  # Add agent_ids here if documented reason to deviate
+
+        violations = []
+        for agent in all_agents:
+            if not agent.agent_id or agent.agent_id in NAMING_EXCEPTIONS:
+                continue
+
+            aid = agent.agent_id
+
+            # Must be kebab-case: lowercase alphanumeric segments separated by hyphens
+            if not re.match(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$", aid):
+                violations.append((str(agent.path), aid, "not valid kebab-case"))
+
+            # Must not end with -agent (redundant suffix)
+            if aid.endswith("-agent"):
+                violations.append((str(agent.path), aid, "has redundant -agent suffix"))
+
+            # Must not contain underscores
+            if "_" in aid:
+                violations.append((str(agent.path), aid, "contains underscores (use hyphens)"))
+
+        assert not violations, "Agent ID naming convention violations:\n" + "\n".join(
+            f"  {path}: {aid} ({reason})" for path, aid, reason in violations
+        )
+
+    def test_agent_count_minimum(self, all_agents: list[AgentDefinition]):
+        """Ensure agent population hasn't silently decreased."""
+        EXPECTED_MINIMUM = 48  # Based on current agent count as of 2026-03-08
+        assert len(all_agents) >= EXPECTED_MINIMUM, (
+            f"Expected at least {EXPECTED_MINIMUM} agents, found {len(all_agents)}. "
+            f"An agent may have been deleted or failed to parse."
+        )
+
+    def test_agent_id_matches_filename(self, all_agents: list[AgentDefinition]):
+        """Test that agent_id matches the filename stem exactly."""
+        mismatches = []
+        for agent in all_agents:
+            stem = agent.path.stem
+            if agent.agent_id and agent.agent_id != stem:
+                mismatches.append(
+                    (str(agent.path), f"filename={stem}", f"agent_id={agent.agent_id}")
+                )
+        assert not mismatches, "Agent ID / filename mismatches:\n" + "\n".join(
+            f"  {path}: {fs}, {ai}" for path, fs, ai in mismatches
+        )
+
+    def test_handoff_agents_follow_naming_convention(self, all_agents: list[AgentDefinition]):
+        """Test that handoff_agents values use kebab-case (no underscores, no -agent suffix)."""
+        violations = []
+        for agent in all_agents:
+            interactions = agent.interactions or {}
+            handoff_agents = interactions.get("handoff_agents", [])
+            for ref in handoff_agents:
+                ref_str = str(ref)
+                if "_" in ref_str:
+                    violations.append((agent.agent_id, ref_str, "contains underscores"))
+                if ref_str.endswith("-agent"):
+                    violations.append((agent.agent_id, ref_str, "has -agent suffix"))
+        assert not violations, "Handoff agent references with naming violations:\n" + "\n".join(
+            f"  {aid} -> {ref} ({reason})" for aid, ref, reason in violations
+        )
+
+    def test_agent_filename_convention(self, all_agents: list[AgentDefinition]):
+        """Test that agent filenames use kebab-case without -agent suffix."""
+        violations = []
+        for agent in all_agents:
+            stem = agent.path.stem
+            if "_" in stem:
+                violations.append((str(agent.path), stem, "contains underscores"))
+            if stem.endswith("-agent"):
+                violations.append((str(agent.path), stem, "has -agent suffix"))
+        assert not violations, "Agent filename convention violations:\n" + "\n".join(
+            f"  {path}: {stem} ({reason})" for path, stem, reason in violations
+        )
+
+    def test_handoff_agents_resolve_to_real_agents(self, all_agents: list[AgentDefinition]):
+        """Test that ALL handoff_agents values point to existing agent_ids."""
+        all_ids = {a.agent_id for a in all_agents if a.agent_id}
+        broken = []
+        for agent in all_agents:
+            interactions = agent.interactions or {}
+            for ref in interactions.get("handoff_agents", []):
+                ref_str = str(ref)
+                if ref_str not in all_ids:
+                    broken.append((agent.agent_id, ref_str))
+        assert not broken, "Handoff references to non-existent agents:\n" + "\n".join(
+            f"  {aid} -> {ref}" for aid, ref in broken
         )
 
 

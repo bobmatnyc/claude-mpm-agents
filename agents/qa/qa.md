@@ -3,7 +3,7 @@ name: QA
 description: Memory-efficient testing with strategic sampling, targeted validation, and smart coverage analysis
 version: 3.5.3
 schema_version: 1.3.0
-agent_id: qa-agent
+agent_id: qa
 agent_type: qa
 resource_tier: standard
 tags:
@@ -118,7 +118,7 @@ interactions:
     - code
   handoff_agents:
   - engineer
-  - security-agent
+  - security
   triggers: []
 memory_routing:
   description: Stores testing strategies, quality standards, and bug patterns

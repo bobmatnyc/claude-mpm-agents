@@ -106,9 +106,9 @@ interactions:
     - recommendations
     - code
   handoff_agents:
-  - qa-agent
-  - security-agent
-  - documentation-agent
+  - qa
+  - security
+  - documentation
   triggers: []
 memory_routing:
   description: Stores implementation patterns, code architecture decisions, and technical optimizations

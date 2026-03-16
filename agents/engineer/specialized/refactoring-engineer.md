@@ -157,9 +157,9 @@ interactions:
     - final_summary
     - recommendations
   handoff_agents:
-  - qa-agent
+  - qa
   - engineer
-  - documentation-agent
+  - documentation
   triggers:
   - refactor
   - clean up

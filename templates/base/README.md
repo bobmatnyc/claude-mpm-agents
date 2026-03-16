@@ -54,7 +54,7 @@ templates/base/
 ### base-qa.md
 **Category**: Quality Assurance
 **Purpose**: Testing methodologies, quality gates, evidence requirements
-**Used By**: qa-agent, web-qa, api-qa, test-quality-inspector, etc.
+**Used By**: qa, web-qa, api-qa, test-quality-inspector, etc.
 
 **Extracted Patterns**:
 - Testing methodology principles (TDD, BDD, property-based)
@@ -67,7 +67,7 @@ templates/base/
 ### base-ops.md
 **Category**: Operations
 **Purpose**: Deployment verification, infrastructure management, monitoring standards
-**Used By**: ops-agent, local-ops-agent, vercel-ops, gcp-ops, clerk-ops, etc.
+**Used By**: ops, local-ops, vercel-ops, gcp-ops, clerk-ops, etc.
 
 **Extracted Patterns**:
 - Deployment verification protocols
@@ -81,7 +81,7 @@ templates/base/
 ### base-research.md
 **Category**: Research
 **Purpose**: Analysis frameworks, knowledge synthesis, documentation standards
-**Used By**: research-agent, code-analyzer, documentation-agent, etc.
+**Used By**: research, code-analyzer, documentation, etc.
 
 **Extracted Patterns**:
 - Analysis framework (systematic investigation)
@@ -292,9 +292,9 @@ changelog:
 | Base Template | Status | Pattern Examples From | Lines |
 |--------------|--------|----------------------|-------|
 | base-engineer.md | ✅ Available | python-engineer, typescript-engineer, rust-engineer | ~400 |
-| base-qa.md | ✅ Available | qa-agent, web-qa, api-qa | ~200 |
-| base-ops.md | ✅ Available | ops-agent, vercel-ops, local-ops | ~150 |
-| base-research.md | ✅ Available | research-agent, code-analyzer | ~250 |
+| base-qa.md | ✅ Available | qa, web-qa, api-qa | ~200 |
+| base-ops.md | ✅ Available | ops, vercel-ops, local-ops | ~150 |
+| base-research.md | ✅ Available | research, code-analyzer | ~250 |
 | base-specialized.md | ✅ Available | imagemagick, circuit-breakers, git-tracking | ~100 |
 
 ### Documentation Status

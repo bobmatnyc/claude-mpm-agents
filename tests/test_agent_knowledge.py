@@ -3,7 +3,7 @@
 This module validates that:
 1. Agents have proper knowledge definitions
 2. Knowledge includes domain_expertise and best_practices
-3. Agents define interaction patterns (handoff_to, etc.)
+3. Agents define interaction patterns (handoff_agents, etc.)
 4. Knowledge is actionable and well-structured
 """
 
@@ -268,9 +268,9 @@ class TestAgentInteractions:
 
         for agent in all_agents:
             interactions = agent.interactions or {}
-            handoff_to = interactions.get("handoff_to", [])
+            handoff_agents = interactions.get("handoff_agents", [])
 
-            if not handoff_to:
+            if not handoff_agents:
                 without_handoff.append(agent.agent_id)
 
         # Informational: Check how many agents define handoff targets
@@ -281,7 +281,7 @@ class TestAgentInteractions:
         # TODO: Increase threshold as agents are updated with handoff patterns
         if has_handoff < len(all_agents) * 0.2:
             pytest.skip(
-                f"Only {has_handoff}/{len(all_agents)} agents define handoff_to. "
+                f"Only {has_handoff}/{len(all_agents)} agents define handoff_agents. "
                 f"This is aspirational - agents can be updated to include handoff patterns."
             )
 
@@ -305,10 +305,10 @@ class TestAgentInteractions:
 
         for agent in engineer_agents:
             interactions = agent.interactions or {}
-            handoff_to = interactions.get("handoff_to", [])
+            handoff_agents = interactions.get("handoff_agents", [])
 
             # Check if qa or qa-agent is in handoff targets
-            has_qa = any("qa" in str(target).lower() for target in handoff_to)
+            has_qa = any("qa" in str(target).lower() for target in handoff_agents)
             if not has_qa:
                 cannot_handoff_to_qa.append(agent.agent_id)
 
@@ -316,7 +316,7 @@ class TestAgentInteractions:
         # Skip if no engineers have handoff defined yet
         if len(cannot_handoff_to_qa) == len(engineer_agents):
             pytest.skip(
-                "No engineer agents define handoff_to yet. "
+                "No engineer agents define handoff_agents yet. "
                 "This is aspirational - engineers can be updated to include QA handoff."
             )
 
@@ -387,9 +387,9 @@ class TestAgentInteractions:
 
         for agent in all_agents:
             interactions = agent.interactions or {}
-            handoff_to = interactions.get("handoff_to", [])
+            handoff_agents = interactions.get("handoff_agents", [])
 
-            for target in handoff_to:
+            for target in handoff_agents:
                 if not target or not str(target).strip():
                     invalid_targets.append((agent.agent_id, target))
 
