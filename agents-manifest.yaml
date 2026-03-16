@@ -1,0 +1,21 @@
+# agents-manifest.yaml
+# Location: Repository root
+# Encoding: UTF-8, YAML 1.2
+#
+# This file declares the structural format version of agent definitions
+# in this repository and the minimum claude-mpm CLI version required to
+# process them. claude-mpm checks this file during sync and at agent deployment time.
+#
+# See: https://github.com/bobmatnyc/claude-mpm/docs (version coordination)
+
+# REQUIRED: Repository format version. Integer, monotonically increasing.
+# Increments ONLY on breaking structural changes to agent definitions.
+repo_format_version: 1
+
+# REQUIRED: Minimum claude-mpm CLI version that can process this repo.
+# Semver string.
+min_cli_version: "5.10.0"
+
+# OPTIONAL: Human-readable migration notes. Displayed when version check fails.
+migration_notes: |
+  repo_format_version 1 is the initial stable format able to support agent repo versioning.
