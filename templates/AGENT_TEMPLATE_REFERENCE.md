@@ -30,7 +30,8 @@ description: |                            # REQUIRED: Clear, concise description
 version: 1.0.0                            # REQUIRED: Semantic versioning (MAJOR.MINOR.PATCH)
                                           # Increment MAJOR for breaking changes, MINOR for features, PATCH for fixes
 
-schema_version: 1.3.0                     # REQUIRED: Current agent schema version (use 1.3.0)
+schema_version: 1.3.0                     # REQUIRED: Frontmatter schema structure version (use 1.3.0)
+                                          # See "Schema Version History" section below for details
 
 agent_id: agent-name                      # REQUIRED: Must match 'name' field exactly
 
@@ -342,6 +343,32 @@ Hard limits and requirements:
 ---
 
 ```
+
+---
+
+## Schema Version History
+
+`schema_version` tracks the **frontmatter schema structure** — the set of supported fields and their meanings. It does **not** track individual agent content changes (those use the `version` field).
+
+### Versioning Rules
+
+- **Agent content changes** (new instructions, updated patterns): bump `version`, not `schema_version`
+- **New fields added** to the schema: bump `schema_version` minor (e.g., `1.2.0` → `1.3.0`)
+- **Fields removed or renamed**: bump `schema_version` major (e.g., `1.x.x` → `2.0.0`)
+
+### Version History
+
+| Version | Change |
+|---------|--------|
+| `1.1.0` | Initial schema with core fields: `name`, `description`, `agent_id`, `agent_type`, `version`, `tags`, `capabilities`, `dependencies`, `skills`, `knowledge`, `interactions` |
+| `1.2.0` | Added `memory_routing` field for agent memory categorization |
+| `1.3.0` | Standardized `agent_id` to kebab-case format; naming convention enforcement; no new fields added |
+
+**Current canonical version: `1.3.0`** — use this for all new agents.
+
+Build-time validation (`build-agent.py`) will warn if an agent's `schema_version` differs from the current canonical version.
+
+---
 
 ## Best Practices for Agent Authoring
 

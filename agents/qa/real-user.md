@@ -4,6 +4,7 @@ description: "Persona-based behavioral testing agent that simulates realistic us
 agent_id: real-user
 agent_type: qa
 version: "1.0.0"
+schema_version: 1.3.0
 skills:
 - playwright
 - webapp-testing

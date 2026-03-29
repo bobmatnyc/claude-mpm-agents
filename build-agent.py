@@ -28,6 +28,9 @@ import re
 import json
 
 
+CURRENT_SCHEMA_VERSION = "1.3.0"
+
+
 class AgentBuilder:
     """Builds flattened agent definitions from modular sources with BASE-AGENT.md inheritance."""
 
@@ -43,7 +46,7 @@ class AgentBuilder:
 
         Returns list ordered from root to agent directory (append order).
         """
-        base_files = []
+        base_files: List[Path] = []
         current = agent_path.parent
 
         # Walk up from agent directory to root
@@ -61,7 +64,7 @@ class AgentBuilder:
 
         Returns: (frontmatter, body)
         """
-        pattern = r'^---\n(.*?)\n---\n(.*)$'
+        pattern = r"^---\n(.*?)\n---\n(.*)$"
         match = re.match(pattern, content, re.DOTALL)
 
         if match:
@@ -82,7 +85,7 @@ class AgentBuilder:
             raise FileNotFoundError(f"Agent file not found: {agent_path}")
 
         # Read agent-specific content
-        agent_content = agent_path.read_text(encoding='utf-8')
+        agent_content = agent_path.read_text(encoding="utf-8")
         frontmatter, body = self.extract_frontmatter(agent_content)
 
         # Find all BASE-AGENT.md files in hierarchy
@@ -100,11 +103,13 @@ class AgentBuilder:
 
         # 3. Append BASE-AGENT.md files (root to local)
         for base_file in base_files:
-            base_content = base_file.read_text(encoding='utf-8')
+            base_content = base_file.read_text(encoding="utf-8")
             # Remove frontmatter from base files
             _, base_body = self.extract_frontmatter(base_content)
             if base_body.strip():
-                parts.append(f"\n<!-- Inherited from {base_file.relative_to(self.agents_dir)} -->\n")
+                parts.append(
+                    f"\n<!-- Inherited from {base_file.relative_to(self.agents_dir)} -->\n"
+                )
                 parts.append(base_body.strip())
 
         return "\n\n".join(parts)
@@ -144,7 +149,7 @@ class AgentBuilder:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Write content
-        output_path.write_text(content, encoding='utf-8')
+        output_path.write_text(content, encoding="utf-8")
 
         return output_path
 
@@ -171,24 +176,24 @@ class AgentBuilder:
             skills = set()
 
             # Handle universal skills (list of dicts)
-            if 'universal' in manifest.get('skills', {}):
-                for skill in manifest['skills']['universal']:
-                    if isinstance(skill, dict) and 'name' in skill:
-                        skills.add(skill['name'])
+            if "universal" in manifest.get("skills", {}):
+                for skill in manifest["skills"]["universal"]:
+                    if isinstance(skill, dict) and "name" in skill:
+                        skills.add(skill["name"])
 
             # Handle toolchains (nested dict of lists of dicts)
-            if 'toolchains' in manifest.get('skills', {}):
-                for toolchain, toolchain_skills in manifest['skills']['toolchains'].items():
+            if "toolchains" in manifest.get("skills", {}):
+                for _, toolchain_skills in manifest["skills"]["toolchains"].items():
                     if isinstance(toolchain_skills, list):
                         for skill in toolchain_skills:
-                            if isinstance(skill, dict) and 'name' in skill:
-                                skills.add(skill['name'])
+                            if isinstance(skill, dict) and "name" in skill:
+                                skills.add(skill["name"])
 
             # Handle examples (if present)
-            if 'examples' in manifest.get('skills', {}):
-                for skill in manifest['skills']['examples']:
-                    if isinstance(skill, dict) and 'name' in skill:
-                        skills.add(skill['name'])
+            if "examples" in manifest.get("skills", {}):
+                for skill in manifest["skills"]["examples"]:
+                    if isinstance(skill, dict) and "name" in skill:
+                        skills.add(skill["name"])
 
             self._valid_skills = skills
             return skills
@@ -205,38 +210,57 @@ class AgentBuilder:
         Returns: List of validation errors (empty if valid)
         """
         errors = []
+        warnings = []
 
         try:
-            content = agent_path.read_text(encoding='utf-8')
+            content = agent_path.read_text(encoding="utf-8")
             frontmatter, body = self.extract_frontmatter(content)
 
             # Check for required frontmatter fields
             if not frontmatter:
                 errors.append("Missing YAML frontmatter")
             else:
-                required_fields = ['name', 'description', 'agent_id', 'agent_type']
+                required_fields = [
+                    "name",
+                    "description",
+                    "agent_id",
+                    "agent_type",
+                    "schema_version",
+                ]
                 for field in required_fields:
                     if f"{field}:" not in frontmatter:
                         errors.append(f"Missing required field: {field}")
+
+                # Validate schema_version value
+                schema_match = re.search(r"^schema_version:\s*(.+)$", frontmatter, re.MULTILINE)
+                if schema_match:
+                    agent_schema_version = schema_match.group(1).strip()
+                    if agent_schema_version != CURRENT_SCHEMA_VERSION:
+                        warnings.append(
+                            f"schema_version is {agent_schema_version}, "
+                            f"current is {CURRENT_SCHEMA_VERSION}"
+                        )
 
                 # Validate skill references
                 valid_skills = self.load_valid_skills()
                 if valid_skills:  # Only validate if manifest was loaded
                     # Extract skills from frontmatter
-                    skills_match = re.search(r'skills:\s*\n((?:- .+\n)+)', content)
+                    skills_match = re.search(r"skills:\s*\n((?:- .+\n)+)", content)
                     if skills_match:
                         skills_text = skills_match.group(1)
                         agent_skills = []
-                        for line in skills_text.split('\n'):
+                        for line in skills_text.split("\n"):
                             line = line.strip()
-                            if line.startswith('- '):
+                            if line.startswith("- "):
                                 skill = line[2:].strip()
                                 agent_skills.append(skill)
 
                         # Check for invalid skills
                         invalid_skills = [s for s in agent_skills if s not in valid_skills]
                         if invalid_skills:
-                            errors.append(f"Invalid skill references (not in claude-mpm-skills): {', '.join(invalid_skills)}")
+                            errors.append(
+                                f"Invalid skill references (not in claude-mpm-skills): {', '.join(invalid_skills)}"
+                            )
 
             # Check for content
             if not body.strip():
@@ -244,6 +268,9 @@ class AgentBuilder:
 
         except Exception as e:
             errors.append(f"Error reading file: {e}")
+
+        # Append warnings after errors so they surface in validation output
+        errors.extend(f"WARNING: {w}" for w in warnings)
 
         return errors
 
@@ -270,45 +297,28 @@ def main():
     parser = argparse.ArgumentParser(
         description="Build flattened agent definitions with BASE-AGENT.md inheritance",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=__doc__
+        epilog=__doc__,
     )
 
-    parser.add_argument(
-        'agent_path',
-        nargs='?',
-        type=Path,
-        help='Path to agent file to build'
-    )
+    parser.add_argument("agent_path", nargs="?", type=Path, help="Path to agent file to build")
+
+    parser.add_argument("--all", action="store_true", help="Build all agents in repository")
 
     parser.add_argument(
-        '--all',
-        action='store_true',
-        help='Build all agents in repository'
+        "--output-dir", type=Path, help="Output directory for built agents (default: dist/agents)"
     )
 
-    parser.add_argument(
-        '--output-dir',
-        type=Path,
-        help='Output directory for built agents (default: dist/agents)'
-    )
+    parser.add_argument("--validate", action="store_true", help="Validate all agent definitions")
 
     parser.add_argument(
-        '--validate',
-        action='store_true',
-        help='Validate all agent definitions'
-    )
-
-    parser.add_argument(
-        '--root',
+        "--root",
         type=Path,
         default=Path.cwd(),
-        help='Root directory of repository (default: current directory)'
+        help="Root directory of repository (default: current directory)",
     )
 
     parser.add_argument(
-        '--preview',
-        action='store_true',
-        help='Print built agent content to stdout after build'
+        "--preview", action="store_true", help="Print built agent content to stdout after build"
     )
 
     args = parser.parse_args()
