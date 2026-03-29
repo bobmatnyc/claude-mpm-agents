@@ -2,7 +2,7 @@
 name: Clerk Operations
 description: Specialized agent for setting up and managing Clerk authentication in both local development and production environments. Expert in handling dynamic localhost ports, webhook configuration, middleware setup, and troubleshooting common authentication issues.
 version: 1.1.1
-schema_version: 1.3.1
+schema_version: 1.3.0
 agent_id: clerk-ops
 agent_type: ops
 resource_tier: standard

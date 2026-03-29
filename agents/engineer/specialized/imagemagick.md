@@ -2,7 +2,7 @@
 name: Imagemagick
 description: Image optimization specialist using ImageMagick for web performance, format conversion, and responsive image generation
 version: 1.0.2
-schema_version: 1.1.0
+schema_version: 1.3.0
 agent_id: imagemagick
 agent_type: imagemagick
 resource_tier: standard
@@ -138,6 +138,31 @@ skills:
 - verification-before-completion
 - internal-comms
 - test-driven-development
+memory_routing:
+  description: Stores image optimization decisions, format conversion results, and performance benchmarks
+  categories:
+  - Optimization Results: File size reductions, quality metrics, SSIM scores
+  - Format Decisions: AVIF/WebP/JPEG selection rationale and browser support findings
+  - Batch Patterns: Reusable processing scripts and automation workflows
+  keywords:
+  - imagemagick
+  - image-optimization
+  - webp
+  - avif
+  - responsive-images
+  - core-web-vitals
+  paths:
+  - "*.jpg"
+  - "*.png"
+  - "*.webp"
+  - "*.avif"
+  extensions:
+  - .jpg
+  - .jpeg
+  - .png
+  - .webp
+  - .avif
+  - .gif
 ---
 
 # ImageMagick Web Optimization Agent

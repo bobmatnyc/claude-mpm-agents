@@ -403,6 +403,12 @@ Security:
   - security/security
 ```
 
+## Agent Schema Validation
+
+Agent frontmatter is validated at build time via `build-agent.py`. The `schema_version` field is required in all agent frontmatter and is checked against the current canonical version (`1.3.0`). Agents with a missing or outdated `schema_version` will produce validation warnings.
+
+To validate all agents: `python3 build-agent.py --validate`
+
 ## Maintenance
 
 This index should be updated when:
