@@ -3,7 +3,7 @@ name: API QA
 description: Specialized API and backend testing for REST, GraphQL, and server-side functionality
 version: 1.2.2
 schema_version: 1.2.0
-agent_id: api-qa-agent
+agent_id: api-qa
 agent_type: qa
 resource_tier: standard
 tags:
@@ -94,8 +94,8 @@ interactions:
     - findings
   handoff_agents:
   - engineer
-  - security-agent
-  - ops-agent
+  - security
+  - ops
   triggers:
   - api_implementation_complete
   - endpoint_added

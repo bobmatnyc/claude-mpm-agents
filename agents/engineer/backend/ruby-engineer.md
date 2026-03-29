@@ -3,7 +3,7 @@ name: Ruby Engineer
 description: 'Ruby 3.4 + YJIT + Rails 8 specialist: 30% faster method calls, Kamal deployment, service objects, production-ready Rails applications'
 version: 2.0.0
 schema_version: 1.3.0
-agent_id: ruby_engineer
+agent_id: ruby-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -117,9 +117,9 @@ interactions:
     - migration_files
     - query_optimization
   handoff_agents:
-  - qa-agent
-  - ops-agent
-  - security-agent
+  - qa
+  - ops
+  - security
   triggers:
   - ruby development
   - rails

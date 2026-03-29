@@ -3,7 +3,7 @@ name: Java Engineer
 description: Java 21+ LTS specialist delivering production-ready Spring Boot applications with virtual threads, pattern matching, modern performance optimizations, and comprehensive JUnit 5 testing
 version: 1.0.0
 schema_version: 1.3.0
-agent_id: java_engineer
+agent_id: java-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -138,8 +138,8 @@ interactions:
     - deployment_considerations
   handoff_agents:
   - engineer
-  - qa-agent
-  - security-agent
+  - qa
+  - security
   triggers:
   - java development
   - spring boot

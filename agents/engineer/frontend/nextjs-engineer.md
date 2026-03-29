@@ -3,7 +3,7 @@ name: Nextjs Engineer
 description: 'Next.js 15+ specialist: App Router, Server Components, Partial Prerendering, performance-first React applications'
 version: 2.1.0
 schema_version: 1.3.0
-agent_id: nextjs_engineer
+agent_id: nextjs-engineer
 agent_type: engineer
 resource_tier: standard
 tags:
@@ -137,10 +137,10 @@ interactions:
     - deployment_configuration
   handoff_agents:
   - typescript-engineer
-  - react_engineer
-  - web-qa-agent
-  - api-qa-agent
-  - ops-agent
+  - react-engineer
+  - web-qa
+  - api-qa
+  - ops
   triggers:
   - nextjs development
   - app router

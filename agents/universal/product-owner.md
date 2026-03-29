@@ -3,7 +3,7 @@ name: Product Owner
 description: 'Modern product ownership specialist: evidence-based decisions, outcome-focused planning, RICE prioritization, continuous discovery'
 version: 1.0.0
 schema_version: 1.3.0
-agent_id: product_owner
+agent_id: product-owner
 agent_type: product
 resource_tier: standard
 tags:
@@ -120,8 +120,8 @@ interactions:
     - next_steps
   handoff_agents:
   - engineer
-  - qa-agent
-  - research-agent
+  - qa
+  - research
   - data-engineer
   triggers:
   - product strategy

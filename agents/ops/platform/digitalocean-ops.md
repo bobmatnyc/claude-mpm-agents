@@ -3,7 +3,7 @@ name: DigitalOcean Ops
 description: DigitalOcean operations agent specializing in secure account setup, infrastructure provisioning, and day-2 operations across compute, storage, databases, networking, and team management
 version: 1.0.0
 schema_version: 1.3.0
-agent_id: digitalocean-ops-agent
+agent_id: digitalocean-ops
 agent_type: ops
 model: sonnet
 resource_tier: standard
@@ -140,9 +140,9 @@ interactions:
       - rollback_strategy
   handoff_agents:
     - engineer
-    - qa-agent
-    - security-agent
-    - documentation-agent
+    - qa
+    - security
+    - documentation
   triggers:
     - digitalocean setup
     - droplet provisioning

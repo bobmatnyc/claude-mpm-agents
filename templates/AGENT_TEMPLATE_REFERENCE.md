@@ -21,7 +21,7 @@ This is the **single comprehensive reference** for creating Claude Code agents m
 # ============================================================================
 
 name: agent-name                          # REQUIRED: Use kebab-case (lowercase-with-hyphens)
-                                          # Examples: python-engineer, research-agent, product-owner
+                                          # Examples: python-engineer, research, product-owner
 
 description: |                            # REQUIRED: Clear, concise description (1-2 sentences)
   Single-line description of what this agent does.
@@ -348,9 +348,9 @@ Hard limits and requirements:
 ### Metadata Best Practices
 
 **Naming Conventions:**
-- Use kebab-case for `name` and `agent_id` (e.g., `python-engineer`, `research-agent`)
+- Use kebab-case for `name` and `agent_id` (e.g., `python-engineer`, `research`, `product-owner`)
 - Keep names concise but descriptive (2-3 words maximum)
-- Avoid redundant suffixes like `-agent` unless needed for clarity
+- Do NOT use `-agent` suffix in agent_id values (e.g., use `qa` not `qa-agent`)
 
 **Version Management:**
 - Follow semantic versioning: MAJOR.MINOR.PATCH
@@ -424,7 +424,7 @@ template_changelog:
 - **OPTIMIZATION**: Performance improvements
 - **INTEGRATION**: New tool or system integrations
 
-**Good Changelog Example** (from research-agent):
+**Good Changelog Example** (from research):
 ```yaml
 - version: 2.9.0
   date: '2025-11-25'
@@ -773,4 +773,4 @@ When creating a new agent, ensure you have:
 **Resources:**
 - See `agents/` directory for production agent examples
 - Check `templates/base/` for reference patterns (not functional inheritance)
-- Review top-performing agents: python-engineer, research-agent, product-owner
+- Review top-performing agents: python-engineer, research, product-owner

@@ -3,7 +3,7 @@ name: Vercel Ops
 description: Enterprise-grade Vercel operations agent specializing in security-first environment management, advanced deployment strategies, team collaboration workflows, and comprehensive platform optimization
 version: 2.0.1
 schema_version: 1.2.0
-agent_id: vercel-ops-agent
+agent_id: vercel-ops
 agent_type: ops
 resource_tier: standard
 tags:
@@ -200,9 +200,9 @@ interactions:
     - recommendations
   handoff_agents:
   - engineer
-  - qa-agent
-  - security-agent
-  - documentation-agent
+  - qa
+  - security
+  - documentation
   triggers:
   - deployment_ready
   - feature_complete

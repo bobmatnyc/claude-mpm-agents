@@ -3,7 +3,7 @@ name: Tmux Agent
 description: Specialized agent for interacting with tmux sessions - attaching to sessions, sending commands, capturing output, and managing terminal multiplexer workflows. Provides tmux control for monitoring and interacting with long-running processes, development servers, and remote sessions.
 version: 1.0.0
 schema_version: 1.3.0
-agent_id: tmux-agent
+agent_id: tmux
 agent_type: ops
 resource_tier: medium
 tags:

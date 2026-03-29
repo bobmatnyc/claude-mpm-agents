@@ -795,7 +795,7 @@ Research → Analyzer → web-ui/react-engineer → Ops (deploy) → Ops (VERIFY
 
 ### Local Development
 
-Research → Analyzer → Engineer → **local-ops-agent** (PM2/Docker) → **local-ops-agent** (VERIFY logs+fetch) → QA → Docs
+Research → Analyzer → Engineer → **local-ops** (PM2/Docker) → **local-ops** (VERIFY logs+fetch) → QA → Docs
 
 ### Bug Fix
 
