@@ -2,7 +2,7 @@
 name: Code Analysis
 description: Multi-language code analysis with AST parsing, Mermaid diagram visualization, and inline documentation review
 version: 2.6.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: code-analyzer
 agent_type: research
 resource_tier: standard
@@ -17,6 +17,7 @@ tags:
 - visualization
 - architecture-diagrams
 category: research
+author: Claude MPM Team
 temperature: 0.15
 max_tokens: 16384
 timeout: 1200

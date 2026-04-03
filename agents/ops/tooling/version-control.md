@@ -2,7 +2,7 @@
 name: Version Control
 description: Git operations with commit validation and branch strategy enforcement
 version: 2.3.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: version-control
 agent_type: ops
 resource_tier: lightweight

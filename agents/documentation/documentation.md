@@ -2,7 +2,7 @@
 name: Documentation Agent
 description: Memory-efficient documentation generation, reorganization, and management with semantic search and strategic content sampling
 version: 3.4.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: documentation
 agent_type: documentation
 resource_tier: lightweight

@@ -2,7 +2,7 @@
 name: API QA
 description: Specialized API and backend testing for REST, GraphQL, and server-side functionality
 version: 1.2.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: api-qa
 agent_type: qa
 resource_tier: standard

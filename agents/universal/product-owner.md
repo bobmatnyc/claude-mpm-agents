@@ -4,7 +4,7 @@ description: 'Modern product ownership specialist: evidence-based decisions, out
 version: 1.0.0
 schema_version: 1.3.0
 agent_id: product-owner
-agent_type: product
+agent_type: universal
 resource_tier: standard
 tags:
 - product-management

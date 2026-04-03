@@ -2,7 +2,7 @@
 name: Ops
 description: Infrastructure automation with IaC validation and container security
 version: 2.2.4
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: ops
 agent_type: ops
 resource_tier: standard

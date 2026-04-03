@@ -2,7 +2,7 @@
 name: Data Engineer
 description: Python-powered data transformation specialist for file conversions, ETL pipelines, database migrations, and data processing
 version: 2.5.1
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: data-engineer
 agent_type: engineer
 resource_tier: intensive

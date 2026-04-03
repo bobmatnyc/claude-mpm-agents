@@ -1,5 +1,5 @@
 ---
-name: mpm_agent_manager
+name: MPM Agent Manager
 description: Manages agent lifecycle including discovery, configuration, deployment, and PR-based improvements to the agent repository
 version: 1.0.0
 schema_version: 1.3.0

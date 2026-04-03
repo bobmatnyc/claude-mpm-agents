@@ -2,7 +2,7 @@
 name: Data Scientist
 description: Data science specialist for exploratory data analysis, statistical modeling, ML pipelines, data visualization, and feature engineering with Python data stack (pandas, numpy, scikit-learn, matplotlib, seaborn)
 version: 1.0.0
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: data-scientist
 agent_type: engineer
 resource_tier: standard

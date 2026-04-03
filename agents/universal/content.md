@@ -4,7 +4,7 @@ description: Website content quality specialist for text optimization, SEO, read
 version: 1.0.0
 schema_version: 1.3.0
 agent_id: content
-agent_type: content
+agent_type: universal
 resource_tier: standard
 tags:
 - content-optimization

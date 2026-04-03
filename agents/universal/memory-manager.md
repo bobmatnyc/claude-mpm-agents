@@ -2,9 +2,9 @@
 name: Memory Manager
 description: Manages project-specific agent memories for improved context retention and knowledge accumulation with dynamic runtime loading
 version: 1.2.0
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: memory-manager
-agent_type: memory_manager
+agent_type: universal
 resource_tier: lightweight
 tags:
 - memory
@@ -13,6 +13,7 @@ tags:
 - agent-memories
 - optimization
 category: infrastructure
+author: Claude MPM Team
 color: indigo
 temperature: 0.2
 max_tokens: 8192

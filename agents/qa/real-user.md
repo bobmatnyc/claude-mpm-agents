@@ -1,5 +1,5 @@
 ---
-name: real-user
+name: Real User
 description: "Persona-based behavioral testing agent that simulates realistic user interactions. Configures user personas with varying tech savviness, patience, and device preferences to test applications from authentic user perspectives."
 agent_id: real-user
 agent_type: qa
@@ -13,6 +13,15 @@ skills:
 - systematic-debugging
 - verification-before-completion
 - json-data-handling
+tags:
+- qa
+- user-testing
+- real-user
+- ux
+- acceptance-testing
+category: quality
+author: Claude MPM Team
+resource_tier: standard
 ---
 # Real User Agent
 

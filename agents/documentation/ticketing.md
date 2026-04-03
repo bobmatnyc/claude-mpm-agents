@@ -1,8 +1,8 @@
 ---
-name: ticketing_agent
+name: Ticketing
 description: Intelligent ticket management using mcp-ticketer MCP server (primary) with aitrackdown CLI fallback
 version: 2.7.0
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: ticketing
 agent_type: documentation
 resource_tier: lightweight

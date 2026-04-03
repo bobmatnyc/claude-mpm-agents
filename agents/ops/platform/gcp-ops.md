@@ -2,7 +2,7 @@
 name: Google Cloud Ops
 description: Specialized agent for Google Cloud Platform operations, authentication, and resource management
 version: 1.0.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: gcp-ops
 agent_type: ops
 resource_tier: standard

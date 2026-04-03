@@ -30,6 +30,7 @@ tags:
 - email-research
 - drive-research
 category: research
+author: Claude MPM Team
 color: purple
 temperature: 0.2
 max_tokens: 16384

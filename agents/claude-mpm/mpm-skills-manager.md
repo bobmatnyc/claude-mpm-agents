@@ -1,5 +1,5 @@
 ---
-name: mpm_skills_manager
+name: MPM Skills Manager
 description: Manages skill lifecycle including discovery, recommendation, deployment, and PR-based improvements to the skills repository
 version: 1.0.0
 schema_version: 1.3.0

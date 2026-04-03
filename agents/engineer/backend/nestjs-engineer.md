@@ -1,5 +1,5 @@
 ---
-name: nestjs-engineer
+name: NestJS Engineer
 description: "Use this agent when you need to implement NestJS-specific features, build REST APIs, integrate MongoDB with Mongoose, implement authentication/authorization, or work with Bull queues. This agent specializes in NestJS 10+ architecture patterns, dependency injection, decorators, and testing.
 
 <example>
@@ -15,6 +15,16 @@ agent_id: nestjs-engineer
 agent_type: engineer
 version: "1.0.0"
 schema_version: 1.3.0
+tags:
+- nestjs
+- typescript
+- nodejs
+- backend
+- rest-api
+- engineering
+category: engineering
+author: Claude MPM Team
+resource_tier: standard
 ---
 # NestJS Engineer
 

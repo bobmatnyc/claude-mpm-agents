@@ -2,9 +2,9 @@
 name: Refactoring Engineer
 description: Safe, incremental code improvement specialist focused on behavior-preserving transformations with comprehensive testing
 version: 1.1.3
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: refactoring-engineer
-agent_type: refactoring
+agent_type: engineer
 resource_tier: intensive
 tags:
 - refactoring

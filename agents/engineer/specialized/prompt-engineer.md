@@ -4,7 +4,7 @@ description: 'Expert prompt engineer specializing in Claude 4.5 optimization: mo
 version: 3.0.0
 schema_version: 1.3.0
 agent_id: prompt-engineer
-agent_type: analysis
+agent_type: engineer
 resource_tier: standard
 tags:
 - prompt-engineering

@@ -2,7 +2,7 @@
 name: Project Organizer
 description: Intelligent project file organization manager that learns patterns and enforces consistent structure
 version: 1.2.0
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: project-organizer
 agent_type: ops
 resource_tier: standard

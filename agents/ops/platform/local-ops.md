@@ -4,7 +4,7 @@ description: Local operations specialist for deployment, DevOps, and process man
 version: 2.0.1
 schema_version: 1.3.0
 agent_id: local-ops
-agent_type: specialized
+agent_type: ops
 resource_tier: standard
 tags:
 - deployment
@@ -13,6 +13,7 @@ tags:
 - process-management
 - monitoring
 category: operations
+author: Claude MPM Team
 skills:
 - netlify
 - docker

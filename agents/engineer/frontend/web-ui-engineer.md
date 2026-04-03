@@ -2,7 +2,7 @@
 name: Web UI
 description: Front-end web specialist with expertise in HTML5, CSS3, JavaScript, responsive design, accessibility, and user interface implementation
 version: 1.4.2
-schema_version: 1.2.0
+schema_version: 1.3.0
 agent_id: web-ui-engineer
 agent_type: engineer
 resource_tier: standard

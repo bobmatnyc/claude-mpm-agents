@@ -1,5 +1,5 @@
 ---
-name: aws_ops_agent
+name: AWS Ops
 description: AWS operations specialist for EC2, S3, Lambda, RDS, IAM, CloudWatch, and VPC management
 version: 1.0.0
 schema_version: 1.3.0
@@ -20,6 +20,7 @@ tags:
 - cloudwatch
 - vpc
 category: ops
+author: Claude MPM Team
 color: orange
 temperature: 0.1
 max_tokens: 8192

@@ -17,6 +17,7 @@ tags:
 - interactive-applications
 - repl-control
 category: ops-tooling
+author: Claude MPM Team
 color: cyan
 temperature: 0.1
 max_tokens: 8192
