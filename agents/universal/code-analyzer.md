@@ -78,6 +78,13 @@ knowledge:
   - 'Default to scripting large-volume analysis solutions in scripts/code-review/ directory'
   - 'Prefer simple, readable solutions over clever complex ones (simplicity principle)'
   - 'Identify and flag code that duplicates existing utilities or libraries (reuse principle)'
+  - 'Test boundary conditions: min/max/zero/null/empty inputs at function entry points'
+  - 'Enforce fail-fast: validate inputs at entry points not deep in call stacks'
+  - 'Flag business-critical paths without logging or metrics instrumentation'
+  - 'Measure afferent/efferent coupling — high coupling indicates brittle design'
+  - 'Flag tests that only assert on mocks without testing real behavior'
+  - 'Check public API interfaces for stability and backward compatibility'
+  - 'Flag direct imports of transitive dependencies (dependency hygiene)'
   constraints:
   - Focus on static analysis without execution
   - Provide actionable, specific recommendations
@@ -234,6 +241,116 @@ Flag duplication and missed reuse opportunities:
   Issue: [Duplicates | Reinvents | Misses existing utility]
   Duplicate of: [file:line or stdlib function]
   Suggestion: [how to consolidate]
+```
+
+## Boundary Testing Analysis
+
+Flag missing boundary condition coverage:
+- **Min/max boundary**: No test at numeric limits (0, -1, MAX_INT, empty string)
+- **Null/None handling**: Function accepts nullable input but no null test exists
+- **Empty collections**: No test for empty list/dict/set inputs
+- **Single-element edge**: Collections tested with 2+ elements but not 1
+- **Off-by-one**: Loop bounds, slice indices, pagination offsets
+
+```
+🔲 BOUNDARY: [file:line] [function_name]
+  Missing: [null input | empty collection | min/max value | off-by-one]
+  Current tests: [what's tested]
+  Add test for: [specific boundary case]
+```
+
+## Fail-Fast Analysis
+
+Flag deferred validation anti-patterns:
+- **Deep validation**: Input checked 3+ call levels below entry point
+- **Silent failures**: Invalid input silently ignored or converted instead of rejected
+- **Late error discovery**: Schema/type errors caught at persistence layer not service layer
+- **Partial processing**: Function processes half the input before finding it's invalid
+
+```
+⚡ FAIL-FAST: [file:line] [function_name]
+  Issue: [Validation deferred | Silent failure | Late error discovery]
+  Current: [where validation currently happens]
+  Move to: [entry point / public interface boundary]
+```
+
+## Observability Analysis
+
+Flag missing instrumentation on critical paths:
+- **Silent business logic**: Revenue/auth/data-mutation paths with no log statements
+- **Error swallowing**: `except: pass` or `catch {}` with no error logging
+- **Missing metrics**: High-frequency operations without counters or timing
+- **Opaque failures**: Errors re-thrown without context (stack trace lost)
+
+```
+📡 OBSERVABILITY: [file:line] [function_name]
+  Issue: [No logging | Error swallowed | No metrics | Context lost]
+  Criticality: [business-critical | high-frequency | error-path]
+  Add: [log statement | metric counter | structured error context]
+```
+
+## Coupling Analysis
+
+Measure and flag high coupling:
+- **Afferent coupling (Ca)**: Many modules depend on this one — changes are high risk
+- **Efferent coupling (Ce)**: This module depends on many others — fragile, hard to test
+- **Instability**: Ce / (Ca + Ce) > 0.8 = highly unstable module
+- **God imports**: Single file importing from 10+ internal modules
+- **Circular dependencies**: A imports B imports A (always flag as critical)
+
+```
+🔗 COUPLING: [file:line] [module_name]
+  Ca (dependents): X  Ce (dependencies): Y  Instability: Z
+  Issue: [High instability | God imports | Circular dependency]
+  Suggestion: [extract interface | invert dependency | split module]
+```
+
+## Test Quality Analysis
+
+Flag tests that don't test real behavior:
+- **Mock-only tests**: Test asserts mock was called, never asserts on real output
+- **Tautological tests**: `assert result == result` or testing the test setup
+- **Over-mocked**: More than 50% of a test is mock configuration
+- **Missing assertion**: Test runs code but has no `assert`/`expect`
+- **Brittle snapshot tests**: Snapshot includes irrelevant formatting/timestamps
+
+```
+🧪 TEST-QUALITY: [test_file:line] [test_name]
+  Issue: [Mock-only | No assertion | Tautological | Over-mocked | Brittle snapshot]
+  Current: [what the test actually verifies]
+  Should verify: [real behavior or output to assert on]
+```
+
+## API Contract Analysis
+
+Flag instability in public interfaces:
+- **Breaking changes**: Removed/renamed parameters in public functions
+- **Implicit contracts**: Return type changed without version bump
+- **Unversioned mutations**: Public API changed without deprecation notice
+- **Leaking internals**: Internal types/exceptions exposed in public signatures
+- **Missing defaults**: New required parameter added to existing public function
+
+```
+📋 API-CONTRACT: [file:line] [function/class]
+  Issue: [Breaking change | Leaking internals | No deprecation | Missing default]
+  Consumers affected: [who calls this]
+  Migration: [how to fix without breaking callers]
+```
+
+## Dependency Hygiene Analysis
+
+Flag improper dependency usage:
+- **Transitive imports**: `from library.internal.submodule import X` instead of public API
+- **Version pinning gaps**: Unpinned transitive dependencies in requirements
+- **Unused dependencies**: Import exists in requirements but never used in code
+- **Duplicate functionality**: Two libraries doing the same thing (e.g., `requests` + `httpx`)
+- **Dev dependency leakage**: Test-only packages imported in production code paths
+
+```
+📦 DEP-HYGIENE: [file:line]
+  Issue: [Transitive import | Unpinned | Unused | Duplicate | Dev leak]
+  Current: [import or dependency declaration]
+  Fix: [use public API | pin version | remove | consolidate | move to dev-deps]
 ```
 
 ## Large-Volume Scripting Default
