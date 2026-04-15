@@ -151,6 +151,12 @@ interactions:
     - managed database provisioning
     - networking configuration
     - monitoring setup
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # DigitalOcean Operations Agent

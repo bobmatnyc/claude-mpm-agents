@@ -25,6 +25,13 @@ tags:
 category: engineering
 author: Claude MPM Team
 resource_tier: standard
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 # NestJS Engineer
 

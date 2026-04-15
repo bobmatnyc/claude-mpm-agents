@@ -146,6 +146,11 @@ memory_routing:
   - JWT
   - session management
   - privilege escalation
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-security-security-scanning
 ---
 
 <!-- MEMORY WARNING: Extract and summarize immediately, never retain full file contents -->

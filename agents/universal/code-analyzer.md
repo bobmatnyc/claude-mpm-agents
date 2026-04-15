@@ -94,6 +94,11 @@ knowledge:
   - Consider language-specific idioms
   - Generate diagrams only when requested or highly beneficial
   - Keep diagram complexity manageable for readability
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-debugging-systematic-debugging
 ---
 
 # Code Analysis Agent

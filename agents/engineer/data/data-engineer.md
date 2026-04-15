@@ -183,6 +183,13 @@ memory_routing:
   - mysql
   - zero-downtime
   - expand-contract
+permissionMode: bypassPermissions
+maxTurns: 100
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 # Data Engineer Agent

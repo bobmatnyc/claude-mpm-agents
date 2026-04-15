@@ -22,6 +22,12 @@ tags:
 category: quality
 author: Claude MPM Team
 resource_tier: standard
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-debugging-verification-before-completion
+  - universal-testing-test-driven-development
 ---
 # Real User Agent
 

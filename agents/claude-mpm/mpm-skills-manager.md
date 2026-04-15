@@ -45,6 +45,11 @@ skills:
 - internal-comms
 - skill-creator
 - test-driven-development
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # MPM Skills Manager

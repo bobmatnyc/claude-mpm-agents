@@ -52,6 +52,12 @@ memory_routing_rules:
   description: Deployment strategies, rollback procedures, blue-green patterns
 - category: security_policies
   description: Security group rules, IAM policies, encryption settings
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # AWS Operations Agent

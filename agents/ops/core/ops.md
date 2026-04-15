@@ -129,6 +129,12 @@ memory_routing:
   - gcp
   - git commit protocols
   - security scanning patterns
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # Ops Agent

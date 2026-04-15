@@ -212,6 +212,11 @@ skills:
 - verification-before-completion
 - internal-comms
 - test-driven-development
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # Product Owner

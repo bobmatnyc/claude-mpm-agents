@@ -107,6 +107,12 @@ memory_routing:
   - gitflow
   - rebase
   - repository
+permissionMode: acceptEdits
+maxTurns: 20
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 <!-- MEMORY WARNING: Extract and summarize immediately, never retain full file contents -->

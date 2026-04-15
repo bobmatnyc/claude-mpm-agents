@@ -51,6 +51,13 @@ memory_routing_rules:
 - Common data quality issues and solutions
 - Performance optimization for data processing
 - Jupyter notebook organization patterns
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 # Data Scientist Agent Instructions

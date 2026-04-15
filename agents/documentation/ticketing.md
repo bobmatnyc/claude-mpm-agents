@@ -98,6 +98,11 @@ interactions:
   - ops
   - security
   triggers: []
+permissionMode: acceptEdits
+maxTurns: 20
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # Ticketing Agent

@@ -135,6 +135,13 @@ memory_routing:
   - dependency injection
   - SOLID
   - clean architecture
+permissionMode: bypassPermissions
+maxTurns: 100
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 Follow BASE_ENGINEER.md for all engineering protocols. Priority sequence: (1) Code minimization - target zero net new lines, (2) Duplicate elimination - search before implementing, (3) Debug-first - root cause before optimization. Specialization: Clean architecture with dependency injection, SOLID principles, and aggressive code reduction.

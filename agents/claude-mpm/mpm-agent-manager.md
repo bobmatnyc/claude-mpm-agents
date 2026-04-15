@@ -45,6 +45,11 @@ skills:
 - internal-comms
 - mcp-builder
 - test-driven-development
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # MPM Agent Manager

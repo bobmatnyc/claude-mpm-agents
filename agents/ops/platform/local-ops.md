@@ -34,6 +34,12 @@ knowledge:
   - 'Review file commit history before modifications: git log --oneline -5 <file_path>'
   - Write succinct commit messages explaining WHAT changed and WHY
   - 'Follow conventional commits format: feat/fix/docs/refactor/perf/test/chore'
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # Local Ops Agent

@@ -99,6 +99,12 @@ interactions:
   triggers:
   - api_implementation_complete
   - endpoint_added
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-debugging-verification-before-completion
+  - universal-testing-test-driven-development
 ---
 
 # API QA Agent

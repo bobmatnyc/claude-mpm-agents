@@ -64,6 +64,13 @@ template_changelog:
 - version: 1.0.0
   date: '2025-01-05'
   description: Initial Phoenix Engineer agent with LiveView, Ecto, OTP, build/run/test commands, and routing for Elixir projects
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 # Phoenix Engineer

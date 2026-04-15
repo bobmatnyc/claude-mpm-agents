@@ -186,6 +186,13 @@ memory_routing:
   extensions:
   - .php
   - .json
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 # PHP Engineer

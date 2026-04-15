@@ -187,6 +187,11 @@ memory_routing:
   - /pages/
   - /posts/
 skills: []
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # Content Optimization Agent

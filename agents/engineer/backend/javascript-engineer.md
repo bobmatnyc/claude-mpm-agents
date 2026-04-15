@@ -219,6 +219,13 @@ memory_routing:
   - observers
   - intersection-observer
   - mutation-observer
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - universal-testing-test-driven-development
+  - universal-debugging-systematic-debugging
 ---
 
 # JavaScript Engineer - Vanilla JavaScript Specialist

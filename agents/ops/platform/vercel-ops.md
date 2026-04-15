@@ -209,6 +209,12 @@ interactions:
   - rollback_required
   - environment_setup
   - domain_configuration
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # Vercel Operations Agent

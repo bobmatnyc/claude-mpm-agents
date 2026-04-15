@@ -164,6 +164,11 @@ memory_routing:
   - thorough cleanup
   - documentation organization
   - documentation structure
+permissionMode: acceptEdits
+maxTurns: 20
+memory: project
+skills:
+  - universal-collaboration-git-workflow
 ---
 
 # Documentation Agent

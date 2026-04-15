@@ -87,6 +87,12 @@ interactions:
   - documentation
   - version-control
   triggers: []
+permissionMode: acceptEdits
+maxTurns: 50
+memory: project
+skills:
+  - universal-collaboration-git-workflow
+  - toolchains-universal-infrastructure-docker
 ---
 
 # Project Organizer Agent
