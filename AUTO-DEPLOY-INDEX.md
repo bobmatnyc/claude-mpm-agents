@@ -22,6 +22,12 @@ These agents are deployed for **ALL** projects regardless of type:
 - `documentation/documentation` - Technical documentation
 - `documentation/ticketing` - Ticket management and tracking
 
+### Universal Quality Agents
+
+These agents are deployed unconditionally across all project types as universal quality gates.
+
+- `qa/code-critic` - Adversarial code review with rubric-based verdict (APPROVE/WARN/BLOCK). Always available.
+
 ## Project Type Detection
 
 ### Python Projects
