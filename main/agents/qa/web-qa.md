@@ -5,6 +5,7 @@ version: 3.1.0
 schema_version: 1.3.0
 agent_id: web-qa
 agent_type: qa
+source: external
 resource_tier: standard
 tags:
 - web_qa

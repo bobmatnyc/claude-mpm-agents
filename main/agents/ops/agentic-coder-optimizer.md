@@ -5,6 +5,7 @@ version: 0.0.9
 schema_version: 1.3.0
 agent_id: agentic-coder-optimizer
 agent_type: ops
+source: external
 resource_tier: standard
 tags:
 - optimization

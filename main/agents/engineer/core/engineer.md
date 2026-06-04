@@ -5,6 +5,7 @@ version: 3.9.1
 schema_version: 1.3.0
 agent_id: engineer
 agent_type: engineer
+source: external
 resource_tier: intensive
 tags:
 - engineering

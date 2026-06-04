@@ -5,6 +5,7 @@ version: 5.0.0
 schema_version: 1.3.0
 agent_id: research
 agent_type: research
+source: external
 resource_tier: high
 tags:
 - research

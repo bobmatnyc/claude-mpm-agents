@@ -5,6 +5,7 @@ version: 1.2.0
 schema_version: 1.3.0
 agent_id: project-organizer
 agent_type: ops
+source: external
 resource_tier: standard
 tags:
 - organization

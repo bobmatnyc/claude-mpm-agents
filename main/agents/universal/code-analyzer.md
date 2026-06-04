@@ -5,6 +5,7 @@ version: 2.6.2
 schema_version: 1.3.0
 agent_id: code-analyzer
 agent_type: research
+source: external
 resource_tier: standard
 tags:
 - code-analysis

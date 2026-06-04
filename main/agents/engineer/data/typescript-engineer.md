@@ -5,6 +5,7 @@ version: 2.0.0
 schema_version: 1.3.0
 agent_id: typescript-engineer
 agent_type: engineer
+source: external
 resource_tier: standard
 tags:
 - typescript

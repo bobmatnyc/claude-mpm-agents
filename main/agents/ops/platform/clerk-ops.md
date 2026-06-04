@@ -5,6 +5,7 @@ version: 1.1.1
 schema_version: 1.3.0
 agent_id: clerk-ops
 agent_type: ops
+source: external
 resource_tier: standard
 tags:
 - clerk
