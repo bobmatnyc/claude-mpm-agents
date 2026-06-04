@@ -5,6 +5,7 @@ version: 3.4.2
 schema_version: 1.3.0
 agent_id: documentation
 agent_type: documentation
+source: external
 resource_tier: lightweight
 tags:
 - documentation

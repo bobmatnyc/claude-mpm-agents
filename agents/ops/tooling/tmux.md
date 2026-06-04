@@ -5,6 +5,7 @@ version: 1.0.0
 schema_version: 1.3.0
 agent_id: tmux
 agent_type: ops
+source: external
 resource_tier: medium
 tags:
 - tmux

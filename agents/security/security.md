@@ -5,6 +5,7 @@ version: 2.5.0
 schema_version: 1.3.0
 agent_id: security
 agent_type: security
+source: external
 resource_tier: standard
 tags:
 - security

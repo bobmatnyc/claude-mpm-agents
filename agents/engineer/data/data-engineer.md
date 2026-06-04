@@ -5,6 +5,7 @@ version: 2.5.1
 schema_version: 1.3.0
 agent_id: data-engineer
 agent_type: engineer
+source: external
 resource_tier: intensive
 tags:
 - data
