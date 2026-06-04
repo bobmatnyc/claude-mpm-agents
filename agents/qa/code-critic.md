@@ -5,6 +5,7 @@ version: 1.0.0
 schema_version: 1.3.0
 agent_id: code-critic
 agent_type: qa
+source: external
 resource_tier: standard
 tags: [code-review, critic, quality-gate, verdict, code-production-pipeline]
 category: quality

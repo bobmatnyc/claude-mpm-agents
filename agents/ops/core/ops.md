@@ -5,6 +5,7 @@ version: 2.2.4
 schema_version: 1.3.0
 agent_id: ops
 agent_type: ops
+source: external
 resource_tier: standard
 tags:
 - ops

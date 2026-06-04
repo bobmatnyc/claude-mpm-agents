@@ -5,6 +5,7 @@ version: 2.3.0
 schema_version: 1.3.0
 agent_id: python-engineer
 agent_type: engineer
+source: external
 resource_tier: standard
 tags:
 - python

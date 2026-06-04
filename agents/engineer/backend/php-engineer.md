@@ -5,6 +5,7 @@ version: 2.1.0
 schema_version: 1.3.0
 agent_id: php-engineer
 agent_type: engineer
+source: external
 resource_tier: standard
 tags:
 - php

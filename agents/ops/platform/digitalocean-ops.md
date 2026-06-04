@@ -5,6 +5,7 @@ version: 1.0.0
 schema_version: 1.3.0
 agent_id: digitalocean-ops
 agent_type: ops
+source: external
 model: sonnet
 resource_tier: standard
 tags:

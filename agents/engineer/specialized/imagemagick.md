@@ -5,6 +5,7 @@ version: 1.0.2
 schema_version: 1.3.0
 agent_id: imagemagick
 agent_type: engineer
+source: external
 resource_tier: standard
 tags:
 - imagemagick

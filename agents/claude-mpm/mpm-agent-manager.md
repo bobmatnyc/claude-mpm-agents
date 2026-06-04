@@ -5,6 +5,7 @@ version: 1.0.0
 schema_version: 1.3.0
 agent_id: mpm-agent-manager
 agent_type: system
+source: external
 resource_tier: standard
 tags:
 - agent-management

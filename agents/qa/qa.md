@@ -5,6 +5,7 @@ version: 3.5.3
 schema_version: 1.3.0
 agent_id: qa
 agent_type: qa
+source: external
 resource_tier: standard
 tags:
 - qa

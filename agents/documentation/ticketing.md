@@ -5,6 +5,7 @@ version: 2.7.0
 schema_version: 1.3.0
 agent_id: ticketing
 agent_type: documentation
+source: external
 resource_tier: lightweight
 tags:
 - ticketing

@@ -5,6 +5,7 @@ version: 2.3.2
 schema_version: 1.3.0
 agent_id: version-control
 agent_type: ops
+source: external
 resource_tier: lightweight
 tags:
 - git

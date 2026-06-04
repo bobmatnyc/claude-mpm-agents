@@ -5,6 +5,7 @@ version: 1.2.0
 schema_version: 1.3.0
 agent_id: memory-manager
 agent_type: universal
+source: external
 resource_tier: lightweight
 tags:
 - memory
