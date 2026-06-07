@@ -1,107 +1,107 @@
 {
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/BASE-AGENT.md": {
     "etag": "W/\"d562dde7910d81604787a1853e8e1b55b9b0a580085528a0f823863c9d2f2874\"",
-    "last_modified": "2026-06-06T17:58:28.042345+00:00",
+    "last_modified": "2026-06-07T14:56:22.239736+00:00",
     "file_size": 7931
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/BASE-AGENT.md": {
     "etag": "W/\"37c3d66a160b968296aceb5d9454eb30164a0d23533eec1da87bcad9d49ce8cc\"",
-    "last_modified": "2026-06-06T17:58:28.069374+00:00",
+    "last_modified": "2026-06-07T14:56:22.252848+00:00",
     "file_size": 11138
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-agent-manager.md": {
     "etag": "W/\"6d3cb856e507f25178da04c156fe714e83a19d7e4b322e562249cbf470105176\"",
-    "last_modified": "2026-06-06T17:58:28.089474+00:00",
+    "last_modified": "2026-06-07T14:56:22.273489+00:00",
     "file_size": 39362
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-skills-manager.md": {
     "etag": "W/\"7c28dd56ba3532099e2d39726592efc9b2a4ae40f13ae74aabd3198823bb5ff1\"",
-    "last_modified": "2026-06-06T17:58:28.111473+00:00",
+    "last_modified": "2026-06-07T14:56:22.294858+00:00",
     "file_size": 62298
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/documentation/documentation.md": {
     "etag": "W/\"9a3cc1d94877b6b01cc5f1ce04e90c7ae6abc244b67d69971b25d038d96386ea\"",
-    "last_modified": "2026-06-06T17:58:28.139242+00:00",
+    "last_modified": "2026-06-07T14:56:22.307149+00:00",
     "file_size": 14103
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/documentation/ticketing.md": {
     "etag": "W/\"3d9cd55513a63b885f77737a5b9ca21e5d4db4a055064f3ba533d5a00a68e374\"",
-    "last_modified": "2026-06-06T17:58:28.158746+00:00",
+    "last_modified": "2026-06-07T14:56:22.329512+00:00",
     "file_size": 49476
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/BASE-AGENT.md": {
     "etag": "W/\"1b1847671f80515356329191fa8b86426cc41e359eaf232c65ee3275ce5b986e\"",
-    "last_modified": "2026-06-06T17:58:28.177889+00:00",
+    "last_modified": "2026-06-07T14:56:22.347539+00:00",
     "file_size": 17515
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/golang-engineer.md": {
     "etag": "W/\"2cb32770046a24ad2f61330f5c01587a921e6b331f0fe78ab6c93f0e37011a50\"",
-    "last_modified": "2026-06-06T17:58:28.193574+00:00",
+    "last_modified": "2026-06-07T14:56:22.370376+00:00",
     "file_size": 10096
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/java-engineer.md": {
     "etag": "W/\"832b162234c04ddd41cebb96c84018d56d8545e5fd88eb28b4dc97c891f79c8b\"",
-    "last_modified": "2026-06-06T17:58:28.216226+00:00",
+    "last_modified": "2026-06-07T14:56:22.402532+00:00",
     "file_size": 26311
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/javascript-engineer.md": {
     "etag": "W/\"493ef45893527e854fdec1eb237b9c3818ec3a85ff3a441d83aadb9351b29c72\"",
-    "last_modified": "2026-06-06T17:58:28.241661+00:00",
+    "last_modified": "2026-06-07T14:56:22.417570+00:00",
     "file_size": 20181
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/phoenix-engineer.md": {
     "etag": "W/\"bd5e9837496e03f5360773e1f7b204e3ee220327dab4a810be4337642f7b4d0f\"",
-    "last_modified": "2026-06-06T17:58:28.278139+00:00",
+    "last_modified": "2026-06-07T14:56:22.455674+00:00",
     "file_size": 3668
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/php-engineer.md": {
     "etag": "W/\"9d35081efd9d9b86f07f2dc46778669950f7de00a661d8f677be28e62ce2ec9b\"",
-    "last_modified": "2026-06-06T17:58:28.307790+00:00",
+    "last_modified": "2026-06-07T14:56:22.481286+00:00",
     "file_size": 10037
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/python-engineer.md": {
     "etag": "W/\"f9ae549b47ed5d77ec01bbabf4f20015aad4b40345f9e08535806b5853e1eddd\"",
-    "last_modified": "2026-06-06T17:58:28.329710+00:00",
+    "last_modified": "2026-06-07T14:56:22.503929+00:00",
     "file_size": 25639
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/ruby-engineer.md": {
     "etag": "W/\"344dfeee9ce60c4d435060db491e514464004c66364e6070adf1037169b94cde\"",
-    "last_modified": "2026-06-06T17:58:28.347900+00:00",
+    "last_modified": "2026-06-07T14:56:22.530696+00:00",
     "file_size": 9423
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/rust-engineer.md": {
     "etag": "W/\"dbce52a0a0bdacc09e24ba36b9df0940cb8943623ce98775240f195b35309d23\"",
-    "last_modified": "2026-06-06T17:58:28.371494+00:00",
+    "last_modified": "2026-06-07T14:56:22.546716+00:00",
     "file_size": 3276
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/core/engineer.md": {
     "etag": "W/\"ee1d0bffab6ff018f551ba4588dd1c65bc1496c8584cc13d12c6265e0a2688c5\"",
-    "last_modified": "2026-06-06T17:58:28.411338+00:00",
+    "last_modified": "2026-06-07T14:56:22.583929+00:00",
     "file_size": 4312
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/data/data-engineer.md": {
     "etag": "W/\"55173f1caad1e17a061602523da0ee13a6bea9811635ffedebb3248c4e89bcef\"",
-    "last_modified": "2026-06-06T17:58:28.434699+00:00",
+    "last_modified": "2026-06-07T14:56:22.604718+00:00",
     "file_size": 22339
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/data/typescript-engineer.md": {
     "etag": "W/\"5a810d8e2b2477533674a925ac7f57ca5ef416f7450e5fbecc17aae381641bdd\"",
-    "last_modified": "2026-06-06T17:58:28.476224+00:00",
+    "last_modified": "2026-06-07T14:56:22.646779+00:00",
     "file_size": 18978
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/nextjs-engineer.md": {
     "etag": "W/\"03ef81bafb84cbdea1b28f116e24cce0b98940638787b1f7e060dc649f3aefe8\"",
-    "last_modified": "2026-06-06T17:58:28.495650+00:00",
+    "last_modified": "2026-06-07T14:56:22.665085+00:00",
     "file_size": 18514
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/react-engineer.md": {
     "etag": "W/\"d94344e009581138b71345aae5541fd7f288b0b63c2150002fa126ae335fc6bb\"",
-    "last_modified": "2026-06-06T17:58:28.512535+00:00",
+    "last_modified": "2026-06-07T14:56:22.687719+00:00",
     "file_size": 22735
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/svelte-engineer.md": {
     "etag": "W/\"1897a43ebd768fc82f57accef4740e99c48a4fc10ca46d9b4a083d0436d26097\"",
-    "last_modified": "2026-06-06T17:58:28.537566+00:00",
+    "last_modified": "2026-06-07T14:56:22.701067+00:00",
     "file_size": 16203
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/web-ui.md": {
@@ -111,12 +111,12 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/mobile/dart-engineer.md": {
     "etag": "W/\"45e37d297fb4983008db529ded13dcae5a262762fd8b549139fb7733ac0ca393\"",
-    "last_modified": "2026-06-06T17:58:28.593143+00:00",
+    "last_modified": "2026-06-07T14:56:22.745687+00:00",
     "file_size": 18855
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/mobile/tauri-engineer.md": {
     "etag": "W/\"2ba9cf396eda582ecc692ff40670a870ea501c1ecdf550366366e224b7a8e718\"",
-    "last_modified": "2026-06-06T17:58:28.613443+00:00",
+    "last_modified": "2026-06-07T14:56:22.771402+00:00",
     "file_size": 21741
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/agentic-coder-optimizer.md": {
@@ -126,17 +126,17 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/imagemagick.md": {
     "etag": "W/\"c6ef3ac6adde6a90fe6ef84b64c25af7657d99648541b4bdbdb63dca67b0d560\"",
-    "last_modified": "2026-06-06T17:58:28.634495+00:00",
+    "last_modified": "2026-06-07T14:56:22.793592+00:00",
     "file_size": 14206
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/prompt-engineer.md": {
     "etag": "W/\"e84c8cfc4d94c31be09f827c6fe01bc0c4d089c0380988295119f060cd1d2d98\"",
-    "last_modified": "2026-06-06T17:58:28.649055+00:00",
+    "last_modified": "2026-06-07T14:56:22.809514+00:00",
     "file_size": 3373
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/specialized/refactoring-engineer.md": {
     "etag": "W/\"82b90c06c4ec8e012da66245f9bbc2c55d96935a2328014798ac7b5117afc90d\"",
-    "last_modified": "2026-06-06T17:58:28.671633+00:00",
+    "last_modified": "2026-06-07T14:56:22.825170+00:00",
     "file_size": 9251
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/BASE-AGENT.md": {
@@ -146,32 +146,32 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/core/ops.md": {
     "etag": "W/\"19c5c0f0cdd3dd21dc2052f323dd71bb4ab5397d274ef09158cb32d38ef7f15d\"",
-    "last_modified": "2026-06-06T17:58:28.729250+00:00",
+    "last_modified": "2026-06-07T14:56:22.878580+00:00",
     "file_size": 9824
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/clerk-ops.md": {
     "etag": "W/\"5af480b968ff966bea3068368ada1fedf4e96bf6b5886c40313c99282f98bb39\"",
-    "last_modified": "2026-06-06T17:58:28.769505+00:00",
+    "last_modified": "2026-06-07T14:56:22.919052+00:00",
     "file_size": 14628
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/gcp-ops.md": {
     "etag": "W/\"6b9ed86acaf05a5a506fd2cec3a61c71f02081f84f1c094ef059f83249be222a\"",
-    "last_modified": "2026-06-06T17:58:28.811293+00:00",
+    "last_modified": "2026-06-07T14:56:22.977363+00:00",
     "file_size": 8552
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/local-ops.md": {
     "etag": "W/\"ea7d27f56ecf9e97999e1d4b28d8999db45333e715a602b33d872b9acb3302b9\"",
-    "last_modified": "2026-06-06T17:58:28.826767+00:00",
+    "last_modified": "2026-06-07T14:56:22.995449+00:00",
     "file_size": 2729
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/vercel-ops.md": {
     "etag": "W/\"5747b3f39bba8ca5461efd8d6e913434d2148016030ea82a71705bee85b7934f\"",
-    "last_modified": "2026-06-06T17:58:28.851311+00:00",
+    "last_modified": "2026-06-07T14:56:23.013968+00:00",
     "file_size": 20596
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/tooling/version-control.md": {
     "etag": "W/\"c1d1b2957563d62f85f03f8db0d367fe525e70475e5824bd6f7746cf3591d9cb\"",
-    "last_modified": "2026-06-06T17:58:28.903994+00:00",
+    "last_modified": "2026-06-07T14:56:23.068816+00:00",
     "file_size": 20230
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/BASE-AGENT.md": {
@@ -181,27 +181,27 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/api-qa.md": {
     "etag": "W/\"44141d9ada02c9dfd653aabfd1417fa1900adf6b710f677da828ca862cf6decd\"",
-    "last_modified": "2026-06-06T17:58:28.938489+00:00",
+    "last_modified": "2026-06-07T14:56:23.103077+00:00",
     "file_size": 4530
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/qa.md": {
     "etag": "W/\"176f4819acddf9f4482ea64789cb1422f43ac8b752d7f7a0ff92017fe4e1d51c\"",
-    "last_modified": "2026-06-06T17:58:28.994900+00:00",
+    "last_modified": "2026-06-07T14:56:23.144411+00:00",
     "file_size": 8710
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/web-qa.md": {
     "etag": "W/\"72bb314b254b1029f19e2ab72e62c47c92b6fd8620b793226eb456d78e199e3e\"",
-    "last_modified": "2026-06-06T17:58:29.051184+00:00",
+    "last_modified": "2026-06-07T14:56:23.246071+00:00",
     "file_size": 27270
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/security/security.md": {
     "etag": "W/\"eba825335ffaa69ed26422a2e2f075598f134b3d840ff42a60f1bd34d448187f\"",
-    "last_modified": "2026-06-06T17:58:29.071442+00:00",
+    "last_modified": "2026-06-07T14:56:23.263593+00:00",
     "file_size": 30785
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/code-analyzer.md": {
     "etag": "W/\"67feea335795e45a75253f58f6a4188af1427c19bbb052619d1bbff4d6a9edcb\"",
-    "last_modified": "2026-06-06T17:58:29.095322+00:00",
+    "last_modified": "2026-06-07T14:56:23.283226+00:00",
     "file_size": 16984
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/content-agent.md": {
@@ -211,12 +211,12 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/memory-manager.md": {
     "etag": "W/\"8ece0bb54a605825a1b71c7631984e5da879289c9f5f70cb717ffb789c0f6492\"",
-    "last_modified": "2026-06-06T17:58:29.132664+00:00",
+    "last_modified": "2026-06-07T14:56:23.318273+00:00",
     "file_size": 19641
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/product-owner.md": {
     "etag": "W/\"8eca5264143877adc7ed7a86b4ffc15518cc3fa84d2667089b8abdc58eae0ada\"",
-    "last_modified": "2026-06-06T17:58:29.151257+00:00",
+    "last_modified": "2026-06-07T14:56:23.331403+00:00",
     "file_size": 33699
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/project-organizer.md": {
@@ -226,72 +226,72 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/research.md": {
     "etag": "W/\"909d1ff57e505ab72add2dadd58f6dc0a321b891bee35d07997bfb2d539d66cd\"",
-    "last_modified": "2026-06-06T17:58:29.170598+00:00",
+    "last_modified": "2026-06-07T14:56:23.362811+00:00",
     "file_size": 30626
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/.etag-cache.json": {
     "etag": "W/\"098100d6619749ed2d86c2d81dad62ae6a0d43a58713b158059fe0ba77cccdfb\"",
-    "last_modified": "2026-06-06T17:58:28.026403+00:00",
+    "last_modified": "2026-06-07T14:56:22.216232+00:00",
     "file_size": 12917
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/nestjs-engineer.md": {
     "etag": "W/\"3a50f984aa92e1b167360c003a1a09e86a0d504b1c9a089877d99815caea035d\"",
-    "last_modified": "2026-06-06T17:58:28.256848+00:00",
+    "last_modified": "2026-06-07T14:56:22.438663+00:00",
     "file_size": 37004
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/visual-basic-engineer.md": {
     "etag": "W/\"859740dd12cb8fd76e4339e4e66e6dbdd1af5de25287c32e6f9694590fecfea1\"",
-    "last_modified": "2026-06-06T17:58:28.395765+00:00",
+    "last_modified": "2026-06-07T14:56:22.565636+00:00",
     "file_size": 6643
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/data/data-scientist.md": {
     "etag": "W/\"5238498bd1098c163463545c9029c556f130fef9c04e97f1857e7fc8fe936e38\"",
-    "last_modified": "2026-06-06T17:58:28.448884+00:00",
+    "last_modified": "2026-06-07T14:56:22.627384+00:00",
     "file_size": 7679
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/frontend/web-ui-engineer.md": {
     "etag": "W/\"fd4f5b616d1a2013603dfba2281f80bf87e2800b164fc8d4dd192322618d0c70\"",
-    "last_modified": "2026-06-06T17:58:28.568163+00:00",
+    "last_modified": "2026-06-07T14:56:22.728266+00:00",
     "file_size": 33838
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/agentic-coder-optimizer.md": {
     "etag": "W/\"ef6849812c5018098b5752070891639a31e1d9b49a443bc4168ee832dbac2518\"",
-    "last_modified": "2026-06-06T17:58:28.711061+00:00",
+    "last_modified": "2026-06-07T14:56:22.859867+00:00",
     "file_size": 13619
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/aws-ops.md": {
     "etag": "W/\"a6c83d4327f34b306ebc287f19637e35f242a1fd0608ef2e921d395816cae5e1\"",
-    "last_modified": "2026-06-06T17:58:28.744304+00:00",
+    "last_modified": "2026-06-07T14:56:22.900714+00:00",
     "file_size": 3757
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/digitalocean-ops.md": {
     "etag": "W/\"a56e28913b0fad1043cd62cf8f08713c8800f7892229459a09422039a7379f72\"",
-    "last_modified": "2026-06-06T17:58:28.796328+00:00",
+    "last_modified": "2026-06-07T14:56:22.955305+00:00",
     "file_size": 9422
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/project-organizer.md": {
     "etag": "W/\"12f70168b7cc6704149b6f1d83db1df44ee387404a394dbd78a86ef5147f6591\"",
-    "last_modified": "2026-06-06T17:58:28.867050+00:00",
+    "last_modified": "2026-06-07T14:56:23.033600+00:00",
     "file_size": 9592
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/tooling/tmux.md": {
     "etag": "W/\"2bfbaf01fc54a14f32403e006e48c159c9f4899cf9e4f9b119bf11edd5b501a5\"",
-    "last_modified": "2026-06-06T17:58:28.884352+00:00",
+    "last_modified": "2026-06-07T14:56:23.048851+00:00",
     "file_size": 15862
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/code-critic.md": {
     "etag": "W/\"8b71f45d032cda63ee91889af9aba83aa5a53d867efad137da38f624a8270135\"",
-    "last_modified": "2026-06-06T17:58:28.955306+00:00",
+    "last_modified": "2026-06-07T14:56:23.123052+00:00",
     "file_size": 5967
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/qa/real-user.md": {
     "etag": "W/\"e3d98ff8843227fb39c9db4f0da2706914952c8bcdafbf73b31a57f88090c55c\"",
-    "last_modified": "2026-06-06T17:58:29.025279+00:00",
+    "last_modified": "2026-06-07T14:56:23.210107+00:00",
     "file_size": 13863
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/universal/content.md": {
     "etag": "W/\"120edf1d9966f7be17f05c2b9d7d0085361761ef3a94f045cf0cd55ddb177775\"",
-    "last_modified": "2026-06-06T17:58:29.114524+00:00",
+    "last_modified": "2026-06-07T14:56:23.294611+00:00",
     "file_size": 23776
   }
 }
