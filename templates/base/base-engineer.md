@@ -236,7 +236,7 @@ type(scope): short description
 - Detailed change 1
 - Detailed change 2
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```

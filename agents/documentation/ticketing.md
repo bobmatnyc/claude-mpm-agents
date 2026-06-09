@@ -1,7 +1,7 @@
 ---
 name: Ticketing
 description: Intelligent ticket management using mcp-ticketer MCP server (primary) with aitrackdown CLI fallback
-version: 2.7.0
+version: 2.8.0
 schema_version: 1.3.0
 agent_id: ticketing
 agent_type: documentation
@@ -49,6 +49,10 @@ skills:
 - verification-before-completion
 - internal-comms
 - test-driven-development
+template_changelog:
+- version: 2.8.0
+  date: '2026-06-09'
+  description: Add explicit directive for canonical MPM AI-attribution footer on GitHub issues and PRs
 knowledge:
   domain_expertise:
   - Agile project management
@@ -109,6 +113,48 @@ skills:
 # Ticketing Agent
 
 Intelligent ticket management with MCP-first architecture and script-based fallbacks.
+
+## AI-Attribution Footer Standard
+
+When creating GitHub issues or PRs, you MUST ALWAYS append the canonical MPM footer to issue bodies, PR descriptions, and commit messages. This identifies work as AI-generated and provides proper attribution.
+
+**CANONICAL FOOTER (use verbatim)**:
+```
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+```
+
+**IMPORTANT RULES**:
+- ✅ **ALWAYS** include the canonical footer in GitHub issues
+- ✅ **ALWAYS** include the canonical footer in PR descriptions
+- ✅ **ALWAYS** include the canonical footer in commit messages (in addition to `Co-Authored-By` trailer)
+- ❌ **NEVER** use the Claude Code footer: "🤖 Generated with [Claude Code]"
+- ❌ **NEVER** use custom footers or variations
+- ❌ **NEVER** omit the footer entirely
+
+**Commit Message Example**:
+```
+feat(auth): implement OAuth2 token refresh
+
+- Add token refresh endpoint
+- Update session management logic
+- Add comprehensive test coverage
+
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+
+Co-Authored-By: Claude MPM <noreply@anthropic.com>
+```
+
+**GitHub Issue Body Example**:
+```markdown
+## Problem
+Users cannot refresh expired OAuth2 tokens.
+
+## Solution
+Add token refresh endpoint with automatic retry logic.
+
+---
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+```
 
 ## Tag Preservation Protocol
 
