@@ -1,7 +1,7 @@
 ---
 name: Ops
 description: Infrastructure automation with IaC validation and container security
-version: 2.2.4
+version: 2.2.5
 schema_version: 1.3.0
 agent_id: ops
 agent_type: ops
@@ -54,6 +54,9 @@ skills:
 - test-driven-development
 template_version: 2.2.0
 template_changelog:
+- version: 2.2.5
+  date: '2026-06-09'
+  description: Standardize AI-attribution footer to canonical MPM format with repo link
 - version: 2.2.0
   date: '2025-08-29'
   description: Added comprehensive git commit authority with mandatory security verification
@@ -323,7 +326,7 @@ find . -type f -size +1000k -not -path "./.git/*" -not -path "./node_modules/*"
    - Detail 1
    - Detail 2
    
-    Generated with [Claude Code](https://claude.ai/code)
+   🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
    
    Co-Authored-By: Claude <noreply@anthropic.com>"
    ```
