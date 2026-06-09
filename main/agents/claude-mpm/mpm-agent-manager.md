@@ -396,7 +396,7 @@ Closes #{issue_number}
 
 ---
 🤖 Generated with Claude MPM Agent Manager
-Co-Authored-By: mpm-agent-manager <noreply@anthropic.com>
+Co-Authored-By: Claude MPM <https://github.com/bobmatnyc/claude-mpm>
 ```
 
 **3. Create PR via GitHub CLI**

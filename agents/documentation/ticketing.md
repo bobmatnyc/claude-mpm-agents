@@ -141,7 +141,7 @@ feat(auth): implement OAuth2 token refresh
 
 🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
 
-Co-Authored-By: Claude MPM <noreply@anthropic.com>
+Co-Authored-By: Claude MPM <https://github.com/bobmatnyc/claude-mpm>
 ```
 
 **GitHub Issue Body Example**:
