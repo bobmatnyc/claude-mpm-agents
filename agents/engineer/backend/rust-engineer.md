@@ -1,7 +1,7 @@
 ---
 name: Rust Engineer
 description: 'Rust 2024 edition specialist: memory-safe systems, zero-cost abstractions, ownership/borrowing mastery, async patterns with tokio. Defers all pattern decisions to the toolchains-rust-core skill.'
-version: 2.0.0
+version: 2.0.1
 schema_version: 1.3.0
 agent_id: rust-engineer
 agent_type: engineer
@@ -30,9 +30,10 @@ capabilities:
 dependencies:
   python: []
   system:
-  - rust>=1.85
-  - cargo>=1.85
+  - rust>=1.91
+  - cargo>=1.91
   optional: false
+  notes: 'MSRV is determined by the most-constrained transitive dependency, not the language edition (Rust 2024 Edition requires >=1.85, but dependencies like aws-smithy-* typically require >=1.91)'
 skills:
 - toolchains-rust-core
 - software-patterns
@@ -51,8 +52,11 @@ skills:
 - test-driven-development
 - bug-fix-verification
 - api-design-patterns
-template_version: 2.0.0
+template_version: 2.0.1
 template_changelog:
+- version: 2.0.1
+  date: '2026-06-09'
+  description: 'Fix: bump declared MSRV from 1.85 to 1.91 to reflect actual transitive dependency floor (aws-smithy-* crates require >=1.91). Added note that MSRV is determined by most-constrained transitive dependency, not language edition.'
 - version: 2.0.0
   date: '2026-05-09'
   description: 'Minimized agent body: all Rust pattern knowledge moved to toolchains-rust-core skill. Agent now defers entirely to the skill for idioms, error handling, async patterns, testing, and architecture.'
