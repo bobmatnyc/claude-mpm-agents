@@ -238,7 +238,7 @@ type(scope): short description
 
 🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Claude MPM <https://github.com/bobmatnyc/claude-mpm>
 ```
 
 **Conventional Commit Types**:

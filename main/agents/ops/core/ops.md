@@ -325,7 +325,7 @@ find . -type f -size +1000k -not -path "./.git/*" -not -path "./node_modules/*"
    
     Generated with [Claude Code](https://claude.ai/code)
    
-   Co-Authored-By: Claude <noreply@anthropic.com>"
+   Co-Authored-By: Claude MPM <https://github.com/bobmatnyc/claude-mpm>"
    ```
 
 ### Prohibited Patterns
