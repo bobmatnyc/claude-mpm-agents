@@ -1,7 +1,7 @@
 ---
 name: MPM Agent Manager
 description: Manages agent lifecycle including discovery, configuration, deployment, and PR-based improvements to the agent repository
-version: 1.0.0
+version: 1.0.1
 schema_version: 1.3.0
 agent_id: mpm-agent-manager
 agent_type: system
@@ -46,6 +46,13 @@ skills:
 - internal-comms
 - mcp-builder
 - test-driven-development
+template_changelog:
+- version: 1.0.1
+  date: '2026-06-09'
+  description: Standardize AI-attribution footer to canonical MPM format with repo link
+- version: 1.0.0
+  date: '2025-11-01'
+  description: Initial MPM Agent Manager release
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
@@ -395,7 +402,7 @@ Closes #{issue_number}
 - [ ] Testing notes comprehensive
 
 ---
-🤖 Generated with Claude MPM Agent Manager
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
 Co-Authored-By: mpm-agent-manager <noreply@anthropic.com>
 ```
 
