@@ -1,7 +1,7 @@
 ---
 name: Ops
 description: Infrastructure automation with IaC validation and container security
-version: 2.2.5
+version: 2.2.6
 schema_version: 1.3.0
 agent_id: ops
 agent_type: ops
@@ -52,8 +52,11 @@ skills:
 - internal-comms
 - security-scanning
 - test-driven-development
-template_version: 2.2.0
+template_version: 2.2.1
 template_changelog:
+- version: 2.2.6
+  date: '2026-06-09'
+  description: Align commit trailer to canonical Claude MPM format
 - version: 2.2.5
   date: '2026-06-09'
   description: Standardize AI-attribution footer to canonical MPM format with repo link

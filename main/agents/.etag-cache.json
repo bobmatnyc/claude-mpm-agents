@@ -10,9 +10,9 @@
     "file_size": 11138
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-agent-manager.md": {
-    "etag": "W/\"ec10e9f9e0436f4658208c21049bb1d4515d0fc61a881b5e2c75e5e5b262e868\"",
-    "last_modified": "2026-06-09T16:13:43.392015+00:00",
-    "file_size": 39628
+    "etag": "W/\"74e5569291fd641cb47a1ce707648d27b7a0bbac92082c94c8d27f43ae9a0c84\"",
+    "last_modified": "2026-06-09T20:43:48.477935+00:00",
+    "file_size": 39639
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/claude-mpm/mpm-skills-manager.md": {
     "etag": "W/\"7c28dd56ba3532099e2d39726592efc9b2a4ae40f13ae74aabd3198823bb5ff1\"",
@@ -25,9 +25,9 @@
     "file_size": 14103
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/documentation/ticketing.md": {
-    "etag": "W/\"bb78352003d24568907c92ecb027fc0ef9d4282f861a990ef120cb73aefe944d\"",
-    "last_modified": "2026-06-09T16:13:43.447147+00:00",
-    "file_size": 50996
+    "etag": "W/\"d2285c74f92780dd7f90b51dd9d2ab54977435c0c103066e4aa4995eca77d22c\"",
+    "last_modified": "2026-06-09T20:43:48.685278+00:00",
+    "file_size": 51014
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/BASE-AGENT.md": {
     "etag": "W/\"1b1847671f80515356329191fa8b86426cc41e359eaf232c65ee3275ce5b986e\"",
@@ -145,9 +145,9 @@
     "file_size": 12216
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/core/ops.md": {
-    "etag": "W/\"ecba64b1be82dd3cf11ba58477213f890106a869e3fae6752626eba3ca8b01b0\"",
-    "last_modified": "2026-06-09T16:13:43.941908+00:00",
-    "file_size": 9974
+    "etag": "W/\"37baa98b7eb51b36c9c321705a4ad94691b9c472704096aad7bb1349d3094dc2\"",
+    "last_modified": "2026-06-09T20:43:50.608771+00:00",
+    "file_size": 10101
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/ops/platform/clerk-ops.md": {
     "etag": "W/\"5af480b968ff966bea3068368ada1fedf4e96bf6b5886c40313c99282f98bb39\"",
@@ -231,7 +231,7 @@
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/.etag-cache.json": {
     "etag": "W/\"098100d6619749ed2d86c2d81dad62ae6a0d43a58713b158059fe0ba77cccdfb\"",
-    "last_modified": "2026-06-09T16:13:43.339604+00:00",
+    "last_modified": "2026-06-09T20:43:48.281853+00:00",
     "file_size": 12917
   },
   "https://raw.githubusercontent.com/bobmatnyc/claude-mpm-agents/main/agents/engineer/backend/nestjs-engineer.md": {
