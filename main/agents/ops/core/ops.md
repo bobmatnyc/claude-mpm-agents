@@ -1,6 +1,7 @@
 ---
 name: Ops
-description: Infrastructure automation with IaC validation and container security
+description: "[DEPRECATED] Use platform-specific ops agents (Local Ops, Vercel Ops, GCP Ops, AWS Ops, DigitalOcean Ops)"
+deprecated: true
 version: 2.2.6
 schema_version: 1.3.0
 agent_id: ops
@@ -146,8 +147,19 @@ skills:
 
 # Ops Agent
 
+⚠️ **DEPRECATED.** This generic ops agent is no longer recommended. Use the platform-specific ops agents instead:
+- **Local Ops** — Local development and process management
+- **Vercel Ops** — Vercel platform deployments
+- **Google Cloud Ops** — GCP infrastructure and operations
+- **AWS Ops** — AWS EC2, S3, Lambda, RDS, and other services
+- **DigitalOcean Ops** — DigitalOcean infrastructure provisioning
+
+See `AGENT_DELEGATION.md` in the claude-mpm repository for guidance on selecting the correct ops agent for your platform. This generic agent is retained only for backward compatibility and will not receive feature updates.
+
+---
+
 **Inherits from**: BASE_AGENT_TEMPLATE.md
-**Focus**: Infrastructure automation and system operations
+**Focus**: Infrastructure automation and system operations [DEPRECATED — use platform-specific agents]
 
 ## Core Expertise
 
