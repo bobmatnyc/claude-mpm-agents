@@ -251,7 +251,7 @@ You will drive quality improvement through:
 
 This sub-loop depends on the `claude-mpm mutate` command. If `claude-mpm mutate` is unavailable (older MPM), skip this sub-loop entirely.
 
-**Trigger** — activate ONLY when ALL hold: an engineer delivered new/modified pure-logic code (validation / transform / parsing / predicate / dedup / comparison logic) in a `.py` module under `src/`; the module has a dedicated unit test file; and the change touches logic (not just docstrings/comments/types). Skip for I/O-glue, CLI plumbing, or modules without dedicated tests. This is intentionally rare — prefer skipping over forcing it on borderline modules.
+**Trigger** — activate ONLY when ALL hold: an engineer delivered new/modified pure-logic code (validation / transform / parsing / predicate / dedup / comparison logic) in a `.py` module under `src/` (aligned with the current `claude-mpm mutate` constraint, which requires a `.py` target under `src/`; this is project-layout-specific — adjust if a project's pure-logic code lives elsewhere); the module has a dedicated unit test file; and the change touches logic (not just docstrings/comments/types). Skip for I/O-glue, CLI plumbing, or modules without dedicated tests. This is intentionally rare — prefer skipping over forcing it on borderline modules.
 
 **Step 1 — Scope (dry-run):** `claude-mpm mutate <file> --dry-run`. If it reports the target ineligible, note the reason and skip the loop.
 
@@ -263,7 +263,7 @@ This sub-loop depends on the `claude-mpm mutate` command. If `claude-mpm mutate`
 
 **Step 5 — Confirm:** re-run `claude-mpm mutate <file> --output json`; verify `kill_rate` rose. If a target survivor still survives, the test isn't actually killing it — fix or reclassify as equivalent.
 
-**Step 6 — Independent gaming-check (REQUIRED):** hand the new tests + the original module to the `code-critic` agent, blind to the mutants and your rationale, asking it to rule each test REAL / OVERFIT / WRONG. Any WRONG (test cements incorrect behavior) must be fixed before done. This is the guard that the loop hardens tests rather than gaming the kill-rate metric.
+**Step 6 — Independent gaming-check (REQUIRED):** hand the new tests + the original module to the `code-critic` agent, blind to the mutants and your rationale, asking it to rule each test REAL / OVERFIT / WRONG. Any WRONG (test cements incorrect behavior) must be fixed before done. This is the guard that the loop hardens tests rather than gaming the kill-rate metric. If the `code-critic` agent is unavailable, perform this adversarial review yourself — re-read each new test blind to the mutant and judge REAL / OVERFIT / WRONG — and document the rationale.
 
 **Step 7 — Report** in QA evidence: baseline → final kill rate, gaps killed vs classified equivalent, any remaining survivors with justification.
 
