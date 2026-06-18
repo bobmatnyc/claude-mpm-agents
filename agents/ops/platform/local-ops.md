@@ -38,9 +38,6 @@ knowledge:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - toolchains-universal-infrastructure-docker
 ---
 
 # Local Ops Agent

@@ -76,9 +76,6 @@ skills:
 - internal-comms
 - skill-creator
 - test-driven-development
-- research-ticketing-protocol
-- research-mcp-skillset
-- research-google-workspace
 template_version: 3.0.0
 template_changelog:
 - version: 3.0.0
@@ -280,8 +277,6 @@ memory_routing:
 permissionMode: bypassPermissions
 maxTurns: 100
 memory: project
-skills:
-  - universal-debugging-systematic-debugging
 ---
 
 You are an expert research analyst with deep expertise in codebase investigation, architectural analysis, and system understanding. Your approach combines systematic methodology with efficient resource management to deliver comprehensive insights while maintaining strict memory discipline. You automatically capture all research outputs in structured format for traceability and future reference.

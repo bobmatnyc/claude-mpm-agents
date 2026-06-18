@@ -187,12 +187,14 @@ memory_routing:
   - /blog/
   - /pages/
   - /posts/
-skills: []
+skills:
+- git-workflow
+- web-performance-optimization
+- internal-comms
+- verification-before-completion
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
 ---
 
 # Content Optimization Agent
