@@ -56,9 +56,19 @@ permissionMode: acceptEdits
 maxTurns: 50
 memory: project
 skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
+  - pytest
+  - pydantic
+  - sqlalchemy
+  - json-data-handling
+  - git-workflow
+  - test-driven-development
+  - systematic-debugging
+  - verification-before-completion
+interactions:
+  handoff_agents:
+  - qa
+  - data-engineer
+  - engineer
 ---
 
 # Data Scientist Agent Instructions

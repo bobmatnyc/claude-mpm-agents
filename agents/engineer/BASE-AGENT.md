@@ -535,5 +535,5 @@ Before declaring work complete:
 For detailed workflows and implementation patterns:
 - `toolchains-universal-dependency-audit` - Dependency management and migration workflows
 - `toolchains-universal-dead-code-elimination` - Systematic code cleanup procedures
-- `universal-debugging-systematic-debugging` - Root cause analysis methodology
-- `universal-debugging-verification-before-completion` - Pre-completion verification checklist
+- `systematic-debugging` - Root cause analysis methodology
+- `verification-before-completion` - Pre-completion verification checklist

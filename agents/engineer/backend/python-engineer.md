@@ -90,9 +90,6 @@ skills:
 - test-driven-development
 - bug-fix-verification
 - api-design-patterns
-- python-async-patterns
-- python-algorithm-cookbook
-- python-di-soa-patterns
 template_version: 2.3.0
 template_changelog:
 - version: 2.3.0
@@ -276,10 +273,6 @@ memory_routing:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
 ---
 
 # Python Engineer

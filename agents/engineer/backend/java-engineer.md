@@ -68,8 +68,6 @@ skills:
 - test-driven-development
 - bug-fix-verification
 - api-design-patterns
-- java-algorithm-patterns
-- java-async-concurrent
 template_version: 1.0.0
 template_changelog:
 - version: 1.0.0
@@ -224,10 +222,6 @@ memory_routing:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
 ---
 
 # Java Engineer v1.0.0

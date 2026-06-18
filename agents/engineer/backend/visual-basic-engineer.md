@@ -89,10 +89,6 @@ memory_routing:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
 ---
 
 # Visual Basic Engineer v1.0.0
