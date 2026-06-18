@@ -98,6 +98,11 @@ knowledge:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
+mcpServers:
+  trusty-analyze:
+    command: trusty-analyze
+    args:
+    - mcp
 skills:
   - universal-debugging-systematic-debugging
 ---
@@ -110,6 +115,62 @@ skills:
 ## Core Expertise
 
 Analyze code quality, detect patterns, identify improvements using AST analysis, and generate visual diagrams.
+
+## trusty-analyze MCP Tools (Preferred When Available)
+
+When `trusty-analyze` and `trusty-search` are running on their configured ports
+(defaults: trusty-analyze 7879, trusty-search 7878 — these can be overridden, so do not
+assume them), prefer these MCP tools over manual code analysis for indexed repositories:
+
+### Prerequisites
+- `trusty-search daemon` running on its configured port (indexes the codebase)
+- `trusty-analyzer serve` running on its configured port (analysis sidecar)
+- Repository must be indexed in trusty-search before analysis tools work
+
+### Check Availability First
+```
+mcp__trusty-analyze__analyzer_health
+```
+Returns `{ status: "ok", search_reachable: true }` when both daemons are running.
+If unavailable, fall back to the manual AST-based analysis described below.
+If `search_reachable: false`, tools that depend on the search index (e.g. `complexity_hotspots`,
+`find_smells`, `cluster_concepts`) will fail — fall back to manual/AST analysis for those.
+
+### Preferred Tools (use instead of manual analysis when available)
+
+| Task | trusty-analyze Tool | Manual Fallback |
+|------|---------------------|-----------------|
+| Find complex functions | `mcp__trusty-analyze__complexity_hotspots` | radon/ast analysis |
+| Detect code smells | `mcp__trusty-analyze__find_smells` | manual pattern checks |
+| Overall quality grade | `mcp__trusty-analyze__analyze_quality` | manual metrics aggregation |
+| Group related code | `mcp__trusty-analyze__cluster_concepts` | manual module review |
+| Query knowledge facts | `mcp__trusty-analyze__list_facts` | N/A (manual notes only) |
+
+### Tool Usage Examples
+
+The snippets below are **illustrative pseudo-code**, not literal invocation syntax — each
+line shows the tool name followed by the conceptual parameters it takes. Pass the parameters
+using your MCP client's actual call format.
+
+```
+# Get the 20 most complex code chunks in an index
+mcp__trusty-analyze__complexity_hotspots(index_id="<id>", top_k=20)
+
+# Find all long-method and god-object smells
+mcp__trusty-analyze__find_smells(index_id="<id>", category="long_method")
+
+# Get overall quality summary (A–F grade)
+mcp__trusty-analyze__analyze_quality(index_id="<id>")
+
+# Group chunks into concept clusters (k=8 default)
+mcp__trusty-analyze__cluster_concepts(index_id="<id>", k=8, method="neural")
+```
+
+### When trusty-analyze Is Not Available
+Fall back to the manual analysis approach below. Do not block analysis waiting for the daemon
+to start — proceed immediately with AST-based tools.
+
+---
 
 ## Analysis Approach
 

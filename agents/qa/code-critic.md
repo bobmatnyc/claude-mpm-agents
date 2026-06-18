@@ -127,6 +127,85 @@ If verdict is APPROVE with zero findings: omit the Findings table; write "No iss
 - **WARN** → report verdict + findings to PM; PM proceeds to next stage AND attaches finding table to Documentation agent handoff.
 - **BLOCK** → report verdict + findings to PM; PM HALTS pipeline and surfaces to user. Do not auto-route back to engineer.
 
+## Contract-Driven Testing
+
+When a function carries Code Contracts (preconditions, postconditions, invariants), derive a three-level testing pyramid directly from them. The contracts ARE the test plan.
+
+### Level 1 — Contract-Targeted Unit Tests
+
+- Read the contracts on the function under test — every precondition, postcondition, and invariant.
+- Write one focused test per postcondition. Derive the test name from the postcondition itself.
+- Test both the happy path and the boundary conditions for each postcondition.
+
+```python
+# Given postcondition: len(result) == min(k, len(items))
+def test_top_k_result_length_equals_min_k_items():
+    assert len(top_k([1.0, 2.0, 3.0], k=2)) == 2   # k < len
+    assert len(top_k([1.0, 2.0, 3.0], k=10)) == 3  # k > len
+```
+
+### Level 2 — Property-Based Tests from Contracts
+
+- Translate each postcondition into a property assertion.
+- Encode preconditions as generator constraints — not filter/rejection logic.
+- Use `hypothesis` (Python), `fast-check` (TypeScript/JS), or `quickcheck` (Rust).
+
+```python
+from hypothesis import given
+import hypothesis.strategies as st
+
+@given(
+    items=st.lists(st.floats(allow_nan=False), min_size=1),  # encodes: len(items) > 0
+    k=st.integers(min_value=1),                              # encodes: k > 0
+)
+def test_top_k_all_postconditions(items, k):
+    result = top_k(items, k)
+    assert len(result) <= len(items)                  # postcondition 1
+    assert len(result) == min(k, len(items))          # postcondition 2
+    assert all(x in items for x in result)            # postcondition 3
+```
+
+**Tip:** Python's `icontract-hypothesis` can auto-generate strategies from `icontract` decorators.
+
+### Level 3 — Precondition Violation Tests
+
+- Write one negative test per distinct precondition.
+- Verify the contract fails loudly with a useful message.
+- Verify that valid inputs never trigger spurious violations.
+
+Assert on the contract library's violation/exception type for the target language — the Python
+example below uses `icontract.ViolationError`; in other ecosystems use the equivalent assertion or
+guard failure (e.g. the precondition failure raised by `fast-check`/`quickcheck`-style contracts).
+The structure generalizes; only the exception type changes.
+
+```python
+def test_top_k_rejects_empty_items():
+    with pytest.raises(icontract.ViolationError, match="len\\(items\\) > 0"):
+        top_k([], k=1)
+
+def test_top_k_rejects_nonpositive_k():
+    with pytest.raises(icontract.ViolationError):
+        top_k([1.0, 2.0], k=0)
+```
+
+### When there are no contracts (yet)
+
+If the function under test has no contracts:
+
+1. Flag it for the engineer if the function is complex or critical.
+2. Infer implicit contracts from the function's docstring and observable behavior.
+3. Write property-based tests against the inferred properties anyway.
+
+### Contract review checklist
+
+When reviewing contracts written by the engineer:
+
+- [ ] Postconditions on return-value functions reference `result`; postconditions on mutating functions reference the mutated object.
+- [ ] Relational postconditions present (ordering, identity) — not just existence.
+- [ ] No side effects in contract expressions.
+- [ ] `old()` used where mutation postconditions reference pre-call state.
+- [ ] Each contract has a corresponding Level 3 violation test.
+
 ## Memory Routing
 
 This agent stores patterns of recurring code issues so future critiques can pattern-match faster. Categories: code-quality-issues, recurring-bugs, verdict-patterns.
