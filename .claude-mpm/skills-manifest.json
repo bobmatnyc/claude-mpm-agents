@@ -887,6 +887,153 @@
         "author": "bobmatnyc",
         "updated": "2025-12-31",
         "source_path": "universal/data/xlsx/SKILL.md"
+      },
+      {
+        "name": "code-review-standards",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "code-review",
+          "quality",
+          "rubric",
+          "standards",
+          "verdict",
+          "severity"
+        ],
+        "description": "Code review rubric and severity-assessment standards used by the code-critic agent to produce APPROVE/WARN/BLOCK verdicts with evidence-backed, severity-ranked findings.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/code-review-standards/SKILL.md"
+      },
+      {
+        "name": "code-production-process",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "process",
+          "production-readiness",
+          "checklist",
+          "quality-gate",
+          "release"
+        ],
+        "description": "Production-readiness process checklist covering the code-production pipeline: implementation, review, testing, and pre-release verification gates.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/code-production-process/SKILL.md"
+      },
+      {
+        "name": "mutation-testing",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "testing",
+          "quality-assurance",
+          "mutation-testing",
+          "test-effectiveness",
+          "advisory"
+        ],
+        "description": "Audit whether a test suite actually detects regressions (not just whether it runs) by introducing small code mutations and measuring how many your tests catch. Advisory and on-demand.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/mutation-testing/SKILL.md"
+      },
+      {
+        "name": "research-mcp-skillset",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "research",
+          "mcp-skillset",
+          "enhanced-research",
+          "semantic-search",
+          "code-analysis"
+        ],
+        "description": "MCP-skillset detection, workflow patterns, tool selection matrix, and decision tree examples for enhanced research.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/research-mcp-skillset/SKILL.md"
+      },
+      {
+        "name": "research-ticketing-protocol",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "research",
+          "ticketing",
+          "protocol",
+          "traceability"
+        ],
+        "description": "Ticket attachment decision trees, enforcement protocols, communication templates, and worked examples for research outputs.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/research-ticketing-protocol/SKILL.md"
+      },
+      {
+        "name": "research-google-workspace",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "research",
+          "google-workspace",
+          "calendar",
+          "gmail",
+          "drive"
+        ],
+        "description": "Google Workspace integration with Calendar, Gmail, and Drive for research tasks.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/research-google-workspace/SKILL.md"
+      },
+      {
+        "name": "caveman-prompt-compression",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "prompt-optimization",
+          "token-reduction",
+          "compression",
+          "cost-optimization",
+          "system-prompt"
+        ],
+        "description": "Token-optimized prompt compression techniques for reducing LLM instruction size while preserving or improving quality.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "skills/caveman-prompt-compression/SKILL.md"
       }
     ],
     "toolchains": {
@@ -2770,6 +2917,68 @@
           "author": "Claude MPM",
           "updated": "2025-12-31",
           "source_path": "toolchains/python/data/sqlalchemy/SKILL.md"
+        },
+        {
+          "name": "python-di-soa-patterns",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "python",
+          "framework": null,
+          "tags": [
+            "python",
+            "dependency-injection",
+            "soa",
+            "architecture",
+            "patterns"
+          ],
+          "description": "DI/SOA decision tree with full code examples for Python architecture decisions.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/python-di-soa-patterns/SKILL.md"
+        },
+        {
+          "name": "python-async-patterns",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "python",
+          "framework": null,
+          "tags": [
+            "python",
+            "async",
+            "concurrency",
+            "patterns",
+            "asyncio"
+          ],
+          "description": "Five async patterns with full implementations for Python concurrent programming.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/python-async-patterns/SKILL.md"
+        },
+        {
+          "name": "python-algorithm-cookbook",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "python",
+          "framework": null,
+          "tags": [
+            "python",
+            "algorithms",
+            "data-structures",
+            "cookbook"
+          ],
+          "description": "Four algorithm patterns with full Python implementations for common coding problems.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/python-algorithm-cookbook/SKILL.md"
         }
       ],
       "rust": [
@@ -2867,6 +3076,30 @@
           "author": "bobmatnyc",
           "updated": "2025-11-21",
           "source_path": "toolchains/rust/frameworks/tauri/SKILL.md"
+        },
+        {
+          "name": "toolchains-rust-core",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "rust",
+          "framework": null,
+          "tags": [
+            "rust",
+            "rust-2024",
+            "ownership",
+            "borrowing",
+            "async",
+            "tokio",
+            "idiomatic",
+            "toolchain"
+          ],
+          "description": "Core Rust toolchain conventions: ownership/borrowing patterns, error handling, async with tokio, and idiomatic project structure for the rust-engineer agent.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/toolchains-rust-core/SKILL.md"
         }
       ],
       "typescript": [
@@ -3506,6 +3739,49 @@
           "author": "claude-mpm-skills",
           "updated": "2025-12-08",
           "source_path": "toolchains/universal/pr/quality/SKILL.md"
+        }
+      ],
+      "java": [
+        {
+          "name": "java-async-concurrent",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "java",
+          "framework": null,
+          "tags": [
+            "java",
+            "async",
+            "concurrency",
+            "threads",
+            "patterns"
+          ],
+          "description": "Five async/concurrent patterns with full Java implementations for high-performance systems.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/java-async-concurrent/SKILL.md"
+        },
+        {
+          "name": "java-algorithm-patterns",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "java",
+          "framework": null,
+          "tags": [
+            "java",
+            "algorithms",
+            "data-structures",
+            "patterns"
+          ],
+          "description": "Five algorithm patterns with full Java implementations for common coding problems.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "skills/java-algorithm-patterns/SKILL.md"
         }
       ]
     },

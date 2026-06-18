@@ -176,10 +176,6 @@ interactions:
 permissionMode: bypassPermissions
 maxTurns: 100
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
 ---
 
 # Refactoring Engineer

@@ -49,8 +49,6 @@ skills:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
 ---
 
 # MPM Skills Manager
@@ -1079,9 +1077,9 @@ User: "I just started a FastAPI + React project, what skills do I need?"
       Why: TypeScript types detected
       Install: claude-mpm skills install toolchains-typescript-core
 
-   5. **universal-debugging-verification-before-completion** (Medium, 70% match)
+   5. **verification-before-completion** (Medium, 70% match)
       Why: Testing framework detected
-      Install: claude-mpm skills install universal-debugging-verification-before-completion
+      Install: claude-mpm skills install verification-before-completion
 
    Install all critical skills? (y/n)
    Or select specific skills: 1,2,3

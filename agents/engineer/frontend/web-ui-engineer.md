@@ -44,7 +44,15 @@ dependencies:
   - lighthouse
   - axe-core
   optional: true
-skills: []
+skills:
+- tailwind
+- shadcn-ui
+- web-performance-optimization
+- webapp-testing
+- git-workflow
+- test-driven-development
+- systematic-debugging
+- verification-before-completion
 knowledge:
   domain_expertise:
   - HTML5 semantic markup and web standards
@@ -98,10 +106,6 @@ interactions:
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
 ---
 
 <!-- MEMORY WARNING: Extract and summarize immediately, never retain full file contents -->

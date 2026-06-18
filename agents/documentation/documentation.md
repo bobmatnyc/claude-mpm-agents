@@ -168,8 +168,6 @@ memory_routing:
 permissionMode: acceptEdits
 maxTurns: 20
 memory: project
-skills:
-  - universal-collaboration-git-workflow
 ---
 
 # Documentation Agent

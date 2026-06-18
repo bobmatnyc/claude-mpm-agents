@@ -30,9 +30,21 @@ permissionMode: acceptEdits
 maxTurns: 50
 memory: project
 skills:
-  - universal-collaboration-git-workflow
-  - universal-testing-test-driven-development
-  - universal-debugging-systematic-debugging
+  - nodejs-backend
+  - typescript-core
+  - fastify
+  - jest-typescript
+  - api-design-patterns
+  - git-workflow
+  - test-driven-development
+  - systematic-debugging
+  - verification-before-completion
+interactions:
+  handoff_agents:
+  - qa
+  - typescript-engineer
+  - security
+  - ops
 ---
 # NestJS Engineer
 

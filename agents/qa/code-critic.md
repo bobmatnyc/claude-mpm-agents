@@ -28,6 +28,11 @@ skills:
   - software-patterns
   - systematic-debugging
   - verification-before-completion
+knowledge:
+  domain_expertise:
+  - Adversarial code review methodology independent of implementer rationale
+  - Static analysis and security-focused code review
+  - Rubric-based severity assessment (CRITICAL/HIGH/MEDIUM/LOW) and APPROVE/WARN/BLOCK verdicts
 interactions:
   input_format:
     required_fields: [task, files_to_review]

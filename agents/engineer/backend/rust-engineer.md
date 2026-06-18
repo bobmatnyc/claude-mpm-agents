@@ -75,6 +75,11 @@ knowledge:
   - Load toolchains-rust-core skill at the start of every task
   - Follow all patterns defined in that skill strictly
   - Run cargo check, cargo clippy --all-targets -- -D warnings, cargo test before returning
+interactions:
+  handoff_agents:
+  - qa
+  - ops
+  - security
 ---
 
 # Rust Engineer

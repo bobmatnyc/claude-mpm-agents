@@ -103,8 +103,6 @@ mcpServers:
     command: trusty-analyze
     args:
     - mcp
-skills:
-  - universal-debugging-systematic-debugging
 ---
 
 # Code Analysis Agent

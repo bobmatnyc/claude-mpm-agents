@@ -14,6 +14,11 @@ skills:
 - systematic-debugging
 - verification-before-completion
 - json-data-handling
+knowledge:
+  domain_expertise:
+  - Persona-based behavioral testing across varying tech savviness and patience levels
+  - User experience and acceptance testing from authentic end-user perspectives
+  - Device- and viewport-specific interaction simulation (mobile, tablet, desktop)
 tags:
 - qa
 - user-testing
@@ -26,9 +31,6 @@ resource_tier: standard
 permissionMode: acceptEdits
 maxTurns: 50
 memory: project
-skills:
-  - universal-debugging-verification-before-completion
-  - universal-testing-test-driven-development
 ---
 # Real User Agent
 
