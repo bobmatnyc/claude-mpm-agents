@@ -887,6 +887,49 @@
         "author": "bobmatnyc",
         "updated": "2025-12-31",
         "source_path": "universal/data/xlsx/SKILL.md"
+      },
+      {
+        "name": "code-review-standards",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "code-review",
+          "quality",
+          "rubric",
+          "standards",
+          "verdict",
+          "severity"
+        ],
+        "description": "Code review rubric and severity-assessment standards used by the code-critic agent to produce APPROVE/WARN/BLOCK verdicts with evidence-backed, severity-ranked findings.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "universal/collaboration/code-review-standards/SKILL.md"
+      },
+      {
+        "name": "code-production-process",
+        "version": "1.0.0",
+        "category": "universal",
+        "toolchain": null,
+        "framework": null,
+        "tags": [
+          "process",
+          "production-readiness",
+          "checklist",
+          "quality-gate",
+          "release"
+        ],
+        "description": "Production-readiness process checklist covering the code-production pipeline: implementation, review, testing, and pre-release verification gates.",
+        "entry_point_tokens": 60,
+        "full_tokens": 4000,
+        "requires": [],
+        "author": "Claude MPM Team",
+        "updated": "2026-06-18",
+        "source_path": "universal/collaboration/code-production-process/SKILL.md"
       }
     ],
     "toolchains": {
@@ -2867,6 +2910,30 @@
           "author": "bobmatnyc",
           "updated": "2025-11-21",
           "source_path": "toolchains/rust/frameworks/tauri/SKILL.md"
+        },
+        {
+          "name": "toolchains-rust-core",
+          "version": "1.0.0",
+          "category": "toolchain",
+          "toolchain": "rust",
+          "framework": null,
+          "tags": [
+            "rust",
+            "rust-2024",
+            "ownership",
+            "borrowing",
+            "async",
+            "tokio",
+            "idiomatic",
+            "toolchain"
+          ],
+          "description": "Core Rust toolchain conventions: ownership/borrowing patterns, error handling, async with tokio, and idiomatic project structure for the rust-engineer agent.",
+          "entry_point_tokens": 60,
+          "full_tokens": 4000,
+          "requires": [],
+          "author": "Claude MPM Team",
+          "updated": "2026-06-18",
+          "source_path": "toolchains/rust/core/toolchains-rust-core/SKILL.md"
         }
       ],
       "typescript": [
@@ -3525,10 +3592,10 @@
         "entry_point_tokens": 74,
         "full_tokens": 3232,
         "requires": [
-          "⚠️ VIOLATION: This field should be empty!",
-          "⚠️ setup-skill",
-          "⚠️ database-skill",
-          "⚠️ pytest-patterns"
+          "\u26a0\ufe0f VIOLATION: This field should be empty!",
+          "\u26a0\ufe0f setup-skill",
+          "\u26a0\ufe0f database-skill",
+          "\u26a0\ufe0f pytest-patterns"
         ],
         "author": "claude-mpm-skills",
         "updated": "2025-12-31",
