@@ -173,6 +173,11 @@ def test_top_k_all_postconditions(items, k):
 - Verify the contract fails loudly with a useful message.
 - Verify that valid inputs never trigger spurious violations.
 
+Assert on the contract library's violation/exception type for the target language — the Python
+example below uses `icontract.ViolationError`; in other ecosystems use the equivalent assertion or
+guard failure (e.g. the precondition failure raised by `fast-check`/`quickcheck`-style contracts).
+The structure generalizes; only the exception type changes.
+
 ```python
 def test_top_k_rejects_empty_items():
     with pytest.raises(icontract.ViolationError, match="len\\(items\\) > 0"):
@@ -195,7 +200,7 @@ If the function under test has no contracts:
 
 When reviewing contracts written by the engineer:
 
-- [ ] Every postcondition references `result` — not just state side effects.
+- [ ] Postconditions on return-value functions reference `result`; postconditions on mutating functions reference the mutated object.
 - [ ] Relational postconditions present (ordering, identity) — not just existence.
 - [ ] No side effects in contract expressions.
 - [ ] `old()` used where mutation postconditions reference pre-call state.
