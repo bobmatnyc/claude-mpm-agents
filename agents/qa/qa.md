@@ -53,6 +53,7 @@ skills:
 - test-driven-development
 - test-quality-inspector
 - testing-anti-patterns
+- mutation-testing
 - webapp-testing
 - bug-fix-verification
 - pre-merge-verification

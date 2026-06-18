@@ -76,6 +76,9 @@ skills:
 - internal-comms
 - skill-creator
 - test-driven-development
+- research-ticketing-protocol
+- research-mcp-skillset
+- research-google-workspace
 template_version: 3.0.0
 template_changelog:
 - version: 3.0.0

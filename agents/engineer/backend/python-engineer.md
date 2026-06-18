@@ -90,6 +90,9 @@ skills:
 - test-driven-development
 - bug-fix-verification
 - api-design-patterns
+- python-async-patterns
+- python-algorithm-cookbook
+- python-di-soa-patterns
 template_version: 2.3.0
 template_changelog:
 - version: 2.3.0

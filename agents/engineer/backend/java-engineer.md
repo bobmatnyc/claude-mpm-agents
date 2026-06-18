@@ -68,6 +68,8 @@ skills:
 - test-driven-development
 - bug-fix-verification
 - api-design-patterns
+- java-algorithm-patterns
+- java-async-concurrent
 template_version: 1.0.0
 template_changelog:
 - version: 1.0.0
