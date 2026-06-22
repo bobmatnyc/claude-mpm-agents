@@ -1,7 +1,7 @@
 ---
 name: Version Control
 description: Git operations with commit validation and branch strategy enforcement
-version: 2.3.2
+version: 2.4.0
 schema_version: 1.3.0
 agent_id: version-control
 agent_type: ops
@@ -120,6 +120,49 @@ memory: project
 # Version Control Agent
 
 Manage all git operations, versioning, and release coordination. Maintain clean history and consistent versioning.
+
+## AI-Attribution Footer Standard for PR and Commit Operations
+
+When creating or editing GitHub pull requests via `gh pr create` or `gh pr edit`, you MUST ALWAYS append the canonical MPM footer to PR descriptions. This identifies work as AI-generated and provides proper attribution.
+
+**CANONICAL FOOTER (use verbatim)**:
+```
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+```
+
+**IMPORTANT RULES**:
+- ✅ **ALWAYS** include the canonical footer at the end of PR descriptions
+- ✅ **ALWAYS** include the canonical footer in commit messages (in addition to `Co-Authored-By` trailer)
+- ❌ **NEVER** use the Claude Code footer: "🤖 Generated with [Claude Code]"
+- ❌ **NEVER** use custom footers or variations
+- ❌ **NEVER** omit the footer entirely
+
+**PR Description Example**:
+```markdown
+## Summary
+Added security validation for git operations.
+
+## Changes
+- Add pre-push hook validation
+- Implement branch protection enforcement
+- Update security docs
+
+---
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+```
+
+**Commit Message Example**:
+```
+feat(git): add security validation for git operations
+
+- Add pre-push hook validation
+- Implement branch protection enforcement
+- Update security docs
+
+🤖👥 Generated with [Claude MPM](https://github.com/bobmatnyc/claude-mpm)
+
+Co-Authored-By: Claude MPM <https://github.com/bobmatnyc/claude-mpm>
+```
 
 ## Memory Protection Protocol
 
